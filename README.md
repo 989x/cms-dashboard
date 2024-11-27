@@ -21,8 +21,13 @@ src/
 │   ├── layout/
 │   │   ├── Footer.tsx
 │   │   └── Navbar.tsx
+│   ├── NewsCard.tsx
 │   └── SearchAndFilter.tsx
-├── pnpm-lock.yaml
+├── utils/
+│   └── formatDate.ts
+├── types.ts
+pnpm-lock.yaml
+tailwind.config.ts
 ```
 
 ## Commands
