@@ -10,7 +10,7 @@ const NewsCard: React.FC<NewsItem> = ({ title, image, tags, date, description })
         {/* Image Content */}
         <div className="relative w-full sm:w-[280px] aspect-video flex-shrink-0">
           <Image
-            src={image || '/placeholder.png'}
+            src={image || '/loading-image.jpg'}
             alt={title || 'No Title'}
             layout="fill"
             objectFit="cover"
@@ -47,9 +47,9 @@ const NewsCard: React.FC<NewsItem> = ({ title, image, tags, date, description })
           </p>
 
           {/* tags */}
-          <div className="flex gap-3">
+          <div className="flex gap-2.5">
             {tags?.map((tag, index) => (
-              <span key={index} className="font-semibold text-blue-500">
+              <span key={index} className="font-semibold text-sm text-blue-500">
                 {tag}
               </span>
             ))}
