@@ -25,13 +25,26 @@ const NewsCard: React.FC<NewsItem> = ({ title, image, tags, date, description })
             </button>
           </div>
           <div className="flex items-center text-sm mt-2 sm:mt-0">
-            <div className="flex gap-2 mr-3">
+            <div className="flex gap-2">
               {tags?.map((tag, index) => (
                 <span key={index} className="font-semibold">
                   {tag}
                 </span>
               ))}
             </div>
+            
+            {/* Divider SVG to separate tags and date */}
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={2}
+              stroke="currentColor"
+              className="w-4 h-4 mx-2 text-gray-500"
+            >
+              <line x1="12" y1="0" x2="12" y2="24" />
+            </svg>
+            
             <span className="text-gray-600 font-medium">{formatToThaiDate(date)}</span>
           </div>
           <p className="text-sm text-gray-800 mt-2 line-clamp-2 leading-relaxed">
