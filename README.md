@@ -11,15 +11,17 @@ For a comprehensive guide on setting up **Next.js** with **pnpm**, check out thi
 ## File structure
 
 ```
-├── src/
-│   ├── api/
-│   │   └── news.js
-│   ├── app/
-│   │   ├── layout.tsx
-│   │   └── page.tsx
-│   ├── components/
+src/
+├── api/
+│   └── news.ts
+├── app/
+│   ├── layout.tsx
+│   └── page.tsx
+├── components/
+│   ├── layout/
 │   │   ├── Footer.tsx
 │   │   └── Navbar.tsx
+│   └── SearchAndFilter.tsx
 ├── pnpm-lock.yaml
 ```
 

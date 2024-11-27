@@ -49,4 +49,54 @@ export const mockNews: NewsItem[] = [
     image: "https://img.pptvhd36.com/thumbor/2024/05/30/news-ad1fe79.webp",
     link: "#",
   },
+  {
+    id: 5,
+    title: "CMS Dashboard ขยายบริการ Cloud Services ในปี 2024",
+    date: "27 พ.ย.",
+    tags: ["Cloud", "Services", "Technology"],
+    description:
+      "CMS Dashboard เปิดตัวบริการ Cloud ใหม่ที่มาพร้อมเทคโนโลยีล้ำสมัย เพื่อช่วยองค์กรยุคดิจิทัลในการจัดเก็บและจัดการข้อมูลอย่างปลอดภัยและรวดเร็ว รองรับการขยายตัวของธุรกิจในอนาคต",
+    image: "https://img.pptvhd36.com/thumbor/2024/05/30/news-ad1fe79.webp",
+    link: "#",
+  },
+  {
+    id: 6,
+    title: "CMS Dashboard ขยายบริการ Cloud Services ในปี 2024",
+    date: "27 พ.ย.",
+    tags: ["Cloud", "Services", "Technology"],
+    description:
+      "CMS Dashboard เปิดตัวบริการ Cloud ใหม่ที่มาพร้อมเทคโนโลยีล้ำสมัย เพื่อช่วยองค์กรยุคดิจิทัลในการจัดเก็บและจัดการข้อมูลอย่างปลอดภัยและรวดเร็ว รองรับการขยายตัวของธุรกิจในอนาคต",
+    image: "https://img.pptvhd36.com/thumbor/2024/05/30/news-ad1fe79.webp",
+    link: "#",
+  },
+  {
+    id: 7,
+    title: "CMS Dashboard ขยายบริการ Cloud Services ในปี 2024",
+    date: "27 พ.ย.",
+    tags: ["Cloud", "Services", "Technology"],
+    description:
+      "CMS Dashboard เปิดตัวบริการ Cloud ใหม่ที่มาพร้อมเทคโนโลยีล้ำสมัย เพื่อช่วยองค์กรยุคดิจิทัลในการจัดเก็บและจัดการข้อมูลอย่างปลอดภัยและรวดเร็ว รองรับการขยายตัวของธุรกิจในอนาคต",
+    image: "https://img.pptvhd36.com/thumbor/2024/05/30/news-ad1fe79.webp",
+    link: "#",
+  },
+  {
+    id: 8,
+    title: "CMS Dashboard ขยายบริการ Cloud Services ในปี 2024",
+    date: "27 พ.ย.",
+    tags: ["Cloud", "Services", "Technology"],
+    description:
+      "CMS Dashboard เปิดตัวบริการ Cloud ใหม่ที่มาพร้อมเทคโนโลยีล้ำสมัย เพื่อช่วยองค์กรยุคดิจิทัลในการจัดเก็บและจัดการข้อมูลอย่างปลอดภัยและรวดเร็ว รองรับการขยายตัวของธุรกิจในอนาคต",
+    image: "https://img.pptvhd36.com/thumbor/2024/05/30/news-ad1fe79.webp",
+    link: "#",
+  },
+  {
+    id: 9,
+    title: "CMS Dashboard ขยายบริการ Cloud Services ในปี 2024",
+    date: "27 พ.ย.",
+    tags: ["Cloud", "Services", "Technology"],
+    description:
+      "CMS Dashboard เปิดตัวบริการ Cloud ใหม่ที่มาพร้อมเทคโนโลยีล้ำสมัย เพื่อช่วยองค์กรยุคดิจิทัลในการจัดเก็บและจัดการข้อมูลอย่างปลอดภัยและรวดเร็ว รองรับการขยายตัวของธุรกิจในอนาคต",
+    image: "https://img.pptvhd36.com/thumbor/2024/05/30/news-ad1fe79.webp",
+    link: "#",
+  },
 ];
