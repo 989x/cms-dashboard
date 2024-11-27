@@ -6,7 +6,7 @@ const NewsCard: React.FC<NewsItem> = ({ title, image, tags, date, description })
   return (
     <div className="block p-4 rounded-lg border border-gray-200">
       <div className="flex flex-col sm:flex-row items-start gap-4">
-        <div className="relative w-full sm:w-48 h-48 sm:h-28 flex-shrink-0">
+        <div className="relative w-full sm:w-56 h-48 sm:h-32 flex-shrink-0">
           <Image
             src={image || '/placeholder.png'}
             alt={title || 'No Title'}
@@ -24,10 +24,12 @@ const NewsCard: React.FC<NewsItem> = ({ title, image, tags, date, description })
               Action
             </button>
           </div>
-          <div className="flex items-center text-sm mt-2 sm:mt-0">
+
+          {/* tag and time */}
+          <div className="flex items-center text-sm my-1">
             <div className="flex gap-2">
               {tags?.map((tag, index) => (
-                <span key={index} className="font-semibold">
+                <span key={index} className="font-semibold text-blue-500 bg-blue-100 px-2 py-1 rounded-md">
                   {tag}
                 </span>
               ))}
