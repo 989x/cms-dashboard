@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { SERVER_NAME } from '@/api/config';
 
 export default function Navbar() {
   const user = { name: 'Admin', status: 'Online' };
@@ -14,7 +15,7 @@ export default function Navbar() {
             height={24}
             className="rounded-full"
           />
-          <h1 className="sm:text-lg font-bold">CMS Dashboard</h1>
+          <h1 className="sm:text-lg font-bold">{SERVER_NAME}</h1>
         </div>
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-2">

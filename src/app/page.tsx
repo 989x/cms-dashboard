@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import { mockNews } from '@/api/news';
-import { SERVER_NAME } from '@/api/config';
 import SearchAndFilterBar from '@/components/SearchAndFilter';
 import NewsCard from '@/components/NewsCard';
 
@@ -23,7 +22,7 @@ export default function Home() {
   return (
     <div className="w-full max-w-4xl mx-auto px-4">
       <h1 className="text-xl sm:text-2xl font-bold mb-6 sm:mb-8">
-        Connecting to {SERVER_NAME}
+        CMS Dashboard
       </h1>
       <SearchAndFilterBar onSearch={handleSearch} onFilter={handleFilter} />
       <p className="text-gray-600 font-medium mt-4 mb-8">
