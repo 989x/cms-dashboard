@@ -7,4 +7,6 @@ export interface NewsItem {
   image: string | null;
   link: string | null;
   views: number | null; // Allow null for view count
+  status: "visible" | "hidden";
+  type: "news" | "article";
 }

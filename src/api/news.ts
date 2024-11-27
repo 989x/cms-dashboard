@@ -10,7 +10,9 @@ export const mockNews: NewsItem[] = [
       "CMS Dashboard เปิดตัวบริการ Cloud ใหม่ที่มาพร้อมเทคโนโลยีล้ำสมัย เพื่อช่วยองค์กรยุคดิจิทัลในการจัดเก็บและจัดการข้อมูลอย่างปลอดภัยและรวดเร็ว รองรับการขยายตัวของธุรกิจในอนาคต",
     image: "https://img.pptvhd36.com/thumbor/2024/05/30/news-ad1fe79.webp",
     link: "#",
-    views: 150
+    views: 150,
+    status: "visible",
+    type: "news"
   },
   {
     id: 2,
@@ -21,7 +23,9 @@ export const mockNews: NewsItem[] = [
       "CMS Dashboard เพิ่มฟีเจอร์ความปลอดภัยใหม่ อาทิ การยืนยันตัวตนแบบหลายขั้นตอนและการเข้ารหัสข้อมูลระดับสูง เพื่อป้องกันข้อมูลสำคัญขององค์กร",
     image: "https://img.pptvhd36.com/thumbor/2024/05/30/news-ad1fe79.webp",
     link: "#",
-    views: 150
+    views: 150,
+    status: "hidden",
+    type: "news"
   },
   {
     id: 3,
@@ -32,7 +36,9 @@ export const mockNews: NewsItem[] = [
       "เพิ่มศักยภาพการวิเคราะห์ข้อมูลด้วย AI อัจฉริยะที่ช่วยให้ผู้ใช้สามารถวิเคราะห์ข้อมูลเชิงลึกได้อย่างรวดเร็ว รองรับการตัดสินใจทางธุรกิจที่แม่นยำยิ่งขึ้น",
     image: "https://img.pptvhd36.com/thumbor/2024/05/30/news-ad1fe79.webp",
     link: "#",
-    views: 150
+    views: 150,
+    status: "visible",
+    type: "news"
   },
   {
     id: 4,
@@ -43,7 +49,9 @@ export const mockNews: NewsItem[] = [
       "CMS Dashboard อัปเดตใหม่ รองรับการใช้งานข้ามแพลตฟอร์มทั้งมือถือ แท็บเล็ต และคอมพิวเตอร์ พร้อมปรับปรุง UI/UX ให้ใช้งานง่ายและทันสมัย",
     image: "https://img.pptvhd36.com/thumbor/2024/05/30/news-ad1fe79.webp",
     link: "#",
-    views: 150
+    views: 150,
+    status: "visible",
+    type: "news"
   },
   {
     id: 5,
@@ -54,7 +62,9 @@ export const mockNews: NewsItem[] = [
       "CMS Dashboard เปิดตัวบริการ Cloud ใหม่ที่มาพร้อมเทคโนโลยีล้ำสมัย เพื่อช่วยองค์กรยุคดิจิทัลในการจัดเก็บและจัดการข้อมูลอย่างปลอดภัยและรวดเร็ว รองรับการขยายตัวของธุรกิจในอนาคต",
     image: "https://img.pptvhd36.com/thumbor/2024/05/30/news-ad1fe79.webp",
     link: "#",
-    views: 150
+    views: 150,
+    status: "visible",
+    type: "news"
   },
   {
     id: 6,
@@ -65,7 +75,9 @@ export const mockNews: NewsItem[] = [
       "CMS Dashboard เปิดตัวบริการ Cloud ใหม่ที่มาพร้อมเทคโนโลยีล้ำสมัย เพื่อช่วยองค์กรยุคดิจิทัลในการจัดเก็บและจัดการข้อมูลอย่างปลอดภัยและรวดเร็ว รองรับการขยายตัวของธุรกิจในอนาคต",
     image: "https://img.pptvhd36.com/thumbor/2024/05/30/news-ad1fe79.webp",
     link: "#",
-    views: 150
+    views: 150,
+    status: "visible",
+    type: "news"
   },
   {
     id: 7,
@@ -76,7 +88,9 @@ export const mockNews: NewsItem[] = [
       "CMS Dashboard เปิดตัวบริการ Cloud ใหม่ที่มาพร้อมเทคโนโลยีล้ำสมัย เพื่อช่วยองค์กรยุคดิจิทัลในการจัดเก็บและจัดการข้อมูลอย่างปลอดภัยและรวดเร็ว รองรับการขยายตัวของธุรกิจในอนาคต",
     image: "https://img.pptvhd36.com/thumbor/2024/05/30/news-ad1fe79.webp",
     link: "#",
-    views: 150
+    views: 150,
+    status: "visible",
+    type: "news"
   },
   {
     id: 8,
@@ -87,7 +101,9 @@ export const mockNews: NewsItem[] = [
       "CMS Dashboard เปิดตัวบริการ Cloud ใหม่ที่มาพร้อมเทคโนโลยีล้ำสมัย เพื่อช่วยองค์กรยุคดิจิทัลในการจัดเก็บและจัดการข้อมูลอย่างปลอดภัยและรวดเร็ว รองรับการขยายตัวของธุรกิจในอนาคต",
     image: "https://img.pptvhd36.com/thumbor/2024/05/30/news-ad1fe79.webp",
     link: "#",
-    views: 150
+    views: 150,
+    status: "visible",
+    type: "news"
   },
   {
     id: 9,
@@ -98,6 +114,8 @@ export const mockNews: NewsItem[] = [
       "CMS Dashboard เปิดตัวบริการ Cloud ใหม่ที่มาพร้อมเทคโนโลยีล้ำสมัย เพื่อช่วยองค์กรยุคดิจิทัลในการจัดเก็บและจัดการข้อมูลอย่างปลอดภัยและรวดเร็ว รองรับการขยายตัวของธุรกิจในอนาคต",
     image: "https://img.pptvhd36.com/thumbor/2024/05/30/news-ad1fe79.webp",
     link: "#",
-    views: 150
+    views: 150,
+    status: "visible",
+    type: "news"
   },
 ];

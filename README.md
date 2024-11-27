@@ -13,21 +13,23 @@ For a comprehensive guide on setting up **Next.js** with **pnpm**, check out thi
 ```
 src/
 ├── api/
-│   └── news.ts
+│   ├── config.ts             # Configuration file for API (reads from .env)
+│   └── news.ts               # Mock or API for news data
 ├── app/
-│   ├── layout.tsx
-│   └── page.tsx
+│   ├── layout.tsx            # Main layout for the application
+│   └── page.tsx              # Main page of the application
 ├── components/
 │   ├── layout/
-│   │   ├── Footer.tsx
-│   │   └── Navbar.tsx
-│   ├── NewsCard.tsx
-│   └── SearchAndFilter.tsx
+│   │   ├── Footer.tsx        # Footer component
+│   │   └── Navbar.tsx        # Navbar component
+│   ├── NewsCard.tsx          # News card component
+│   └── SearchAndFilter.tsx   # Search and filter component
 ├── utils/
-│   └── formatDate.ts
-├── types.ts
-pnpm-lock.yaml
-tailwind.config.ts
+│   └── formatDate.ts         # Utility for formatting dates
+├── types.ts                  # TypeScript types and interfaces
+├── pnpm-lock.yaml            # Lockfile for dependencies managed by pnpm
+├── tailwind.config.ts        # Configuration for Tailwind CSS
+└── .env                      # Environment variables file (not tracked by git)
 ```
 
 ## Commands
