@@ -17,7 +17,7 @@ export default function RootLayout({
     <html lang="en">
       <body className="antialiased flex flex-col min-h-screen">
         <Navbar />
-        <main className="flex-1 py-14">{children}</main>
+        <main className="flex-1 pt-10 pb-14">{children}</main>
         <Footer />
       </body>
     </html>

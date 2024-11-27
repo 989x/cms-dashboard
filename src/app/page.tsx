@@ -21,14 +21,14 @@ export default function Home() {
 
   return (
     <div className="w-full max-w-4xl mx-auto px-4">
-      <h1 className="text-xl sm:text-2xl font-bold mb-8 sm:mb-10">
+      <h1 className="text-xl sm:text-2xl font-bold mb-6 sm:mb-8">
         Explore the Latest News
       </h1>
       <SearchAndFilterBar onSearch={handleSearch} onFilter={handleFilter} />
       <p className="text-gray-600 font-medium mt-4 mb-8">
         Found {filteredNews.length} results.
       </p>
-      <div className="grid gap-5">
+      <div className="grid gap-10">
         {filteredNews.map((news) => (
           <NewsCard
             key={news.id}
