@@ -1,9 +1,7 @@
+import "./globals.css";
 import type { Metadata } from "next";
 import { SERVER_NAME } from "@/api/config";
-
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
-import "./globals.css";
+import Sidebar from "@/components/layout/Sidebar";
 
 export const metadata: Metadata = {
   title: `${SERVER_NAME} - Dashboard`,
@@ -16,11 +14,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className="antialiased flex flex-col min-h-screen">
-        <Navbar />
-        <main className="flex-1 pt-10 pb-14">{children}</main>
-        <Footer />
+    <html lang="en" className="h-full">
+      <body className="h-full flex">
+        {/* Sidebar */}
+        <Sidebar />
+
+        {/* Main Content */}
+        <div className="flex flex-col flex-1 h-full overflow-hidden">
+          <div className="flex-1 flex flex-col overflow-y-auto">
+            <main className="flex-1 pt-8 sm:pt-10 pb-10">{children}</main>
+          </div>
+        </div>
       </body>
     </html>
   );

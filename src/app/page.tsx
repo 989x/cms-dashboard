@@ -20,7 +20,7 @@ export default function Home() {
   };
 
   return (
-    <div className="w-full max-w-4xl mx-auto px-4">
+    <div className="w-full max-w-4xl mx-auto px-4 sm:px-6">
       <h1 className="text-xl sm:text-2xl font-bold mb-6 sm:mb-8">
         CMS Dashboard
       </h1>

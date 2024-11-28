@@ -20,8 +20,7 @@ src/
 │   └── page.tsx              # Main page of the application
 ├── components/
 │   ├── layout/
-│   │   ├── Footer.tsx        # Footer component
-│   │   └── Navbar.tsx        # Navbar component
+│   │   └── Sidebar.tsx       # Sidebar component
 │   ├── NewsCard.tsx          # News card component
 │   └── SearchAndFilter.tsx   # Search and filter component
 ├── utils/
