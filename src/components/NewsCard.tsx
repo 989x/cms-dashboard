@@ -15,7 +15,7 @@ const NewsCard: React.FC<NewsItem> = ({ title, image, tags, date, description, s
         />
       </div>
       <div className="flex-1 flex flex-col gap-2 justify-center">
-        <h2 className="text-lg font-semibold text-blue-600 line-clamp-1">{title || 'Untitled'}</h2>
+        <h2 className="text-lg font-semibold line-clamp-1">{title || 'Untitled'}</h2>
         <div className="flex items-center text-sm text-gray-500 gap-2">
           <span>{type === 'article' ? 'บทความ' : 'ข่าวสาร'}</span>
           <span className="h-4 w-px bg-gray-300"></span>
@@ -42,9 +42,13 @@ const NewsCard: React.FC<NewsItem> = ({ title, image, tags, date, description, s
           </span>
         </button>
       </div>
-      <div className="flex gap-5">
-        <button className="text-blue-600 font-semibold hover:underline">Edit</button>
-        <button className="text-red-600 font-semibold hover:underline">Delete</button>
+      <div className="flex gap-3 text-sm">
+        <button className="px-4 py-2 border text-blue-600 font-semibold rounded-md transition-colors duration-200 hover:bg-blue-600 hover:text-white">
+          Edit
+        </button>
+        <button className="px-4 py-2 border text-red-600 font-semibold rounded-md transition-colors duration-200 hover:bg-red-600 hover:text-white">
+          Delete
+        </button>
       </div>
     </div>
   </div>

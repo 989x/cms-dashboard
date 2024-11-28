@@ -6,13 +6,33 @@ import { useState } from "react";
 import { FiMenu, FiX, FiMonitor, FiLogOut, FiSettings, FiFileText, FiInbox } from "react-icons/fi";
 
 const navItems = [
-  { href: "/", label: "Overview", icon: FiMonitor },
-  { href: "/forms/franchise", label: "Franchise Forms", icon: FiInbox },
-  { href: "/forms/business", label: "Business Forms", icon: FiInbox },
-  { href: "/news", label: "Manage News", icon: FiFileText },
-  { href: "/articles", label: "Manage Articles", icon: FiFileText },
-  { href: "/", label: "Settings", icon: FiSettings },
-  { href: "/", label: "Logout", icon: FiLogOut },
+  {
+    category: "General",
+    items: [
+      { href: "/", label: "Overview", icon: FiMonitor },
+    ],
+  },
+  {
+    category: "Forms",
+    items: [
+      { href: "/forms/franchise", label: "Franchise Forms", icon: FiInbox },
+      { href: "/forms/business", label: "Business Forms", icon: FiInbox },
+    ],
+  },
+  {
+    category: "Management",
+    items: [
+      { href: "/news", label: "Manage News", icon: FiFileText },
+      { href: "/articles", label: "Manage Articles", icon: FiFileText },
+    ],
+  },
+  {
+    category: "Settings",
+    items: [
+      { href: "/", label: "Settings", icon: FiSettings },
+      { href: "/", label: "Logout", icon: FiLogOut },
+    ],
+  },
 ];
 
 export default function Sidebar() {
@@ -68,21 +88,46 @@ export default function Sidebar() {
           </div>
 
           {/* Navigation Links */}
-          <nav className="mt-10">
-            <ul className="space-y-8">
-              {navItems.map(({ href, label, icon: Icon }) => (
-                <li key={label}>
-                  <Link
-                    href={href}
-                    className="flex items-center gap-4 text-gray-700 hover:text-blue-500"
-                  >
-                    <Icon className="w-5 h-5" />
-                    <span className="text-sm font-medium">{label}</span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
+          <nav className="mt-10 space-y-8">
+            {navItems.map(({ category, items }) => (
+              <div key={category}>
+                {/* category */}
+                <h2 className="text-xs font-semibold text-gray-500 uppercase tracking-wide">{category}</h2>
+                <ul className="mt-5 space-y-5">
+                  {items.map(({ href, label, icon: Icon }) => (
+                    <li key={label}>
+                      <Link
+                        href={href}
+                        className="flex items-center gap-4 text-gray-700 hover:text-blue-500"
+                      >
+                        <Icon className="w-5 h-5" />
+                        <span className="text-sm font-medium">{label}</span>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
           </nav>
+
+          <div className="absolute bottom-0 left-0 w-full flex items-center gap-4 px-3 sm:px-5 pb-5">
+            <div className="relative w-11 h-11">
+              <Image
+                src="/labubu.webp"
+                alt="User Profile Picture"
+                width={44}
+                height={44}
+                className="rounded-full object-cover"
+              />
+              {/* Green dot */}
+              <div className="absolute bottom-0 right-0 w-3.5 h-3.5 bg-green-500 border-2 border-white rounded-full"></div>
+            </div>
+            <div>
+              <h2 className="font-medium text-gray-800">admin</h2>
+              <p className="text-sm text-gray-500">admin@123.123.12.com</p>
+            </div>
+          </div>
+
         </div>
       </aside>
     </>
