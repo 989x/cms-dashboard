@@ -20,8 +20,9 @@ src/
 │   └── page.tsx              # Main page of the application
 ├── components/
 │   ├── layout/
-│   │   └── Sidebar.tsx       # Sidebar component
-│   ├── NewsCard.tsx          # News card component
+│   │   └── Sidebar.tsx       
+│   ├── EditModal.tsx         
+│   ├── NewsCard.tsx          
 │   └── SearchAndFilter.tsx   # Search and filter component
 ├── utils/
 │   └── formatDate.ts         # Utility for formatting dates
