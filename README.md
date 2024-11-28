@@ -36,6 +36,8 @@ src/
 ### Create a new Next.js application using pnpm:
 ```bash
 pnpm create next-app
+
+pnpm add react-icons
 ```
 
 ## Example Configuration
