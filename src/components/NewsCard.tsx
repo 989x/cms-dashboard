@@ -96,6 +96,7 @@ const NewsCard: React.FC<NewsItem> = ({
       <EditModal
         isOpen={isEditModalOpen}
         onClose={() => setEditModalOpen(false)}
+        id={id}
         status={currentStatus}
         contentType={currentContentType}
         title={currentTitle}

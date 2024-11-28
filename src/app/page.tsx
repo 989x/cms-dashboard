@@ -22,7 +22,7 @@ export default function Home() {
   return (
     <div className="w-full max-w-4xl mx-auto px-4 sm:px-6">
       <h1 className="text-xl sm:text-2xl font-bold mb-6 sm:mb-8">
-        Manage Content
+        Manage News Content
       </h1>
       <SearchAndFilterBar onSearch={handleSearch} onFilter={handleFilter} />
       <p className="text-gray-600 font-medium mt-4 mb-8">

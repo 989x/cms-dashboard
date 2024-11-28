@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { FiX, FiSave, FiXCircle, FiEdit } from 'react-icons/fi';
+import { FiX, FiSave, FiXCircle } from 'react-icons/fi';
 
 interface EditModalProps {
   isOpen: boolean;
   onClose: () => void;
+  id: string;
   status: "visible" | "hidden";
   contentType: "news" | "article";
   title: string;
@@ -18,7 +19,7 @@ interface EditModalProps {
   }) => void;
 }
 
-const EditModal: React.FC<EditModalProps> = ({ isOpen, onClose, title, description, tags = [], status, contentType, onSave }) => {
+const EditModal: React.FC<EditModalProps> = ({ isOpen, onClose, id, title, description, tags = [], status, contentType, onSave }) => {
   const [editStatus, setEditStatus] = useState(status);
   const [editContentType, setEditContentType] = useState(contentType);
   const [editTitle, setEditTitle] = useState(title);
@@ -44,8 +45,7 @@ const EditModal: React.FC<EditModalProps> = ({ isOpen, onClose, title, descripti
           {/* Modal Header */}
           <div className="flex items-center justify-between mb-8">
             <h2 className="text-lg sm:text-xl font-semibold flex items-center gap-3">
-              <FiEdit className="h-5 w-5 sm:h-6 sm:w-6" />
-              Edit Content
+              Edit Content <span className='text-gray-500 text-base'>ID: {id}</span>
             </h2>
             <button
               onClick={onClose}
