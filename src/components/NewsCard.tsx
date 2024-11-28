@@ -2,12 +2,6 @@ import Image from 'next/image';
 import { NewsItem } from '@/types';
 import { formatToThaiDate } from '@/utils/formatDate';
 
-const DividerIcon: React.FC = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4 mx-1.5 text-gray-400">
-    <line x1="12" y1="0" x2="12" y2="24" />
-  </svg>
-);
-
 const NewsCard: React.FC<NewsItem> = ({ title, image, tags, date, description, status, type, views }) => (
   <div className="block">
     <div className="flex flex-col sm:flex-row sm:items-center gap-4">
@@ -22,11 +16,11 @@ const NewsCard: React.FC<NewsItem> = ({ title, image, tags, date, description, s
       </div>
       <div className="flex-1 flex flex-col gap-2 justify-center">
         <h2 className="text-lg font-semibold text-blue-600 line-clamp-1">{title || 'Untitled'}</h2>
-        <div className="flex items-center text-sm text-gray-600 font-medium">
+        <div className="flex items-center text-sm text-gray-500 gap-2">
           <span>{type === 'article' ? 'บทความ' : 'ข่าวสาร'}</span>
-          <DividerIcon />
+          <span className="h-4 w-px bg-gray-300"></span>
           <span>{formatToThaiDate(date)}</span>
-          <DividerIcon />
+          <span className="h-4 w-px bg-gray-300"></span>
           <span>ยอดวิว {views ?? '0'}</span>
         </div>
         <p className="text-sm text-gray-800 line-clamp-2 leading-relaxed">{description || 'No description available.'}</p>
