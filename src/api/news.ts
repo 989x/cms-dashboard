@@ -21,7 +21,7 @@ export const generateRandomNews = (count: number): NewsItem[] => {
 
   return Array.from({ length: count }, () => {
     const title = getRandomLorem(Math.floor(Math.random() * 5) + 5); // Title with 5 to 9 words
-    const description = getRandomLorem(title.split(" ").length * 2); // Description twice the length of title
+    const description = getRandomLorem(title.split(" ").length * 60); // Description 60 times longer than the title
     return {
       id: generateRandomId(),
       title,

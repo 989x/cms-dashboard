@@ -132,10 +132,10 @@ const EditModal: React.FC<EditModalProps> = ({ isOpen, onClose, id, title, descr
             </div>
 
             {/* Action Buttons */}
-            <div className="flex justify-end font-semibold gap-4 mt-8">
+            <div className="flex justify-end text-sm font-medium gap-4 mt-8">
               <button
                 type="button"
-                className="flex items-center gap-2 px-5 py-3 bg-gray-200 rounded-lg text-gray-700 hover:bg-gray-300"
+                className="flex items-center gap-2 px-4 py-3 bg-gray-200 rounded-lg text-gray-700 hover:bg-gray-300"
                 onClick={onClose}
               >
                 <FiXCircle className="h-5 w-5" />
@@ -143,7 +143,7 @@ const EditModal: React.FC<EditModalProps> = ({ isOpen, onClose, id, title, descr
               </button>
               <button
                 type="submit"
-                className="flex items-center gap-2 px-5 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+                className="flex items-center gap-2 px-4 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
               >
                 <FiSave className="h-5 w-5" />
                 Save

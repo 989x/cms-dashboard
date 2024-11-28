@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { MdFilterList } from 'react-icons/md';
 
 export default function SearchAndFilterBar({
   onSearch,
@@ -48,8 +49,9 @@ export default function SearchAndFilterBar({
       {/* Filter Button */}
       <button
         onClick={onFilter}
-        className="font-medium text-gray-700 px-4 py-2 border rounded-lg transition"
+        className="font-medium text-gray-700 px-4 py-2 border rounded-lg transition flex items-center gap-2"
       >
+        <MdFilterList className="h-5 w-5" />
         Filter
       </button>
     </div>

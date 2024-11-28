@@ -26,7 +26,7 @@ export default function Home() {
       </h1>
       <SearchAndFilterBar onSearch={handleSearch} onFilter={handleFilter} />
       <p className="text-gray-600 font-medium mt-4 mb-8">
-        Found {filteredNews.length} results.
+        Found {filteredNews.length} results
       </p>
       <div className="grid gap-10">
         {filteredNews.map((news) => (

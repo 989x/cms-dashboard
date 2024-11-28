@@ -22,8 +22,7 @@ const navItems = [
   {
     category: "Management",
     items: [
-      { href: "/news", label: "Manage News", icon: FiFileText },
-      { href: "/articles", label: "Manage Articles", icon: FiFileText },
+      { href: "/", label: "Manage Content", icon: FiFileText },
     ],
   },
   {
