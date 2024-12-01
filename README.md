@@ -9,28 +9,33 @@ For a comprehensive guide on setting up **Next.js** with **pnpm**, check out thi
 
 
 ## File structure
-
-```
 src/
-├── api/
-│   ├── config.ts             # Configuration file for API (reads from .env)
-│   └── news.ts               # Mock or API for news data
-├── app/
-│   ├── layout.tsx            # Main layout for the application
-│   └── page.tsx              # Main page of the application
-├── components/
-│   ├── layout/
-│   │   └── Sidebar.tsx       
-│   ├── EditModal.tsx         
-│   ├── NewsCard.tsx          
-│   └── SearchAndFilter.tsx   # Search and filter component
-├── utils/
-│   └── formatDate.ts         # Utility for formatting dates
-├── types.ts                  # TypeScript types and interfaces
-├── pnpm-lock.yaml            # Lockfile for dependencies managed by pnpm
-├── tailwind.config.ts        # Configuration for Tailwind CSS
-└── .env                      # Environment variables file (not tracked by git)
-```
+- **api/**  
+  - **login.ts**: Handles login API requests
+  - **config.ts**: Configuration file for API (reads from `.env`).  
+  - **news.ts**: Mock or API for news data.  
+
+- **app/**  
+  - **login/page.ts**: Login page with UI and authentication logic
+  - **layout.tsx**
+  - **page.tsx**
+
+- **components/**  
+  - **layout/**  
+    - **Sidebar.tsx**
+  - **EditModal.tsx**
+  - **NewsCard.tsx**
+  - **SearchAndFilter.tsx**
+
+- **utils/**  
+  - **authStorage.ts**: Utility for handling authentication tokens
+  - **formatDate.ts**
+
+- **types.ts**: TypeScript types and interfaces.  
+- **pnpm-lock.yaml**: Lockfile for dependencies managed by pnpm.  
+- **tailwind.config.ts**
+- **.env**: Environment variables file (not tracked by git).  
+
 
 ## Commands
 

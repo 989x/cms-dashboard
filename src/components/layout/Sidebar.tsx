@@ -3,14 +3,22 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
-import { FiMenu, FiX, FiMonitor, FiLogOut, FiSettings, FiFileText, FiInbox } from "react-icons/fi";
+import { useRouter } from "next/navigation";
+import { clearAuthToken } from "@/utils/authStorage";
+import {
+  FiMenu,
+  FiX,
+  FiMonitor,
+  FiLogOut,
+  FiSettings,
+  FiFileText,
+  FiInbox,
+} from "react-icons/fi";
 
 const navItems = [
   {
     category: "General",
-    items: [
-      { href: "/", label: "Overview", icon: FiMonitor },
-    ],
+    items: [{ href: "/", label: "Overview", icon: FiMonitor }],
   },
   {
     category: "Forms",
@@ -21,21 +29,20 @@ const navItems = [
   },
   {
     category: "Management",
-    items: [
-      { href: "/", label: "Manage Content", icon: FiFileText },
-    ],
+    items: [{ href: "/", label: "Manage Content", icon: FiFileText }],
   },
   {
     category: "Settings",
     items: [
       { href: "/", label: "Settings", icon: FiSettings },
-      { href: "/", label: "Logout", icon: FiLogOut },
+      { href: "#", label: "Logout", icon: FiLogOut, isLogout: true }, // Add isLogout flag
     ],
   },
 ];
 
 export default function Sidebar() {
   const [isOpen, setIsOpen] = useState(false);
+  const router = useRouter(); // Use router for navigation
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
@@ -49,11 +56,7 @@ export default function Sidebar() {
         onClick={toggleSidebar}
         aria-label="Toggle Sidebar"
       >
-        {isOpen ? (
-          <FiX className="w-5 h-5" />
-        ) : (
-          <FiMenu className="w-5 h-5" />
-        )}
+        {isOpen ? <FiX className="w-5 h-5" /> : <FiMenu className="w-5 h-5" />}
       </button>
 
       {/* Overlay */}
@@ -90,18 +93,32 @@ export default function Sidebar() {
           <nav className="mt-10 space-y-8">
             {navItems.map(({ category, items }) => (
               <div key={category}>
-                {/* category */}
-                <h2 className="text-xs font-semibold text-gray-500 uppercase tracking-wide">{category}</h2>
+                {/* Category */}
+                <h2 className="text-xs font-semibold text-gray-500 uppercase tracking-wide">
+                  {category}
+                </h2>
                 <ul className="mt-5 space-y-5">
-                  {items.map(({ href, label, icon: Icon }) => (
+                  {items.map(({ href, label, icon: Icon, isLogout }) => (
                     <li key={label}>
-                      <Link
-                        href={href}
-                        className="flex items-center gap-4 text-gray-700 hover:text-blue-500"
-                      >
-                        <Icon className="w-5 h-5" />
-                        <span className="text-sm font-medium">{label}</span>
-                      </Link>
+                      {isLogout ? (
+                        // Logout button
+                        <button
+                          onClick={clearAuthToken}
+                          className="flex items-center gap-4 text-gray-700 hover:text-blue-500 w-full text-left"
+                        >
+                          <Icon className="w-5 h-5" />
+                          <span className="text-sm font-medium">{label}</span>
+                        </button>
+                      ) : (
+                        // Normal navigation link
+                        <Link
+                          href={href}
+                          className="flex items-center gap-4 text-gray-700 hover:text-blue-500"
+                        >
+                          <Icon className="w-5 h-5" />
+                          <span className="text-sm font-medium">{label}</span>
+                        </Link>
+                      )}
                     </li>
                   ))}
                 </ul>
@@ -126,7 +143,6 @@ export default function Sidebar() {
               <p className="text-sm text-gray-500">admin@123.123.12.com</p>
             </div>
           </div>
-
         </div>
       </aside>
     </>

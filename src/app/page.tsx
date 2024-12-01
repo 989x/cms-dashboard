@@ -1,11 +1,23 @@
 "use client";
 
-import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { hasAuthToken } from '@/utils/authStorage';
+
+import { useEffect, useState } from 'react';
 import { mockNews } from '@/api/news';
 import SearchAndFilterBar from '@/components/SearchAndFilter';
 import NewsCard from '@/components/NewsCard';
 
 export default function Home() {
+  const router = useRouter();
+
+  useEffect(() => {
+    // Redirect to login if not authenticated
+    if (!hasAuthToken()) {
+      router.push('/login');
+    }
+  }, []);
+  
   const [filteredNews, setFilteredNews] = useState(mockNews);
 
   const handleSearch = (query: string) => {
