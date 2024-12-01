@@ -1,5 +1,5 @@
-import dotenv from 'dotenv';
+export const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL as string;
 
-dotenv.config();
-
-export const SERVER_NAME = process.env.SERVER_NAME || 'Default Server';
+if (!API_BASE_URL) {
+  throw new Error("Environment variable NEXT_PUBLIC_API_BASE_URL is not defined");
+}

@@ -34,7 +34,8 @@ src/
 - **types.ts**: TypeScript types and interfaces.  
 - **pnpm-lock.yaml**: Lockfile for dependencies managed by pnpm.  
 - **tailwind.config.ts**
-- **.env**: Environment variables file (not tracked by git).  
+- **.env.example**  
+- **.env.local**: file .local (not tracked by git).  
 
 
 ## Commands
