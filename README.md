@@ -21,6 +21,7 @@ src/
   - login/
     - layout.tsx: Layout for the login page (handles metadata)
     - page.tsx: Login page with UI and authentication logic
+  - client-layout.tsx: Client-side layout logic (handles conditional rendering of Sidebar)
   - layout.tsx: Root layout for the app
   - page.tsx: Home page (Dashboard)
 

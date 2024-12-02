@@ -1,6 +1,8 @@
+import { SERVER_IP } from "@/api/config";
+
 export const metadata = {
-  title: "Login - CMS Dashboard",
-  description: "Log in to access the CMS Dashboard and manage your content.",
+  title: `CMS Login (${SERVER_IP})`,
+  description: `Access your CMS Dashboard securely.`,
 };
 
 export default function LoginLayout({

@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { SERVER_IP } from "@/api/config";
 import { clearAuthToken } from "@/utils/authStorage";
 import {
   FiMenu,
@@ -140,7 +141,7 @@ export default function Sidebar() {
             </div>
             <div>
               <h2 className="font-medium text-gray-800">admin</h2>
-              <p className="text-sm text-gray-500">admin@123.123.12.com</p>
+              <p className="text-sm text-gray-500">IP: {SERVER_IP}</p>
             </div>
           </div>
         </div>
