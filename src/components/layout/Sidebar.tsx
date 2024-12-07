@@ -76,14 +76,14 @@ export default function Sidebar() {
       >
         <div className="p-6">
           <div className="flex flex-col mt-2">
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-3">
               <div className="w-8 h-8">
                 <Image
-                  src="/favicon.ico"
+                  src="/favicon.png"
                   alt="Server Logo"
                   width={32}
                   height={32}
-                  className="rounded-full object-cover"
+                  className="object-cover"
                 />
               </div>
               <h1 className="font-semibold">CMS Dashboard</h1>

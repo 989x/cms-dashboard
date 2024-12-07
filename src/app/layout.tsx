@@ -14,6 +14,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="h-full">
+      <head>
+        <link rel="icon" href="/favicon.png" sizes="any" type="image/png" />
+      </head>
       <body className="h-full">
         <ClientLayout>{children}</ClientLayout>
       </body>
