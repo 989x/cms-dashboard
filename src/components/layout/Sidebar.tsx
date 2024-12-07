@@ -47,8 +47,9 @@ export default function Sidebar() {
           isOpen ? "translate-x-0" : "-translate-x-full"
         } w-64 transition-transform duration-300 ease-in-out z-50 lg:translate-x-0 lg:static lg:flex-shrink-0`}
       >
-        <div className="p-6">
-          <div className="flex flex-col">
+        <div className="h-full flex flex-col">
+          {/* Header Section */}
+          <div className="p-6 flex-shrink-0">
             <Link href="/" className="flex items-center gap-3 group">
               <div className="w-11 h-11">
                 <Image
@@ -70,10 +71,10 @@ export default function Sidebar() {
             </Link>
           </div>
 
-          {/* Navigation Links */}
-          <nav className="mt-8 space-y-6">
+          {/* Scrollable Navigation Section */}
+          <nav className="flex-1 overflow-y-auto px-6">
             {navItems.map(({ category, items }) => (
-              <div key={category}>
+              <div key={category} className="mb-6">
                 <h2 className="text-xs font-semibold text-gray-400 uppercase tracking-wide">
                   {category}
                 </h2>
@@ -94,28 +95,30 @@ export default function Sidebar() {
             ))}
           </nav>
 
-          {/* account section */}
-          <div className="absolute bottom-0 left-0 w-full flex items-center justify-between px-3 sm:px-5 pb-5">
-            <div className="flex items-center gap-4">
-              <div className="relative w-11 h-11">
-                <Image
-                  src="/labubu.webp"
-                  alt="User Profile Picture"
-                  width={44}
-                  height={44}
-                  className="rounded-full object-cover"
-                />
-                <div className="absolute bottom-0 right-0 w-3.5 h-3.5 bg-green-500 border-2 border-white rounded-full"></div>
+          {/* Account Section */}
+          <div className="flex-shrink-0 p-4">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-4">
+                <div className="relative w-11 h-11">
+                  <Image
+                    src="/labubu.webp"
+                    alt="User Profile Picture"
+                    width={44}
+                    height={44}
+                    className="rounded-full object-cover"
+                  />
+                  <div className="absolute bottom-0 right-0 w-3.5 h-3.5 bg-green-500 border-2 border-white rounded-full"></div>
+                </div>
+                <p className="font-medium text-gray-800">Admin</p>
               </div>
-              <p className="font-medium text-gray-800">Admin</p>
+              <button
+                onClick={handleLogout}
+                className="p-2 border-[1.5px] rounded-lg"
+                aria-label="Logout"
+              >
+                <FiLogOut className="w-[18px] h-[18px]" />
+              </button>
             </div>
-            <button
-              onClick={handleLogout}
-              className="p-2 border-[1.5px] rounded-lg"
-              aria-label="Logout"
-            >
-              <FiLogOut className="w-[18px] h-[18px]" />
-            </button>
           </div>
         </div>
       </aside>
