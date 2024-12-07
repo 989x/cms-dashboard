@@ -13,11 +13,17 @@ For a comprehensive guide on setting up **Next.js** with **pnpm**, check out thi
 ```
 src/
 - api/
-  - login.ts: Handles login API requests
   - config.ts: Configuration file for API (reads from `.env`)
+  - login.ts: Handles login API requests
   - news.ts: Mock or API for news data
 
 - app/
+  - content/
+    - page.tsx
+  - business/
+    - page.tsx
+  - message/
+    - page.tsx
   - login/
     - layout.tsx: Layout for the login page (handles metadata)
     - page.tsx: Login page with UI and authentication logic
@@ -27,6 +33,7 @@ src/
 
 - components/
   - layout/
+    - navItems.ts
     - Sidebar.tsx
   - EditModal.tsx
   - NewsCard.tsx

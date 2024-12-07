@@ -6,52 +6,8 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { SERVER_IP } from "@/api/config";
 import { clearAuthToken } from "@/utils/authStorage";
-import {
-  FiMenu,
-  FiX,
-  FiSettings,
-  FiFileText,
-  FiInbox,
-  FiLogOut,
-  FiPlusCircle,
-  FiImage,
-  FiBook,
-  FiShare2,
-  FiGlobe,
-} from "react-icons/fi";
-
-const navItems = [
-  {
-    category: "Message",
-    items: [
-      { href: "/forms/franchise", label: "Franchise Forms", icon: FiInbox },
-      { href: "/forms/business", label: "Business Forms", icon: FiInbox },
-    ],
-  },
-  {
-    category: "Listing",
-    items: [
-      { href: "/business/add", label: "Create Listing", icon: FiPlusCircle }, 
-      { href: "/business/general", label: "Manage Business", icon: FiGlobe },
-      { href: "/business/franchise", label: "Manage Franchise", icon: FiShare2 },
-    ],
-  },
-  {
-    category: "Content",
-    items: [
-      { href: "/content/add", label: "Add Content", icon: FiPlusCircle }, 
-      { href: "/", label: "Manage News", icon: FiFileText },
-      { href: "/", label: "Manage Article", icon: FiBook },
-    ],
-  },
-  {
-    category: "System",
-    items: [
-      { href: "/content/images", label: "Manage Image", icon: FiImage }, 
-      { href: "/", label: "Setting", icon: FiSettings }
-    ],
-  },
-];
+import { FiMenu, FiX, FiLogOut } from "react-icons/fi";
+import { navItems } from "./navItems";
 
 export default function Sidebar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -93,7 +49,7 @@ export default function Sidebar() {
       >
         <div className="p-6">
           <div className="flex flex-col">
-            <div className="flex items-center gap-3">
+            <Link href="/" className="flex items-center gap-3 group">
               <div className="w-11 h-11">
                 <Image
                   src="/favicon.png"
@@ -104,10 +60,14 @@ export default function Sidebar() {
                 />
               </div>
               <div className="space-y-[1px]">
-                <p className="text-[17px] font-semibold">Dashboard</p>
-                <p className="text-sm text-gray-500">{SERVER_IP}</p>
+                <p className="text-[17px] font-semibold group-hover:text-blue-600 transition-colors">
+                  Dashboard
+                </p>
+                <p className="text-sm text-gray-500 group-hover:text-blue-400 transition-colors">
+                  {SERVER_IP}
+                </p>
               </div>
-            </div>
+            </Link>
           </div>
 
           {/* Navigation Links */}
