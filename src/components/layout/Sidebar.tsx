@@ -31,9 +31,9 @@ const navItems = [
   {
     category: "Listing",
     items: [
-      { href: "/bussystem/add", label: "Create Listing", icon: FiPlusCircle }, 
-      { href: "/bussystem/business", label: "Manage Business", icon: FiGlobe },
-      { href: "/bussystem/franchise", label: "Manage Franchise", icon: FiShare2 },
+      { href: "/business/add", label: "Create Listing", icon: FiPlusCircle }, 
+      { href: "/business/general", label: "Manage Business", icon: FiGlobe },
+      { href: "/business/franchise", label: "Manage Franchise", icon: FiShare2 },
     ],
   },
   {
@@ -114,7 +114,7 @@ export default function Sidebar() {
           <nav className="mt-8 space-y-6">
             {navItems.map(({ category, items }) => (
               <div key={category}>
-                <h2 className="text-xs font-semibold text-gray-500 uppercase tracking-wide">
+                <h2 className="text-xs font-semibold text-gray-400 uppercase tracking-wide">
                   {category}
                 </h2>
                 <ul className="mt-5 space-y-5">

@@ -90,7 +90,7 @@ const NewsCard: React.FC<NewsItem> = ({
       </div>
       <div className="border-t border-gray-200 my-3"></div>
       <div className="flex items-center justify-between">
-        <div className="flex items-center gap-2">
+        <div className="flex gap-2">
           <span className="text-sm font-medium text-gray-600">Status:</span>
           <button className="flex items-center gap-1">
             {currentStatus === 'visible' ? (
