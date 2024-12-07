@@ -9,38 +9,47 @@ import { clearAuthToken } from "@/utils/authStorage";
 import {
   FiMenu,
   FiX,
-  FiMonitor,
   FiSettings,
   FiFileText,
   FiInbox,
   FiLogOut,
   FiPlusCircle,
   FiImage,
+  FiBook,
+  FiShare2,
+  FiGlobe,
 } from "react-icons/fi";
 
 const navItems = [
   {
-    category: "Homepage",
-    items: [{ href: "/", label: "Overview", icon: FiMonitor }],
-  },
-  {
-    category: "Messages",
+    category: "Message",
     items: [
       { href: "/forms/franchise", label: "Franchise forms", icon: FiInbox },
       { href: "/forms/business", label: "Business forms", icon: FiInbox },
     ],
   },
   {
-    category: "Management",
+    category: "Listing",
     items: [
-      { href: "/content/add", label: "Add Content", icon: FiPlusCircle }, 
-      { href: "/", label: "Manage content", icon: FiFileText },
-      { href: "/content/images", label: "Manage Images", icon: FiImage }, 
+      { href: "/bussystem/add", label: "Create Listing", icon: FiPlusCircle }, 
+      { href: "/bussystem/business", label: "Manage Business", icon: FiGlobe },
+      { href: "/bussystem/franchise", label: "Manage Franchise", icon: FiShare2 },
     ],
   },
   {
-    category: "General",
-    items: [{ href: "/", label: "Settings", icon: FiSettings }],
+    category: "Content",
+    items: [
+      { href: "/content/add", label: "Add Content", icon: FiPlusCircle }, 
+      { href: "/", label: "Manage News", icon: FiFileText },
+      { href: "/", label: "Manage Article", icon: FiBook },
+    ],
+  },
+  {
+    category: "System",
+    items: [
+      { href: "/content/images", label: "Manage Image", icon: FiImage }, 
+      { href: "/", label: "Setting", icon: FiSettings }
+    ],
   },
 ];
 
@@ -83,7 +92,7 @@ export default function Sidebar() {
         } w-64 transition-transform duration-300 ease-in-out z-50 lg:translate-x-0 lg:static lg:flex-shrink-0`}
       >
         <div className="p-6">
-          <div className="flex flex-col mt-2">
+          <div className="flex flex-col">
             <div className="flex items-center gap-3">
               <div className="w-11 h-11">
                 <Image
@@ -102,7 +111,7 @@ export default function Sidebar() {
           </div>
 
           {/* Navigation Links */}
-          <nav className="mt-10 space-y-8">
+          <nav className="mt-8 space-y-6">
             {navItems.map(({ category, items }) => (
               <div key={category}>
                 <h2 className="text-xs font-semibold text-gray-500 uppercase tracking-wide">
@@ -113,7 +122,7 @@ export default function Sidebar() {
                     <li key={label}>
                       <Link
                         href={href}
-                        className="flex items-center gap-4 text-gray-700 hover:text-blue-500"
+                        className="flex items-center gap-3.5 text-gray-700 hover:text-blue-500"
                       >
                         <Icon className="w-5 h-5" />
                         <span className="text-sm font-medium">{label}</span>
