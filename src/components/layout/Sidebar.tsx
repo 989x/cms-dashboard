@@ -24,8 +24,8 @@ const navItems = [
   {
     category: "Message",
     items: [
-      { href: "/forms/franchise", label: "Franchise forms", icon: FiInbox },
-      { href: "/forms/business", label: "Business forms", icon: FiInbox },
+      { href: "/forms/franchise", label: "Franchise Forms", icon: FiInbox },
+      { href: "/forms/business", label: "Business Forms", icon: FiInbox },
     ],
   },
   {
