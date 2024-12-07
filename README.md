@@ -29,11 +29,12 @@ src/
     - page.tsx: Login page with UI and authentication logic
   - client-layout.tsx: Client-side layout logic (handles conditional rendering of Sidebar)
   - layout.tsx: Root layout for the app
+  - not-found.tsx
   - page.tsx: Home page (Dashboard)
 
 - components/
   - layout/
-    - navItems.ts
+    - navItems.ts: Defines navigation structure with categories, links, icons, and descriptions for Sidebar.
     - Sidebar.tsx
   - EditModal.tsx
   - NewsCard.tsx
