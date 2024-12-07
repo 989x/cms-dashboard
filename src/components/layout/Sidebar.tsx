@@ -14,6 +14,8 @@ import {
   FiFileText,
   FiInbox,
   FiLogOut,
+  FiPlusCircle,
+  FiImage,
 } from "react-icons/fi";
 
 const navItems = [
@@ -30,7 +32,11 @@ const navItems = [
   },
   {
     category: "Management",
-    items: [{ href: "/", label: "Manage content", icon: FiFileText }],
+    items: [
+      { href: "/content/add", label: "Add Content", icon: FiPlusCircle }, 
+      { href: "/", label: "Manage content", icon: FiFileText },
+      { href: "/content/images", label: "Manage Images", icon: FiImage }, 
+    ],
   },
   {
     category: "General",
