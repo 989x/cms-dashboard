@@ -1,15 +1,4 @@
-export type BusinessItem = {
-  id: string;
-  title: string;
-  date: string;
-  contacts: { name: string; phone: string; email: string }[];
-  description: string;
-  image: string;
-  link: string;
-  views: number;
-  status: "visible" | "hidden";
-  type: "general" | "franchise";
-};
+import { BusinessItem } from "@/types";
 
 export const generateRandomBusiness = (count: number): BusinessItem[] => {
   const businessNames = [
@@ -65,8 +54,9 @@ export const generateRandomBusiness = (count: number): BusinessItem[] => {
       views: Math.floor(Math.random() * 1000),
       status: Math.random() > 0.5 ? "visible" : "hidden",
       type: Math.random() > 0.5 ? "general" : "franchise",
+      branches: Math.floor(Math.random() * 20) + 1, 
     };
   });
 };
 
-export const mockBusiness: BusinessItem[] = generateRandomBusiness(20);
+export const mockBusiness = generateRandomBusiness(20);

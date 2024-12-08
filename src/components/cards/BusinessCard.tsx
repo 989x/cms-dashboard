@@ -16,6 +16,7 @@ const BusinessCard: React.FC<BusinessItem> = ({
   date,
   description,
   views,
+  branches,
 }) => {
   const [isEditModalOpen, setEditModalOpen] = useState(false);
   const [currentStatus, setCurrentStatus] = useState(status);
@@ -35,7 +36,6 @@ const BusinessCard: React.FC<BusinessItem> = ({
     setCurrentContentType(data.contentType);
     setCurrentTitle(data.title);
     setCurrentDescription(data.description);
-    // setCurrentContacts(data.contacts);
     setEditModalOpen(false);
   };
 
@@ -74,6 +74,10 @@ const BusinessCard: React.FC<BusinessItem> = ({
             </span>
           </div>
           <p className="text-sm text-gray-800 line-clamp-2 leading-relaxed">{currentDescription || 'No description available.'}</p>
+          <div className="flex items-center text-sm text-gray-600 gap-2">
+            <span className="font-semibold text-gray-800">Branches:</span>
+            <span>{branches}</span>
+          </div>
           <div className="flex flex-wrap gap-2 text-sm text-gray-600">
             {currentContacts.map((contact, index) => (
               <div

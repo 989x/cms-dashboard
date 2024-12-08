@@ -54,6 +54,7 @@ export default function Home() {
             views={business.views}
             status={business.status}
             type={business.type}
+            branches={business.branches}
           />
         ))}
       </div>

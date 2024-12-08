@@ -1,16 +1,19 @@
 export type BusinessItem = {
-  id: string;
+  id: any;
   title: string;
   date: string;
   contacts: {
-    email: string; name: string; phone: string 
-}[];
+    email: string;
+    name: string;
+    phone: string;
+  }[];
   description: string;
   image: string;
   link: string;
   views: number;
-  status: "visible" | "hidden";
-  type: "general" | "franchise";
+  status: 'visible' | 'hidden';
+  type: 'general' | 'franchise';
+  branches: number;
 };
 
 export interface NewsItem {
@@ -22,6 +25,6 @@ export interface NewsItem {
   image: string | null;
   link: string | null;
   views: number | null; // Allow null for view count
-  status: "visible" | "hidden";
-  type: "news" | "article";
+  status: 'visible' | 'hidden';
+  type: 'news' | 'article';
 }
