@@ -74,18 +74,18 @@ export default function Sidebar() {
           {/* Scrollable Navigation Section */}
           <nav className="flex-1 overflow-y-auto px-6">
             {navItems.map(({ category, items }) => (
-              <div key={category} className="mb-6">
+              <div key={category} className="mb-4">
                 <h2 className="text-xs font-semibold text-gray-400 uppercase tracking-wide">
                   {category}
                 </h2>
-                <ul className="mt-5 space-y-5">
+                <ul className="mt-4 space-y-4">
                   {items.map(({ href, label, icon: Icon }) => (
                     <li key={label}>
                       <Link
                         href={href}
-                        className="flex items-center gap-3.5 text-gray-700 hover:text-blue-500"
+                        className="flex items-center gap-3 text-gray-700 hover:text-blue-500"
                       >
-                        <Icon className="w-5 h-5" />
+                        <Icon className="w-4 h-4" />
                         <span className="text-sm font-medium">{label}</span>
                       </Link>
                     </li>
@@ -99,12 +99,12 @@ export default function Sidebar() {
           <div className="flex-shrink-0 p-4">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-4">
-                <div className="relative w-11 h-11">
+                <div className="relative w-10 h-10">
                   <Image
                     src="/labubu.webp"
                     alt="User Profile Picture"
-                    width={44}
-                    height={44}
+                    width={40}
+                    height={40}
                     className="rounded-full object-cover"
                   />
                   <div className="absolute bottom-0 right-0 w-3.5 h-3.5 bg-green-500 border-2 border-white rounded-full"></div>
@@ -113,7 +113,7 @@ export default function Sidebar() {
               </div>
               <button
                 onClick={handleLogout}
-                className="p-2 border-[1.5px] rounded-lg"
+                className="p-1.5 border-[1.5px] rounded-lg"
                 aria-label="Logout"
               >
                 <FiLogOut className="w-[18px] h-[18px]" />

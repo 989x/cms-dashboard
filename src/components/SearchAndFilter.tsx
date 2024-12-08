@@ -21,7 +21,7 @@ export default function SearchAndFilterBar({
         <input
           type="text"
           placeholder="Search..."
-          className="flex-1 bg-transparent outline-none"
+          className="text-sm flex-1 bg-transparent outline-none"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
         />
@@ -49,7 +49,7 @@ export default function SearchAndFilterBar({
       {/* Filter Button */}
       <button
         onClick={onFilter}
-        className="font-medium text-gray-700 px-4 py-2 border rounded-lg transition flex items-center gap-2"
+        className="font-medium text-sm text-gray-700 px-4 py-2 border rounded-lg flex items-center gap-2"
       >
         <MdFilterList className="h-5 w-5" />
         Filter

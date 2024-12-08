@@ -52,7 +52,7 @@ const NewsCard: React.FC<NewsItem> = ({
           />
         </div>
         <div className="flex-1 flex flex-col gap-2 justify-center">
-          <h2 className="text-lg font-semibold line-clamp-1">{currentTitle || 'Untitled'}</h2>
+          <h2 className="font-semibold line-clamp-1">{currentTitle || 'Untitled'}</h2>
           <div className="flex items-center text-sm text-gray-500 gap-2.5">
             <span className="flex items-center gap-1.5">
               {currentContentType === 'article' ? (
@@ -91,31 +91,31 @@ const NewsCard: React.FC<NewsItem> = ({
       <div className="border-t border-gray-200 my-3"></div>
       <div className="flex items-center justify-between">
         <div className="flex gap-2">
-          <span className="text-sm font-medium text-gray-600">Status:</span>
+          <span className="text-[13px] font-medium text-gray-600">Status:</span>
           <button className="flex items-center gap-1">
             {currentStatus === 'visible' ? (
               <>
                 <FiEye className="h-4 w-4 text-green-500" />
-                <span className="text-sm font-medium text-green-600">Visible</span>
+                <span className="text-[13px] font-medium text-green-600">Visible</span>
               </>
             ) : (
               <>
                 <FiEyeOff className="h-4 w-4 text-gray-500" />
-                <span className="text-sm font-medium text-gray-600">Hidden</span>
+                <span className="text-[13px] font-medium text-gray-600">Hidden</span>
               </>
             )}
           </button>
         </div>
-        <div className="flex gap-3 text-sm">
+        <div className="flex gap-3 text-xs">
           <button
-            className="flex items-center gap-2 px-4 py-2 border text-blue-600 font-semibold rounded-md transition-colors duration-200 hover:bg-blue-600 hover:text-white"
+            className="flex items-center gap-2 px-3 py-2 border text-blue-600 font-semibold rounded-md transition-colors duration-200 hover:bg-blue-600 hover:text-white"
             onClick={() => setEditModalOpen(true)}
           >
             <FiEdit className="h-4 w-4" />
             Edit
           </button>
           <button
-            className="flex items-center gap-2 px-4 py-2 border text-red-600 font-semibold rounded-md transition-colors duration-200 hover:bg-red-600 hover:text-white"
+            className="flex items-center gap-2 px-3 py-2 border text-red-600 font-semibold rounded-md transition-colors duration-200 hover:bg-red-600 hover:text-white"
           >
             <FiTrash2 className="h-4 w-4" />
             Delete
