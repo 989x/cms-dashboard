@@ -4,11 +4,11 @@ import { useRouter } from 'next/navigation';
 import { hasAuthToken } from '@/utils/authStorage';
 
 import { useEffect, useState } from 'react';
-import { mockContents } from '@/api/content';
+import { mockContentArticles } from '@/api/content';
 import SearchAndFilterBar from '@/components/SearchAndFilter';
 import NewsCard from '@/components/cards/NewsCard';
 
-export default function Home() {
+export default function ArticlePage() {
   const router = useRouter();
 
   useEffect(() => {
@@ -18,13 +18,13 @@ export default function Home() {
     }
   }, []);
   
-  const [filteredNews, setFilteredNews] = useState(mockContents);
+  const [filteredArticles, setFilteredArticles] = useState(mockContentArticles);
 
   const handleSearch = (query: string) => {
-    const results = mockContents.filter((contents) =>
-      contents.title?.toLowerCase().includes(query.toLowerCase())
+    const results = mockContentArticles.filter((article) =>
+      article.title?.toLowerCase().includes(query.toLowerCase())
     );
-    setFilteredNews(results);
+    setFilteredArticles(results);
   };
 
   const handleFilter = () => {
@@ -34,26 +34,26 @@ export default function Home() {
   return (
     <div className="w-full max-w-6xl mx-auto px-4 sm:px-6">
       <h1 className="text-lg sm:text-xl font-bold mb-6 sm:mb-8">
-        Manage All Content
+        Manage Article Content
       </h1>
       <SearchAndFilterBar onSearch={handleSearch} onFilter={handleFilter} />
       <p className="text-gray-600 text-sm font-medium mt-4 mb-8">
-        Found {filteredNews.length} results
+        Found {filteredArticles.length} results
       </p>
       <div className="grid gap-4">
-        {filteredNews.map((news) => (
+        {filteredArticles.map((article) => (
           <NewsCard
-            key={news.id}
-            id={news.id}
-            title={news.title}
-            image={news.image}
-            tags={news.tags}
-            date={news.date}
-            description={news.description}
-            link={news.link}
-            views={news.views}
-            status={news.status}
-            type={news.type}
+            key={article.id}
+            id={article.id}
+            title={article.title}
+            image={article.image}
+            tags={article.tags}
+            date={article.date}
+            description={article.description}
+            link={article.link}
+            views={article.views}
+            status={article.status}
+            type={article.type}
           />
         ))}
       </div>

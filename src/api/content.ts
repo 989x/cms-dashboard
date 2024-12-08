@@ -39,4 +39,14 @@ export const generateRandomContents = (count: number): ContentItem[] => {
   });
 };
 
-export const mockNews: ContentItem[] = generateRandomContents(20);
+export const mockContents: ContentItem[] = generateRandomContents(20);
+
+// Generate mock data for articles
+export const mockContentArticles = generateRandomContents(10).filter(
+  (news) => news.type === "article"
+);
+
+// Generate mock data for news
+export const mockContentNews = generateRandomContents(10).filter(
+  (news) => news.type === "news"
+);

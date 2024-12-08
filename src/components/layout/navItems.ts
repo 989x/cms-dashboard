@@ -78,13 +78,13 @@ export const navItems = [
         description: "Add new content such as articles or news posts",
       },
       {
-        href: "/content",
+        href: "/content/news",
         label: "Manage News",
         icon: FiFileText,
         description: "Oversee and edit news content posted on the platform",
       },
       {
-        href: "/content",
+        href: "/content/article",
         label: "Manage Article",
         icon: FiBook,
         description: "Handle and update articles published on the site",
