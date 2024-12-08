@@ -1,3 +1,18 @@
+export type BusinessItem = {
+  id: string;
+  title: string;
+  date: string;
+  contacts: {
+    email: string; name: string; phone: string 
+}[];
+  description: string;
+  image: string;
+  link: string;
+  views: number;
+  status: "visible" | "hidden";
+  type: "general" | "franchise";
+};
+
 export interface NewsItem {
   id: any;
   title: string | null;

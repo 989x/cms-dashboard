@@ -15,12 +15,13 @@ src/
 - api/
   - config.ts: Configuration file for API (reads from `.env`)
   - login.ts: Handles login API requests
+  - business.ts: Mock or API for business data
   - news.ts: Mock or API for news data
 
 - app/
-  - content/
-    - page.tsx
   - business/
+    - page.tsx
+  - content/
     - page.tsx
   - message/
     - page.tsx
@@ -36,8 +37,10 @@ src/
   - layout/
     - navItems.ts: Defines navigation structure with categories, links, icons, and descriptions for Sidebar.
     - Sidebar.tsx
+  - cards/
+    - BusinessCard.tsx
+    - NewsCard.tsx
   - EditModal.tsx
-  - NewsCard.tsx
   - SearchAndFilter.tsx
 
 - utils/

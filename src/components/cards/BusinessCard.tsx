@@ -1,18 +1,18 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
-import { NewsItem } from '@/types';
+import { BusinessItem } from '@/types';
 import { formatToThaiDate } from '@/utils/formatDate';
-import EditModal from './EditModal';
+import EditModal from '../EditModal';
 import { AiOutlineCalendar, AiOutlineEye } from 'react-icons/ai';
-import { FiBook, FiEdit, FiEye, FiEyeOff, FiFileText, FiTrash2 } from 'react-icons/fi';
+import { FiEdit, FiEye, FiEyeOff, FiTrash2, FiShare2, FiGlobe } from 'react-icons/fi';
 
-const NewsCard: React.FC<NewsItem> = ({
+const BusinessCard: React.FC<BusinessItem> = ({
   id,
   status,
   type,
   title,
   image,
-  tags,
+  contacts,
   date,
   description,
   views,
@@ -22,22 +22,24 @@ const NewsCard: React.FC<NewsItem> = ({
   const [currentContentType, setCurrentContentType] = useState(type);
   const [currentTitle, setCurrentTitle] = useState(title || "");
   const [currentDescription, setCurrentDescription] = useState(description || "");
-  const [currentTags, setCurrentTags] = useState(tags || []);
+  const [currentContacts, setCurrentContacts] = useState(contacts || []);
 
   const handleSave = (data: {
     status: "visible" | "hidden";
-    contentType: "news" | "article";
+    contentType: "general" | "franchise";
     title: string;
     description: string;
-    tags: string[];
+    contacts: { name: string; phone: string; }[];
   }) => {
     setCurrentStatus(data.status);
     setCurrentContentType(data.contentType);
     setCurrentTitle(data.title);
     setCurrentDescription(data.description);
-    setCurrentTags(data.tags);
+    // setCurrentContacts(data.contacts);
     setEditModalOpen(false);
   };
+
+  const TypeIcon = currentContentType === "franchise" ? FiShare2 : FiGlobe;
 
   return (
     <div className="block">
@@ -55,17 +57,10 @@ const NewsCard: React.FC<NewsItem> = ({
           <h2 className="font-semibold line-clamp-1">{currentTitle || 'Untitled'}</h2>
           <div className="flex items-center text-sm text-gray-500 gap-2.5">
             <span className="flex items-center gap-1.5">
-              {currentContentType === 'article' ? (
-                <>
-                  <FiBook className="h-4 w-4" />
-                  บทความ
-                </>
-              ) : (
-                <>
-                  <FiFileText className="h-4 w-4" />
-                  ข่าวสาร
-                </>
-              )}
+              <TypeIcon className="h-4 w-4 text-blue-500" />
+              <span className="font-medium">
+                {currentContentType === 'franchise' ? 'Franchise' : 'General'}
+              </span>
             </span>
             <span className="h-4 w-[1.5px] bg-gray-300"></span>
             <span className="flex items-center gap-1.5">
@@ -79,11 +74,18 @@ const NewsCard: React.FC<NewsItem> = ({
             </span>
           </div>
           <p className="text-sm text-gray-800 line-clamp-2 leading-relaxed">{currentDescription || 'No description available.'}</p>
-          <div className="flex gap-2.5">
-            {currentTags.map((tag, index) => (
-              <span key={index} className="font-semibold text-sm text-blue-500">
-                {tag}
-              </span>
+          <div className="flex flex-wrap gap-2 text-sm text-gray-600">
+            {currentContacts.map((contact, index) => (
+              <div
+                key={index}
+                className="flex flex-col sm:flex-row sm:items-center sm:gap-1"
+              >
+                <span className="font-semibold text-gray-800">{contact.name}:</span>
+                <span>{contact.phone}</span>
+                <a href={`mailto:${contact.email}`} className="text-blue-500 underline">
+                  {contact.email}
+                </a>
+              </div>
             ))}
           </div>
         </div>
@@ -124,7 +126,7 @@ const NewsCard: React.FC<NewsItem> = ({
       </div>
 
       {/* Modal */}
-      <EditModal
+      {/* <EditModal
         isOpen={isEditModalOpen}
         onClose={() => setEditModalOpen(false)}
         id={id}
@@ -132,11 +134,11 @@ const NewsCard: React.FC<NewsItem> = ({
         contentType={currentContentType}
         title={currentTitle}
         description={currentDescription}
-        tags={currentTags}
+        tags={currentContacts.map((c) => c.name)}
         onSave={handleSave}
-      />
+      /> */}
     </div>
   );
 };
 
-export default NewsCard;
+export default BusinessCard;

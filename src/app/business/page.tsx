@@ -4,9 +4,9 @@ import { useRouter } from 'next/navigation';
 import { hasAuthToken } from '@/utils/authStorage';
 
 import { useEffect, useState } from 'react';
-import { mockNews } from '@/api/news';
+import { mockBusiness } from '@/api/business';
 import SearchAndFilterBar from '@/components/SearchAndFilter';
-import NewsCard from '@/components/cards/NewsCard';
+import BusinessCard from '@/components/cards/BusinessCard';
 
 export default function Home() {
   const router = useRouter();
@@ -18,13 +18,13 @@ export default function Home() {
     }
   }, []);
   
-  const [filteredNews, setFilteredNews] = useState(mockNews);
+  const [filteredBusinesses, setFilteredBusinesses] = useState(mockBusiness);
 
   const handleSearch = (query: string) => {
-    const results = mockNews.filter((news) =>
-      news.title?.toLowerCase().includes(query.toLowerCase())
+    const results = mockBusiness.filter((business) =>
+      business.title?.toLowerCase().includes(query.toLowerCase())
     );
-    setFilteredNews(results);
+    setFilteredBusinesses(results);
   };
 
   const handleFilter = () => {
@@ -34,26 +34,26 @@ export default function Home() {
   return (
     <div className="w-full max-w-6xl mx-auto px-4 sm:px-6">
       <h1 className="text-lg sm:text-xl font-bold mb-6 sm:mb-8">
-        Manage News Content
+        Manage Business Listing
       </h1>
       <SearchAndFilterBar onSearch={handleSearch} onFilter={handleFilter} />
       <p className="text-gray-600 text-sm font-medium mt-4 mb-8">
-        Found {filteredNews.length} results
+        Found {filteredBusinesses.length} results
       </p>
       <div className="grid gap-4">
-        {filteredNews.map((news) => (
-          <NewsCard
-            key={news.id}
-            id={news.id}
-            title={news.title}
-            image={news.image}
-            tags={news.tags}
-            date={news.date}
-            description={news.description}
-            link={news.link}
-            views={news.views}
-            status={news.status}
-            type={news.type}
+        {filteredBusinesses.map((business) => (
+          <BusinessCard
+            key={business.id}
+            id={business.id}
+            title={business.title}
+            image={business.image}
+            contacts={business.contacts}
+            date={business.date}
+            description={business.description}
+            link={business.link}
+            views={business.views}
+            status={business.status}
+            type={business.type}
           />
         ))}
       </div>

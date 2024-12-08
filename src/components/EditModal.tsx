@@ -69,7 +69,7 @@ const EditModal: React.FC<EditModalProps> = ({ isOpen, onClose, id, title, descr
                 <select
                   value={editContentType}
                   onChange={(e) => setEditContentType(e.target.value as "news" | "article")}
-                  className="w-full sm:w-[220px] px-[13px] py-[9px] border rounded-lg"
+                  className="w-full sm:w-[220px] px-[13px] py-[10px] border rounded-lg"
                 >
                   <option value="news">News</option>
                   <option value="article">Article</option>
@@ -103,7 +103,7 @@ const EditModal: React.FC<EditModalProps> = ({ isOpen, onClose, id, title, descr
                 type="text"
                 value={editTitle}
                 onChange={(e) => setEditTitle(e.target.value)}
-                className="w-full px-4 py-2 border rounded-lg focus:ring-blue-500 focus:border-blue-500"
+                className="w-full px-4 py-[10px] border rounded-lg focus:ring-blue-500 focus:border-blue-500"
               />
             </div>
 
@@ -113,7 +113,7 @@ const EditModal: React.FC<EditModalProps> = ({ isOpen, onClose, id, title, descr
               <textarea
                 value={editDescription}
                 onChange={(e) => setEditDescription(e.target.value)}
-                className="w-full px-4 py-2 border rounded-lg focus:ring-blue-500 focus:border-blue-500"
+                className="w-full px-4 py-[10px] border rounded-lg focus:ring-blue-500 focus:border-blue-500"
                 rows={16}
                 placeholder="Enter HTML content here"
               ></textarea>
@@ -127,12 +127,19 @@ const EditModal: React.FC<EditModalProps> = ({ isOpen, onClose, id, title, descr
                 value={editTags}
                 onChange={(e) => setEditTags(e.target.value)}
                 placeholder="Enter tags separated by commas (e.g., Cloud, Service, Technology)"
-                className="w-full px-4 py-2 border rounded-lg focus:ring-blue-500 focus:border-blue-500"
+                className="w-full px-4 py-[10px] border rounded-lg focus:ring-blue-500 focus:border-blue-500"
               />
             </div>
 
             {/* Action Buttons */}
             <div className="flex justify-end text-sm font-medium gap-4 mt-8">
+              <button
+                type="submit"
+                className="flex items-center gap-2 px-4 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+              >
+                <FiSave className="h-5 w-5" />
+                Save
+              </button>
               <button
                 type="button"
                 className="flex items-center gap-2 px-4 py-3 bg-gray-200 rounded-lg text-gray-700 hover:bg-gray-300"
@@ -140,13 +147,6 @@ const EditModal: React.FC<EditModalProps> = ({ isOpen, onClose, id, title, descr
               >
                 <FiXCircle className="h-5 w-5" />
                 Cancel
-              </button>
-              <button
-                type="submit"
-                className="flex items-center gap-2 px-4 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
-              >
-                <FiSave className="h-5 w-5" />
-                Save
               </button>
             </div>
           </form>
