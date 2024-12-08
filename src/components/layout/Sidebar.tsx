@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { SERVER_IP } from "@/api/config";
 import { clearAuthToken } from "@/utils/authStorage";
 import { FiMenu, FiX, FiLogOut } from "react-icons/fi";
@@ -12,6 +12,7 @@ import { navItems } from "./navItems";
 export default function Sidebar() {
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
+  const pathname = usePathname(); // Get current path
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
@@ -43,13 +44,13 @@ export default function Sidebar() {
 
       {/* Sidebar */}
       <aside
-        className={`fixed top-0 left-0 h-full bg-white shadow-lg border-r transform ${
+        className={`fixed top-0 left-0 h-full border-r transform ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         } w-64 transition-transform duration-300 ease-in-out z-50 lg:translate-x-0 lg:static lg:flex-shrink-0`}
       >
         <div className="h-full flex flex-col">
           {/* Header Section */}
-          <div className="p-6 flex-shrink-0">
+          <div className="p-4 flex-shrink-0">
             <Link href="/" className="flex items-center gap-3 group">
               <div className="w-11 h-11">
                 <Image
@@ -72,21 +73,32 @@ export default function Sidebar() {
           </div>
 
           {/* Scrollable Navigation Section */}
-          <nav className="flex-1 overflow-y-auto px-6">
+          <nav className="flex-1 overflow-y-auto px-4 mt-2 no-scrollbar">
             {navItems.map(({ category, items }) => (
-              <div key={category} className="mb-4">
+              <div key={category} className="mb-3">
                 <h2 className="text-xs font-semibold text-gray-400 uppercase tracking-wide">
                   {category}
                 </h2>
-                <ul className="mt-4 space-y-4">
+                <ul className="mt-2 space-y-1 -mr-4"> {/* Adjust and custom spacing */}
                   {items.map(({ href, label, icon: Icon }) => (
                     <li key={label}>
                       <Link
                         href={href}
-                        className="flex items-center gap-3 text-gray-700 hover:text-blue-500"
+                        className={`relative flex items-center gap-3 text-[13px] font-medium px-3 py-2 rounded-md ${
+                          pathname === href
+                            ? "bg-blue-50 text-blue-600 font-semibold"
+                            : "text-gray-700 hover:text-blue-500 hover:bg-gray-100"
+                        }`}
                       >
-                        <Icon className="w-4 h-4" />
-                        <span className="text-sm font-medium">{label}</span>
+                        <Icon
+                          className={`w-4 h-4 ${
+                            pathname === href ? "text-blue-600" : "text-gray-500"
+                          }`}
+                        />
+                        <span>{label}</span>
+                        {pathname === href && (
+                          <span className="absolute right-0 top-0 bottom-0 w-1 bg-blue-600 rounded-md"></span>
+                        )}
                       </Link>
                     </li>
                   ))}
@@ -96,27 +108,27 @@ export default function Sidebar() {
           </nav>
 
           {/* Account Section */}
-          <div className="flex-shrink-0 p-4">
+          <div className="flex-shrink-0 p-4 mb-1">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-4">
-                <div className="relative w-10 h-10">
+                <div className="relative w-[38px] h-[38px]">
                   <Image
                     src="/labubu.webp"
                     alt="User Profile Picture"
-                    width={40}
-                    height={40}
+                    width={38}
+                    height={38}
                     className="rounded-full object-cover"
                   />
-                  <div className="absolute bottom-0 right-0 w-3.5 h-3.5 bg-green-500 border-2 border-white rounded-full"></div>
+                  <div className="absolute bottom-0 -right-1 w-3.5 h-3.5 bg-green-500 border-2 border-white rounded-full"></div>
                 </div>
-                <p className="font-medium text-gray-800">Admin</p>
+                <p className="text-sm text-gray-800 font-medium">Admin</p>
               </div>
               <button
                 onClick={handleLogout}
-                className="p-1.5 border-[1.5px] rounded-lg"
+                className="p-2 border-[1.5px] rounded-lg"
                 aria-label="Logout"
               >
-                <FiLogOut className="w-[18px] h-[18px]" />
+                <FiLogOut className="w-[16px] h-[16px]" />
               </button>
             </div>
           </div>
