@@ -1,6 +1,6 @@
-import { NewsItem } from "@/types";
+import { ContentItem } from "@/types";
 
-export const generateRandomNews = (count: number): NewsItem[] => {
+export const generateRandomContents = (count: number): ContentItem[] => {
   const loremWords = [
     "Lorem", "ipsum", "dolor", "sit", "amet", "consectetur", "adipiscing", "elit",
     "sed", "do", "eiusmod", "tempor", "incididunt", "ut", "labore", "et", "dolore", "magna", "aliqua"
@@ -39,4 +39,4 @@ export const generateRandomNews = (count: number): NewsItem[] => {
   });
 };
 
-export const mockNews: NewsItem[] = generateRandomNews(20);
+export const mockNews: ContentItem[] = generateRandomContents(20);

@@ -16,7 +16,7 @@ export type BusinessItem = {
   branches: number;
 };
 
-export interface NewsItem {
+export interface ContentItem {
   id: any;
   title: string | null;
   date: string | null; // ISO 8601 format, but can be null

@@ -34,7 +34,7 @@ export default function Home() {
   return (
     <div className="w-full max-w-6xl mx-auto px-4 sm:px-6">
       <h1 className="text-lg sm:text-xl font-bold mb-6 sm:mb-8">
-        Manage Business Listing
+        Manage All Business Listing
       </h1>
       <SearchAndFilterBar onSearch={handleSearch} onFilter={handleFilter} />
       <p className="text-gray-600 text-sm font-medium mt-4 mb-8">
