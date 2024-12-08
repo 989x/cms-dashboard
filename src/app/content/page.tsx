@@ -40,7 +40,7 @@ export default function Home() {
       <p className="text-gray-600 text-sm font-medium mt-4 mb-8">
         Found {filteredNews.length} results
       </p>
-      <div className="grid gap-8">
+      <div className="grid gap-4">
         {filteredNews.map((news) => (
           <NewsCard
             key={news.id}
