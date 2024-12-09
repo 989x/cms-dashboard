@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
-import { BusinessItem } from '@/types';
+import { BusinessItem } from '@/types/businessTypes';
 import { formatToThaiDate } from '@/utils/formatDate';
 import BusinessEditModal from '../modals/BusinessEditModal';
 import { AiOutlineCalendar, AiOutlineEye } from 'react-icons/ai';
@@ -30,6 +30,7 @@ const BusinessCard: React.FC<BusinessItem> = ({
     description: string;
     branches: number;
     status: "visible" | "hidden";
+    type: "general" | "franchise";
   }) => {
     setCurrentTitle(data.title);
     setCurrentDescription(data.description);
@@ -121,6 +122,10 @@ const BusinessCard: React.FC<BusinessItem> = ({
         description={currentDescription}
         branches={currentBranches}
         status={currentStatus}
+        type={type}
+        contacts={contacts}
+        image={image}
+        date={date}
         onSave={handleSave}
       />
     </div>

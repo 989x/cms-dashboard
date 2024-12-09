@@ -1,4 +1,4 @@
-import { ContentItem } from "@/types";
+import { ContentItem } from "@/types/contentTypes";
 
 export const generateRandomContents = (count: number): ContentItem[] => {
   const loremWords = [

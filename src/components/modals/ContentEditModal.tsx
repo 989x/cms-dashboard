@@ -1,23 +1,6 @@
 import React, { useState } from 'react';
+import { ContentEditModalProps } from '@/types/contentTypes';
 import { FiX, FiSave, FiXCircle, FiBook, FiFileText } from 'react-icons/fi';
-
-interface ContentEditModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-  id: string;
-  status: "visible" | "hidden";
-  contentType: "news" | "article";
-  title: string;
-  description: string;
-  tags: string[] | null;
-  onSave: (data: {
-    title: string;
-    description: string;
-    tags: string[];
-    status: "visible" | "hidden";
-    contentType: "news" | "article";
-  }) => void;
-}
 
 const ContentEditModal: React.FC<ContentEditModalProps> = ({
   isOpen, onClose, id, title, description, tags = [], status, contentType, onSave,

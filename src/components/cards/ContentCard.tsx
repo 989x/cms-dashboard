@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
-import { ContentItem } from '@/types';
+import { ContentItem } from '@/types/contentTypes';
 import { formatToThaiDate } from '@/utils/formatDate';
 import ContentEditModal from '../modals/ContentEditModal';
 import { AiOutlineCalendar, AiOutlineEye } from 'react-icons/ai';

@@ -1,37 +1,15 @@
 import React, { useState } from 'react';
+import { BusinessEditModalProps } from '@/types/businessTypes';
 import { FiX, FiSave } from 'react-icons/fi';
 
-interface BusinessEditModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-  id: string;
-  title: string;
-  description: string;
-  branches: number;
-  status: "visible" | "hidden";
-  onSave: (data: {
-    id: string;
-    title: string;
-    description: string;
-    branches: number;
-    status: "visible" | "hidden";
-  }) => void;
-}
-
 const BusinessEditModal: React.FC<BusinessEditModalProps> = ({
-  isOpen,
-  onClose,
-  id,
-  title,
-  description,
-  branches,
-  status,
-  onSave,
+  isOpen, onClose, id, title, description, branches, status, type, contacts, image,  onSave,
 }) => {
   const [editTitle, setEditTitle] = useState(title);
   const [editDescription, setEditDescription] = useState(description);
   const [editBranches, setEditBranches] = useState(branches);
   const [editStatus, setEditStatus] = useState(status);
+  const [editType, setEditType] = useState(type);
 
   const handleSave = () => {
     onSave({
@@ -40,6 +18,7 @@ const BusinessEditModal: React.FC<BusinessEditModalProps> = ({
       description: editDescription,
       branches: editBranches,
       status: editStatus,
+      type: editType,
     });
     onClose();
   };
@@ -99,6 +78,19 @@ const BusinessEditModal: React.FC<BusinessEditModalProps> = ({
             >
               <option value="visible">Visible</option>
               <option value="hidden">Hidden</option>
+            </select>
+          </div>
+          <div className="mb-4">
+            <label className="block font-medium mb-2">Type</label>
+            <select
+              value={editType}
+              onChange={(e) =>
+                setEditType(e.target.value as "general" | "franchise")
+              }
+              className="w-full border p-2 rounded"
+            >
+              <option value="general">General</option>
+              <option value="franchise">Franchise</option>
             </select>
           </div>
           <div className="flex justify-end gap-3">

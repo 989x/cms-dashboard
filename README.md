@@ -49,13 +49,15 @@ src/
   - authStorage.ts: Utility for handling authentication tokens
   - formatDate.ts
 
-- types.ts: TypeScript types and interfaces
+- types/
+  - businessTypes.ts
+  - contentTypes.ts
+
 - pnpm-lock.yaml: Lockfile for dependencies managed by pnpm
 - tailwind.config.ts: Tailwind CSS configuration
 - .env.example: Example environment variables file, used for providing a template for environment variables
 - .env.local: Local environment variables file, specific to the developer’s machine (not tracked by git)
 ```
-
 
 ## Commands
 
