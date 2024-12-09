@@ -23,6 +23,12 @@ export const generateRandomBusiness = (count: number): BusinessItem[] => {
     "info@example.com", "contact@example.com", "support@example.com",
     "hello@example.com", "sales@example.com"
   ];
+  const links = [
+    "https://example.com/business1",
+    "https://example.com/business2",
+    "https://example.com/business3",
+  ];
+
   const getRandomName = () => names[Math.floor(Math.random() * names.length)];
   const getRandomEmail = () => emails[Math.floor(Math.random() * emails.length)];
   const getRandomBusinessName = () =>
@@ -35,6 +41,7 @@ export const generateRandomBusiness = (count: number): BusinessItem[] => {
     Array.from({ length: 6 }, () =>
       "abcdefghijklmnopqrstuvwxyz0123456789".charAt(Math.floor(Math.random() * 36))
     ).join("");
+  const getRandomLink = () => links[Math.floor(Math.random() * links.length)];
 
   return Array.from({ length: count }, () => {
     const title = getRandomBusinessName();
@@ -50,7 +57,7 @@ export const generateRandomBusiness = (count: number): BusinessItem[] => {
       })),
       description,
       image: `https://picsum.photos/300/200?random=${Math.floor(Math.random() * 100) + 1}`,
-      link: "#",
+      link: getRandomLink(),
       views: Math.floor(Math.random() * 1000),
       status: Math.random() > 0.5 ? "visible" : "hidden",
       type: Math.random() > 0.5 ? "general" : "franchise",

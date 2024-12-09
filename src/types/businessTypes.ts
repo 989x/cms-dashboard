@@ -32,6 +32,7 @@ export interface BusinessEditModalProps {
   }[];
   image: string;
   date: string;
+  link: string;
   onSave: (data: {
     id: string;
     title: string;
@@ -44,5 +45,6 @@ export interface BusinessEditModalProps {
       name: string;
       phone: string;
     }[];
+    link: string;
   }) => void;
 }

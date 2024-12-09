@@ -7,7 +7,7 @@ import { AiOutlineCalendar, AiOutlineEye } from 'react-icons/ai';
 import { FiEdit, FiEye, FiEyeOff, FiTrash2, FiShare2, FiGlobe } from 'react-icons/fi';
 
 const BusinessCard: React.FC<BusinessItem> = ({
-  id, status, type, title, image, contacts, date, description, views, branches,
+  id, status, type, title, image, link, contacts, date, description, views, branches,
 }) => {
   const [isEditModalOpen, setEditModalOpen] = useState(false);
   const [currentTitle, setCurrentTitle] = useState(title);
@@ -130,6 +130,7 @@ const BusinessCard: React.FC<BusinessItem> = ({
         type={type}
         contacts={contacts}
         image={image}
+        link={link}
         date={date}
         onSave={handleSave}
       />

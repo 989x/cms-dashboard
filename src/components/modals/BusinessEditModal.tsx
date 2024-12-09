@@ -4,12 +4,13 @@ import { FiX, FiSave, FiXCircle, FiBriefcase, FiMapPin, FiPlus, FiTrash2 } from 
 
 const BusinessEditModal: React.FC<BusinessEditModalProps> = ({
   isOpen, onClose,
-  id, title, description, branches, status, type, contacts,
+  id, title, link, description, branches, status, type, contacts,
   onSave,
 }) => {
   const [editTitle, setEditTitle] = useState(title);
   const [editDescription, setEditDescription] = useState(description);
   const [editBranches, setEditBranches] = useState(branches);
+  const [editLink, setEditLink] = useState(link);
   const [editStatus, setEditStatus] = useState(status);
   const [editType, setEditType] = useState(type);
   const [editContacts, setEditContacts] = useState(contacts || []);
@@ -37,6 +38,7 @@ const BusinessEditModal: React.FC<BusinessEditModalProps> = ({
       status: editStatus,
       type: editType,
       contacts: editContacts,
+      link: editLink,
     });
   };
 
@@ -78,7 +80,7 @@ const BusinessEditModal: React.FC<BusinessEditModalProps> = ({
                     type="button"
                     className={`flex items-center gap-2 px-3 py-[10px] bg-gray-100 rounded-lg ${
                       editType === "general"
-                        ? "bg-blue-500 text-white"
+                        ? "bg-green-500 text-white"
                         : "border-gray-300 text-gray-700"
                     }`}
                     onClick={() => setEditType("general")}
@@ -90,7 +92,7 @@ const BusinessEditModal: React.FC<BusinessEditModalProps> = ({
                     type="button"
                     className={`flex items-center gap-2 px-3 py-[10px] bg-gray-100 rounded-lg ${
                       editType === "franchise"
-                        ? "bg-blue-500 text-white"
+                        ? "bg-green-500 text-white"
                         : "border-gray-300 text-gray-700"
                     }`}
                     onClick={() => setEditType("franchise")}
@@ -154,22 +156,38 @@ const BusinessEditModal: React.FC<BusinessEditModalProps> = ({
               ></textarea>
             </div>
 
-            {/* Branches Field */}
-            <div className="mb-5">
-              <label className="block font-medium mb-3">Branches</label>
-              <input
-                type="number"
-                value={editBranches}
-                onChange={(e) => setEditBranches(Number(e.target.value))}
-                className="w-full p-2.5 border rounded-lg"
-              />
+            {/* Branch and Link Fields */}
+            <div className="mb-5 flex items-start gap-4">
+              {/* Branch Section */}
+              <div className="flex-shrink-0" style={{ flexBasis: "20%" }}>
+                <label className="block font-medium mb-2">Branch</label>
+                <input
+                  type="number"
+                  value={editBranches}
+                  onChange={(e) => setEditBranches(Number(e.target.value))}
+                  className="w-full p-2.5 border rounded-lg"
+                  placeholder="Enter number of branches"
+                />
+              </div>
+
+              {/* Link Section */}
+              <div className="flex-grow">
+                <label className="block font-medium mb-2">Link</label>
+                <input
+                  type="url"
+                  value={editLink}
+                  onChange={(e) => setEditLink(e.target.value)}
+                  className="w-full p-2.5 border rounded-lg"
+                  placeholder="Enter link"
+                />
+              </div>
             </div>
 
             {/* Contacts Field */}
             <div className="mb-5">
               <label className="block font-medium mb-3">Contacts</label>
               {editContacts.map((contact, index) => (
-                <div key={index} className="flex items-center gap-2 mb-3">
+                <div key={index} className="grid grid-cols-[1fr_1fr_1fr_auto] gap-2 mb-3">
                   <input
                     type="text"
                     value={contact.name}
@@ -177,7 +195,7 @@ const BusinessEditModal: React.FC<BusinessEditModalProps> = ({
                     onChange={(e) =>
                       handleContactChange(index, "name", e.target.value)
                     }
-                    className="w-1/4 p-2 border rounded-lg"
+                    className="w-full p-2 border rounded-lg"
                   />
                   <input
                     type="text"
@@ -186,7 +204,7 @@ const BusinessEditModal: React.FC<BusinessEditModalProps> = ({
                     onChange={(e) =>
                       handleContactChange(index, "phone", e.target.value)
                     }
-                    className="w-1/4 p-2 border rounded-lg"
+                    className="w-full p-2 border rounded-lg"
                   />
                   <input
                     type="email"
@@ -195,7 +213,7 @@ const BusinessEditModal: React.FC<BusinessEditModalProps> = ({
                     onChange={(e) =>
                       handleContactChange(index, "email", e.target.value)
                     }
-                    className="w-1/4 p-2 border rounded-lg"
+                    className="w-full p-2 border rounded-lg"
                   />
                   <button
                     type="button"
