@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { BusinessEditModalProps } from '@/types/businessTypes';
-import { FiX, FiSave, FiXCircle, FiShare2, FiGlobe } from 'react-icons/fi';
+import { FiX, FiSave, FiXCircle, FiBriefcase, FiMapPin, FiPlus, FiTrash2 } from 'react-icons/fi';
 
 const BusinessEditModal: React.FC<BusinessEditModalProps> = ({
-  isOpen, onClose, 
-  id, title, description, branches, status, type, 
+  isOpen, onClose,
+  id, title, description, branches, status, type, contacts,
   onSave,
 }) => {
   const [editTitle, setEditTitle] = useState(title);
@@ -12,6 +12,21 @@ const BusinessEditModal: React.FC<BusinessEditModalProps> = ({
   const [editBranches, setEditBranches] = useState(branches);
   const [editStatus, setEditStatus] = useState(status);
   const [editType, setEditType] = useState(type);
+  const [editContacts, setEditContacts] = useState(contacts || []);
+
+  const handleAddContact = () => {
+    setEditContacts([...editContacts, { name: '', phone: '', email: '' }]);
+  };
+
+  const handleRemoveContact = (index: number) => {
+    setEditContacts(editContacts.filter((_, i) => i !== index));
+  };
+
+  const handleContactChange = (index: number, field: string, value: string) => {
+    const updatedContacts = [...editContacts];
+    updatedContacts[index] = { ...updatedContacts[index], [field]: value };
+    setEditContacts(updatedContacts);
+  };
 
   const handleSave = () => {
     onSave({
@@ -21,6 +36,7 @@ const BusinessEditModal: React.FC<BusinessEditModalProps> = ({
       branches: editBranches,
       status: editStatus,
       type: editType,
+      contacts: editContacts,
     });
   };
 
@@ -56,30 +72,30 @@ const BusinessEditModal: React.FC<BusinessEditModalProps> = ({
             <div className="grid grid-cols-1 sm:grid-cols-2 items-center mb-5 gap-4">
               {/* Type Field */}
               <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 font-medium">
-                <label className="block">Business Type</label>
+                <label className="block">Type</label>
                 <div className="flex gap-3">
                   <button
                     type="button"
                     className={`flex items-center gap-2 px-3 py-[10px] bg-gray-100 rounded-lg ${
                       editType === "general"
-                        ? "bg-green-500 text-white"
+                        ? "bg-blue-500 text-white"
                         : "border-gray-300 text-gray-700"
                     }`}
                     onClick={() => setEditType("general")}
                   >
-                    <FiShare2 className="h-5 w-5" />
+                    <FiBriefcase className="h-5 w-5" />
                     General
                   </button>
                   <button
                     type="button"
                     className={`flex items-center gap-2 px-3 py-[10px] bg-gray-100 rounded-lg ${
                       editType === "franchise"
-                        ? "bg-green-500 text-white"
+                        ? "bg-blue-500 text-white"
                         : "border-gray-300 text-gray-700"
                     }`}
                     onClick={() => setEditType("franchise")}
                   >
-                    <FiGlobe className="h-5 w-5" />
+                    <FiMapPin className="h-5 w-5" />
                     Franchise
                   </button>
                 </div>
@@ -147,6 +163,57 @@ const BusinessEditModal: React.FC<BusinessEditModalProps> = ({
                 onChange={(e) => setEditBranches(Number(e.target.value))}
                 className="w-full p-2.5 border rounded-lg"
               />
+            </div>
+
+            {/* Contacts Field */}
+            <div className="mb-5">
+              <label className="block font-medium mb-3">Contacts</label>
+              {editContacts.map((contact, index) => (
+                <div key={index} className="flex items-center gap-2 mb-3">
+                  <input
+                    type="text"
+                    value={contact.name}
+                    placeholder="Name"
+                    onChange={(e) =>
+                      handleContactChange(index, "name", e.target.value)
+                    }
+                    className="w-1/4 p-2 border rounded-lg"
+                  />
+                  <input
+                    type="text"
+                    value={contact.phone}
+                    placeholder="Phone"
+                    onChange={(e) =>
+                      handleContactChange(index, "phone", e.target.value)
+                    }
+                    className="w-1/4 p-2 border rounded-lg"
+                  />
+                  <input
+                    type="email"
+                    value={contact.email}
+                    placeholder="Email"
+                    onChange={(e) =>
+                      handleContactChange(index, "email", e.target.value)
+                    }
+                    className="w-1/4 p-2 border rounded-lg"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => handleRemoveContact(index)}
+                    className="text-red-500 hover:text-red-700"
+                  >
+                    <FiTrash2 className="h-5 w-5" />
+                  </button>
+                </div>
+              ))}
+              <button
+                type="button"
+                onClick={handleAddContact}
+                className="flex items-center gap-2 px-3 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300"
+              >
+                <FiPlus className="h-5 w-5" />
+                Add Contact
+              </button>
             </div>
 
             {/* Action Buttons */}

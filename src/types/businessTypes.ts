@@ -1,20 +1,20 @@
-export type BusinessItem = {
-  id: any;
+export interface BusinessItem {
+  id: string;
   title: string;
-  date: string;
+  image: string;
   contacts: {
     email: string;
     name: string;
     phone: string;
   }[];
+  date: string;
   description: string;
-  image: string;
   link: string;
   views: number;
-  status: 'visible' | 'hidden';
-  type: 'general' | 'franchise';
+  status: "visible" | "hidden";
+  type: "general" | "franchise";
   branches: number;
-};
+}
 
 export interface BusinessEditModalProps {
   isOpen: boolean;
@@ -39,5 +39,10 @@ export interface BusinessEditModalProps {
     branches: number;
     status: "visible" | "hidden";
     type: "general" | "franchise";
+    contacts: {
+      email: string;
+      name: string;
+      phone: string;
+    }[];
   }) => void;
 }
