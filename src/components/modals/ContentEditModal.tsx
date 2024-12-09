@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { FiX, FiSave, FiXCircle, FiBook, FiFileText } from 'react-icons/fi';
 
-interface EditModalProps {
+interface ContentEditModalProps {
   isOpen: boolean;
   onClose: () => void;
   id: string;
@@ -19,7 +19,7 @@ interface EditModalProps {
   }) => void;
 }
 
-const EditModal: React.FC<EditModalProps> = ({
+const ContentEditModal: React.FC<ContentEditModalProps> = ({
   isOpen, onClose, id, title, description, tags = [], status, contentType, onSave,
 }) => {
   const [editStatus, setEditStatus] = useState(status);
@@ -189,4 +189,4 @@ const EditModal: React.FC<EditModalProps> = ({
   );
 };
 
-export default EditModal;
+export default ContentEditModal;

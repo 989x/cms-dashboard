@@ -1,21 +1,13 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
-import { NewsItem } from '@/types';
+import { ContentItem } from '@/types';
 import { formatToThaiDate } from '@/utils/formatDate';
-import EditModal from '../EditModal';
+import ContentEditModal from '../modals/ContentEditModal';
 import { AiOutlineCalendar, AiOutlineEye } from 'react-icons/ai';
 import { FiEdit, FiEye, FiEyeOff, FiTrash2, FiBook, FiFileText } from 'react-icons/fi';
 
-const NewsCard: React.FC<NewsItem> = ({
-  id,
-  status,
-  type,
-  title,
-  image,
-  tags,
-  date,
-  description,
-  views,
+const ContentCard: React.FC<ContentItem> = ({
+  id, status, type, title, image, tags, date, description, views, 
 }) => {
   const [isEditModalOpen, setEditModalOpen] = useState(false);
   const [currentStatus, setCurrentStatus] = useState(status);
@@ -119,7 +111,7 @@ const NewsCard: React.FC<NewsItem> = ({
       </div>
 
       {/* Modal */}
-      <EditModal
+      <ContentEditModal
         isOpen={isEditModalOpen}
         onClose={() => setEditModalOpen(false)}
         id={id}
@@ -134,4 +126,4 @@ const NewsCard: React.FC<NewsItem> = ({
   );
 };
 
-export default NewsCard;
+export default ContentCard;

@@ -39,8 +39,10 @@ src/
     - Sidebar.tsx
   - cards/
     - BusinessCard.tsx
-    - NewsCard.tsx
-  - EditModal.tsx
+    - ContentCard.tsx
+  - modals/
+    - BusinessEditModal.tsx
+    - ContentEditModal.tsx
   - SearchAndFilter.tsx
 
 - utils/

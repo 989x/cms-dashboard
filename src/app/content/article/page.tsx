@@ -6,7 +6,7 @@ import { hasAuthToken } from '@/utils/authStorage';
 import { useEffect, useState } from 'react';
 import { mockContentArticles } from '@/api/content';
 import SearchAndFilterBar from '@/components/SearchAndFilter';
-import NewsCard from '@/components/cards/NewsCard';
+import ContentCard from '@/components/cards/ContentCard';
 
 export default function ArticlePage() {
   const router = useRouter();
@@ -42,7 +42,7 @@ export default function ArticlePage() {
       </p>
       <div className="grid gap-4">
         {filteredArticles.map((article) => (
-          <NewsCard
+          <ContentCard
             key={article.id}
             id={article.id}
             title={article.title}

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import { BusinessItem } from '@/types';
 import { formatToThaiDate } from '@/utils/formatDate';
-import EditModal from '../EditModal';
+import BusinessEditModal from '../modals/BusinessEditModal';
 import { AiOutlineCalendar, AiOutlineEye } from 'react-icons/ai';
 import { FiEdit, FiEye, FiEyeOff, FiTrash2, FiShare2, FiGlobe } from 'react-icons/fi';
 
@@ -19,27 +19,26 @@ const BusinessCard: React.FC<BusinessItem> = ({
   branches,
 }) => {
   const [isEditModalOpen, setEditModalOpen] = useState(false);
+  const [currentTitle, setCurrentTitle] = useState(title);
+  const [currentDescription, setCurrentDescription] = useState(description);
+  const [currentBranches, setCurrentBranches] = useState(branches);
   const [currentStatus, setCurrentStatus] = useState(status);
-  const [currentContentType, setCurrentContentType] = useState(type);
-  const [currentTitle, setCurrentTitle] = useState(title || "");
-  const [currentDescription, setCurrentDescription] = useState(description || "");
-  const [currentContacts, setCurrentContacts] = useState(contacts || []);
 
   const handleSave = (data: {
-    status: "visible" | "hidden";
-    contentType: "general" | "franchise";
+    id: string;
     title: string;
     description: string;
-    contacts: { name: string; phone: string; }[];
+    branches: number;
+    status: "visible" | "hidden";
   }) => {
-    setCurrentStatus(data.status);
-    setCurrentContentType(data.contentType);
     setCurrentTitle(data.title);
     setCurrentDescription(data.description);
+    setCurrentBranches(data.branches);
+    setCurrentStatus(data.status);
     setEditModalOpen(false);
   };
 
-  const TypeIcon = currentContentType === "franchise" ? FiShare2 : FiGlobe;
+  const TypeIcon = type === "franchise" ? FiShare2 : FiGlobe;
 
   return (
     <div className="block">
@@ -58,9 +57,7 @@ const BusinessCard: React.FC<BusinessItem> = ({
           <div className="flex items-center text-sm text-gray-500 gap-2.5">
             <span className="flex items-center gap-1.5">
               <TypeIcon className="h-4 w-4 text-blue-500" />
-              <span className="font-medium">
-                {currentContentType === 'franchise' ? 'Franchise' : 'General'}
-              </span>
+              <span className="font-medium">{type === 'franchise' ? 'Franchise' : 'General'}</span>
             </span>
             <span className="h-4 w-[1.5px] bg-gray-300"></span>
             <span className="flex items-center gap-1.5">
@@ -73,24 +70,12 @@ const BusinessCard: React.FC<BusinessItem> = ({
               {views ?? '0'}
             </span>
           </div>
-          <p className="text-sm text-gray-800 line-clamp-2 leading-relaxed">{currentDescription || 'No description available.'}</p>
+          <p className="text-sm text-gray-800 line-clamp-2 leading-relaxed">
+            {currentDescription || 'No description available.'}
+          </p>
           <div className="flex items-center text-sm text-gray-600 gap-2">
             <span className="font-semibold text-gray-800">Branches:</span>
-            <span>{branches}</span>
-          </div>
-          <div className="flex flex-wrap gap-2 text-sm text-gray-600">
-            {currentContacts.map((contact, index) => (
-              <div
-                key={index}
-                className="flex flex-col sm:flex-row sm:items-center sm:gap-1"
-              >
-                <span className="font-semibold text-gray-800">{contact.name}:</span>
-                <span>{contact.phone}</span>
-                <a href={`mailto:${contact.email}`} className="text-blue-500 underline">
-                  {contact.email}
-                </a>
-              </div>
-            ))}
+            <span>{currentBranches}</span>
           </div>
         </div>
       </div>
@@ -120,9 +105,7 @@ const BusinessCard: React.FC<BusinessItem> = ({
             <FiEdit className="h-4 w-4" />
             Edit
           </button>
-          <button
-            className="flex items-center gap-2 px-3 py-2 border text-red-600 font-semibold rounded-md transition-colors duration-200 hover:bg-red-600 hover:text-white"
-          >
+          <button className="flex items-center gap-2 px-3 py-2 border text-red-600 font-semibold rounded-md transition-colors duration-200 hover:bg-red-600 hover:text-white">
             <FiTrash2 className="h-4 w-4" />
             Delete
           </button>
@@ -130,17 +113,16 @@ const BusinessCard: React.FC<BusinessItem> = ({
       </div>
 
       {/* Modal */}
-      {/* <EditModal
+      <BusinessEditModal
         isOpen={isEditModalOpen}
         onClose={() => setEditModalOpen(false)}
         id={id}
-        status={currentStatus}
-        contentType={currentContentType}
         title={currentTitle}
         description={currentDescription}
-        tags={currentContacts.map((c) => c.name)}
+        branches={currentBranches}
+        status={currentStatus}
         onSave={handleSave}
-      /> */}
+      />
     </div>
   );
 };
