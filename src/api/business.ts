@@ -59,14 +59,14 @@ export const generateRandomBusiness = (count: number): BusinessItem[] => {
   });
 };
 
-export const mockBusiness = generateRandomBusiness(20);
+export const mockBusiness = generateRandomBusiness(30);
 
 // Generate mock data for general businesses
-export const mockGeneralBusiness = generateRandomBusiness(10).filter(
+export const mockGeneralBusiness = generateRandomBusiness(30).filter(
   (business) => business.type === "general"
 );
 
 // Generate mock data for franchise businesses
-export const mockFranchiseBusiness = generateRandomBusiness(10).filter(
+export const mockFranchiseBusiness = generateRandomBusiness(30).filter(
   (business) => business.type === "franchise"
 );

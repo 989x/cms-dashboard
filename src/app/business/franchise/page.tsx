@@ -32,7 +32,7 @@ export default function FranchiseBusinessPage() {
   };
 
   return (
-    <div className="w-full max-w-6xl mx-auto px-4 sm:px-6">
+    <div className="w-full max-w-5xl mx-auto px-4 sm:px-6">
       <h1 className="text-lg sm:text-xl font-bold mb-6 sm:mb-8">
         Manage Franchise Businesses
       </h1>
