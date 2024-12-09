@@ -3,7 +3,9 @@ import { ContentEditModalProps } from '@/types/contentTypes';
 import { FiX, FiSave, FiXCircle, FiBook, FiFileText } from 'react-icons/fi';
 
 const ContentEditModal: React.FC<ContentEditModalProps> = ({
-  isOpen, onClose, id, title, description, tags = [], status, contentType, onSave,
+  isOpen, onClose, 
+  id, title, description, tags = [], status, contentType, 
+  onSave,
 }) => {
   const [editStatus, setEditStatus] = useState(status);
   const [editContentType, setEditContentType] = useState(contentType);

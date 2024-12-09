@@ -7,16 +7,7 @@ import { AiOutlineCalendar, AiOutlineEye } from 'react-icons/ai';
 import { FiEdit, FiEye, FiEyeOff, FiTrash2, FiShare2, FiGlobe } from 'react-icons/fi';
 
 const BusinessCard: React.FC<BusinessItem> = ({
-  id,
-  status,
-  type,
-  title,
-  image,
-  contacts,
-  date,
-  description,
-  views,
-  branches,
+  id, status, type, title, image, contacts, date, description, views, branches,
 }) => {
   const [isEditModalOpen, setEditModalOpen] = useState(false);
   const [currentTitle, setCurrentTitle] = useState(title);
@@ -77,6 +68,20 @@ const BusinessCard: React.FC<BusinessItem> = ({
           <div className="flex items-center text-sm text-gray-600 gap-2">
             <span className="font-semibold text-gray-800">Branches:</span>
             <span>{currentBranches}</span>
+          </div>
+          <div className="flex flex-wrap gap-2 text-sm text-gray-600">
+            {contacts?.map((contact, index) => (
+              <div
+                key={index}
+                className="flex flex-col sm:flex-row sm:items-center sm:gap-1"
+              >
+                <span className="font-semibold text-gray-800">{contact.name}:</span>
+                <span>{contact.phone}</span>
+                <a href={`mailto:${contact.email}`} className="text-blue-500 underline">
+                  {contact.email}
+                </a>
+              </div>
+            ))}
           </div>
         </div>
       </div>
