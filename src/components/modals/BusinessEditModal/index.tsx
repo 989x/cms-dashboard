@@ -33,7 +33,7 @@ const BusinessEditModal: React.FC<BusinessEditModalProps> = ({
   };
 
   const handleSave = () => {
-    onSave({
+    const payload = {
       id,
       title: editTitle,
       description: editDescription,
@@ -42,8 +42,11 @@ const BusinessEditModal: React.FC<BusinessEditModalProps> = ({
       type: editType,
       contacts: editContacts,
       link: editLink,
-    });
-  };
+    };
+  
+    console.log("Saving business data:", payload);
+    onSave(payload);
+  };  
 
   if (!isOpen) return null;
 

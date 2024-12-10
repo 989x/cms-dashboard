@@ -16,13 +16,15 @@ const ContentEditModal: React.FC<ContentEditModalProps> = ({
   const [editTags, setEditTags] = useState((tags ?? []).join(", "));
 
   const handleSave = () => {
-    onSave({
+    const payload = {
       title: editTitle,
       description: editDescription,
       tags: editTags.split(",").map((tag) => tag.trim()),
       status: editStatus,
       contentType: editContentType,
-    });
+    };
+    console.log("Saving content:", payload);
+    onSave(payload);
   };
 
   if (!isOpen) return null;
