@@ -42,17 +42,16 @@ src/
     - ContentCard.tsx
   - modals/
     - BusinessEditModal/
-      - ...forms
-      - index.tsx
+      - ...forms and index.tsx
     - ContentEditModal/
-      - ...forms
-      - index.tsx
+      - ...forms and index.tsx
+    - HTMLEditor.tsx
+    - HTMLPreview.module.css
   - SearchAndFilter.tsx
 
 - utils/
   - authStorage.ts: Utility for handling authentication tokens
   - formatDate.ts
-  - HTMLPreview.module.css
 
 - types/
   - businessTypes.ts

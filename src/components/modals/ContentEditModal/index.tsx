@@ -62,7 +62,10 @@ const ContentEditModal: React.FC<ContentEditModalProps> = ({
               tags={editTags}
               onTagsChange={setEditTags}
             />
-            <ContentDescForm value={editDescription} onChange={setEditDescription} />
+            <ContentDescForm 
+              description={editDescription} 
+              onDescriptionChange={setEditDescription}
+            />
 
             <div className="flex justify-end text-sm font-medium gap-3 mt-8">
               <button type="submit" className="flex items-center gap-2 px-4 py-3 bg-blue-600 text-white rounded-lg">
