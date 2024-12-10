@@ -23,55 +23,57 @@ const ContentGeneralForm: React.FC<GeneralFormProps> = ({
 }) => {
   return (
     <>
-      {/* Content Type Field */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 font-medium">
-        <label className="block">Content Type</label>
-        <div className="flex gap-3">
-          <button
-            type="button"
-            className={`flex items-center gap-2 px-3 py-[10px] bg-gray-100 rounded-lg ${
-              contentType === "article" ? "bg-indigo-600 text-white" : "border-gray-300 text-gray-700"
-            }`}
-            onClick={() => onContentTypeChange("article")}
-          >
-            <FiBook className="h-5 w-5" />
-            Article
-          </button>
-          <button
-            type="button"
-            className={`flex items-center gap-2 px-3 py-[10px] bg-gray-100 rounded-lg ${
-              contentType === "news" ? "bg-indigo-600 text-white" : "border-gray-300 text-gray-700"
-            }`}
-            onClick={() => onContentTypeChange("news")}
-          >
-            <FiFileText className="h-5 w-5" />
-            News
-          </button>
+      <div className="grid grid-cols-1 sm:grid-cols-2 items-center mb-5 gap-4">
+        {/* Content Type */}
+        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 font-medium">
+          <label className="block">Content Type</label>
+          <div className="flex gap-3">
+            <button
+              type="button"
+              className={`flex items-center gap-2 px-3 py-[10px] bg-gray-100 rounded-lg ${
+                contentType === "article" ? "bg-indigo-600 text-white" : "border-gray-300 text-gray-700"
+              }`}
+              onClick={() => onContentTypeChange("article")}
+            >
+              <FiBook className="h-5 w-5" />
+              Article
+            </button>
+            <button
+              type="button"
+              className={`flex items-center gap-2 px-3 py-[10px] bg-gray-100 rounded-lg ${
+                contentType === "news" ? "bg-indigo-600 text-white" : "border-gray-300 text-gray-700"
+              }`}
+              onClick={() => onContentTypeChange("news")}
+            >
+              <FiFileText className="h-5 w-5" />
+              News
+            </button>
+          </div>
         </div>
-      </div>
 
-      {/* Status Field */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-start sm:justify-end gap-4">
-        <label className="block font-medium">Status</label>
-        <div className="flex bg-gray-100 rounded-full p-1 gap-1">
-          <button
-            type="button"
-            className={`flex-1 px-4 py-2 font-medium text-center rounded-full ${
-              status === "visible" ? "bg-green-500 text-white" : "bg-transparent text-gray-700"
-            }`}
-            onClick={() => onStatusChange("visible")}
-          >
-            Visible
-          </button>
-          <button
-            type="button"
-            className={`flex-1 px-4 py-2 font-medium text-center rounded-full ${
-              status === "hidden" ? "bg-red-500 text-white" : "bg-transparent text-gray-700"
-            }`}
-            onClick={() => onStatusChange("hidden")}
-          >
-            Hidden
-          </button>
+        {/* Status */}
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-start sm:justify-end gap-4">
+          <label className="block font-medium">Status</label>
+          <div className="flex bg-gray-100 rounded-full p-1 gap-1">
+            <button
+              type="button"
+              className={`flex-1 px-4 py-2 font-medium text-center rounded-full ${
+                status === "visible" ? "bg-green-500 text-white" : "bg-transparent text-gray-700"
+              }`}
+              onClick={() => onStatusChange("visible")}
+            >
+              Visible
+            </button>
+            <button
+              type="button"
+              className={`flex-1 px-4 py-2 font-medium text-center rounded-full ${
+                status === "hidden" ? "bg-red-500 text-white" : "bg-transparent text-gray-700"
+              }`}
+              onClick={() => onStatusChange("hidden")}
+            >
+              Hidden
+            </button>
+          </div>
         </div>
       </div>
 

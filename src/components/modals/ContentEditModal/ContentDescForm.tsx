@@ -29,7 +29,7 @@ const ContentDescForm: React.FC<DescriptionFormProps> = ({ value, onChange }) =>
             type="button"
             onClick={handleSwitchToEditMode}
             className={`px-3 py-2 rounded-md ${
-              !previewMode ? "bg-blue-500 text-white" : "bg-gray-200 text-black"
+              !previewMode ? "bg-indigo-600 text-white" : "bg-gray-200 text-black"
             }`}
           >
             Edit HTML
@@ -38,7 +38,7 @@ const ContentDescForm: React.FC<DescriptionFormProps> = ({ value, onChange }) =>
             type="button"
             onClick={handleSwitchToPreviewMode}
             className={`px-3 py-2 rounded-md ${
-              previewMode ? "bg-blue-500 text-white" : "bg-gray-200 text-black"
+              previewMode ? "bg-indigo-600 text-white" : "bg-gray-200 text-black"
             }`}
           >
             Preview HTML
