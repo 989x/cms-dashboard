@@ -41,8 +41,12 @@ src/
     - BusinessCard.tsx
     - ContentCard.tsx
   - modals/
-    - BusinessEditModal.tsx
-    - ContentEditModal.tsx
+    - BusinessEditModal/
+      - ...forms
+      - index.tsx
+    - ContentEditModal/
+      - ...forms
+      - index.tsx
   - SearchAndFilter.tsx
 
 - utils/
