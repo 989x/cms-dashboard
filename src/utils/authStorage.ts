@@ -7,7 +7,6 @@ export const storeAuthToken = (authToken: string): void => {
   localStorage.setItem("authToken", authToken); // Save token to localStorage
 };
 
-
 export const clearAuthToken = (): void => {
   localStorage.removeItem("authToken"); // Remove token from localStorage
   window.location.href = "/login"; // Redirect to login page

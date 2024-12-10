@@ -7,18 +7,22 @@ import { SERVER_IP } from "@/api/config";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { login } from "@/api/login";
 import { storeAuthToken } from "@/utils/authStorage";
-import { FiServer } from "react-icons/fi";
 
 export default function LoginPage() {
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [isHuman, setIsHuman] = useState(false);
   const [error, setError] = useState("");
   const router = useRouter();
 
   const handleLogin = async () => {
+    if (!username || !password || !isHuman) {
+      setError("Please fill out all fields and confirm you are not a bot.");
+      return;
+    }
     try {
-      const data = await login(email, password);
+      const data = await login(username, password);
       storeAuthToken(data.token);
       router.push("/");
     } catch (err: any) {
@@ -46,7 +50,8 @@ export default function LoginPage() {
           </div>
           <h1 className="text-xl font-bold text-gray-800 mb-2">Welcome back!</h1>
           <p className="text-gray-600 text-sm font-medium mb-6">
-            Access to the CMS at <button className="text-blue-600 font-semobild">{SERVER_IP}</button>
+            Access to the CMS at{" "}
+            <button className="text-blue-600 font-semibold">{SERVER_IP}</button>
           </p>
         </div>
         {error && (
@@ -54,14 +59,12 @@ export default function LoginPage() {
         )}
         <div className="space-y-5 text-sm">
           <div>
-            <label className="block text-gray-600 font-medium mb-2">
-              Email
-            </label>
+            <label className="block text-gray-600 font-medium mb-2">Username</label>
             <input
-              type="email"
-              placeholder="Enter your email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              type="username"
+              placeholder="Enter your username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
               className="w-full py-2 px-3 border border-gray-300 rounded-md"
             />
           </div>
@@ -93,20 +96,24 @@ export default function LoginPage() {
           <div className="flex items-center">
             <input
               type="checkbox"
-              id="rememberMe"
+              id="notABot"
+              checked={isHuman}
+              onChange={(e) => setIsHuman(e.target.checked)}
               className="h-4 w-4 text-blue-600 border-gray-300 rounded"
             />
-            <label
-              htmlFor="rememberMe"
-              className="ml-2 text-gray-600 text-sm"
-            >
-              Remember me
+            <label htmlFor="notABot" className="ml-2 text-gray-600 text-sm">
+              I am not a bot
             </label>
           </div>
         </div>
         <button
           onClick={handleLogin}
-          className="mt-8 w-full bg-blue-600 text-white py-2 rounded-md font-medium"
+          disabled={!username || !password || !isHuman}
+          className={`mt-8 w-full py-2 rounded-md font-medium ${
+            !username || !password || !isHuman
+              ? "bg-gray-400 text-gray-200 cursor-not-allowed"
+              : "bg-blue-600 text-white"
+          }`}
         >
           Login
         </button>
