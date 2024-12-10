@@ -52,6 +52,7 @@ src/
 - utils/
   - authStorage.ts: Utility for handling authentication tokens
   - formatDate.ts
+  - HTMLPreview.module.css
 
 - types/
   - businessTypes.ts

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import styles from "@/utils/HTMLPreview.module.css";
 
 interface DescriptionFormProps {
   value: string;
@@ -8,21 +9,52 @@ interface DescriptionFormProps {
 const ContentDescForm: React.FC<DescriptionFormProps> = ({ value, onChange }) => {
   const [previewMode, setPreviewMode] = useState(false);
 
+  const handleClearContent = () => {
+    onChange("");
+  };
+
+  const handleSwitchToEditMode = () => {
+    setPreviewMode(false);
+  };
+
+  const handleSwitchToPreviewMode = () => {
+    setPreviewMode(true);
+  };
+
   return (
-    <div className="mb-5">
-      <label className="block font-medium mb-3">Description</label>
-      <div className="mb-3 flex justify-between items-center">
+    <div className="pt-2">
+      <div className="mb-5 font-medium flex justify-between items-center">
+        <div className="flex gap-3">
+          <button
+            type="button"
+            onClick={handleSwitchToEditMode}
+            className={`px-3 py-2 rounded-md ${
+              !previewMode ? "bg-blue-500 text-white" : "bg-gray-200 text-black"
+            }`}
+          >
+            Edit HTML
+          </button>
+          <button
+            type="button"
+            onClick={handleSwitchToPreviewMode}
+            className={`px-3 py-2 rounded-md ${
+              previewMode ? "bg-blue-500 text-white" : "bg-gray-200 text-black"
+            }`}
+          >
+            Preview HTML
+          </button>
+        </div>
         <button
           type="button"
-          onClick={() => setPreviewMode(!previewMode)}
-          className="text-sm px-3 py-1 bg-blue-500 text-white rounded"
+          onClick={handleClearContent}
+          className="px-3 py-2 bg-red-500 text-white rounded-md"
         >
-          {previewMode ? "Edit HTML" : "Preview HTML"}
+          Clear Content
         </button>
       </div>
       {previewMode ? (
         <div
-          className="p-3 border rounded-lg bg-gray-50 overflow-auto"
+          className={`${styles["entry-content"]} p-3 border rounded-lg bg-gray-50 overflow-auto`}
           dangerouslySetInnerHTML={{ __html: value }}
         ></div>
       ) : (
