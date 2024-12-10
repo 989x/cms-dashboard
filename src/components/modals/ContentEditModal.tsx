@@ -61,7 +61,7 @@ const ContentEditModal: React.FC<ContentEditModalProps> = ({
                     type="button"
                     className={`flex items-center gap-2 px-3 py-[10px] bg-gray-100 rounded-lg ${
                       editContentType === "article"
-                        ? "bg-blue-500 text-white"
+                        ? "bg-indigo-600 text-white"
                         : "border-gray-300 text-gray-700"
                     }`}
                     onClick={() => setEditContentType("article")}
@@ -73,7 +73,7 @@ const ContentEditModal: React.FC<ContentEditModalProps> = ({
                     type="button"
                     className={`flex items-center gap-2 px-3 py-[10px] bg-gray-100 rounded-lg ${
                       editContentType === "news"
-                        ? "bg-blue-500 text-white"
+                        ? "bg-indigo-600 text-white"
                         : "border-gray-300 text-gray-700"
                     }`}
                     onClick={() => setEditContentType("news")}

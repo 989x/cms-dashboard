@@ -1,7 +1,7 @@
 import { SERVER_IP } from "@/api/config";
 
 export const metadata = {
-  title: `CMS Login (${SERVER_IP})`,
+  title: `CMS ${SERVER_IP}`,
   description: `Access your CMS Dashboard securely.`,
 };
 

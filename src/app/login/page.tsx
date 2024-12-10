@@ -3,9 +3,11 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import { SERVER_IP } from "@/api/config";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { login } from "@/api/login";
 import { storeAuthToken } from "@/utils/authStorage";
+import { FiServer } from "react-icons/fi";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -43,14 +45,16 @@ export default function LoginPage() {
             />
           </div>
           <h1 className="text-xl font-bold text-gray-800 mb-2">Welcome back!</h1>
-          <p className="text-gray-400 mb-6">Log in to your cms account</p>
+          <p className="text-gray-600 text-sm font-medium mb-6">
+            Access to the CMS at <button className="text-blue-600 font-semobild">{SERVER_IP}</button>
+          </p>
         </div>
         {error && (
           <p className="text-red-500 text-sm text-center mb-4">{error}</p>
         )}
-        <div className="space-y-5">
+        <div className="space-y-5 text-sm">
           <div>
-            <label className="block text-gray-600 text-sm font-medium mb-2">
+            <label className="block text-gray-600 font-medium mb-2">
               Email
             </label>
             <input
@@ -58,11 +62,11 @@ export default function LoginPage() {
               placeholder="Enter your email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full p-2.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full py-2 px-3 border border-gray-300 rounded-md"
             />
           </div>
           <div>
-            <label className="block text-gray-600 text-sm font-medium mb-2">
+            <label className="block text-gray-600 font-medium mb-2">
               Password
             </label>
             <div className="relative">
@@ -71,7 +75,7 @@ export default function LoginPage() {
                 placeholder="Enter your password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full p-2.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full py-2 px-3 border border-gray-300 rounded-md"
               />
               <button
                 type="button"
@@ -102,7 +106,7 @@ export default function LoginPage() {
         </div>
         <button
           onClick={handleLogin}
-          className="mt-8 w-full bg-blue-600 text-white py-2.5 rounded-md font-medium"
+          className="mt-8 w-full bg-blue-600 text-white py-2 rounded-md font-medium"
         >
           Login
         </button>

@@ -80,7 +80,7 @@ const BusinessEditModal: React.FC<BusinessEditModalProps> = ({
                     type="button"
                     className={`flex items-center gap-2 px-3 py-[10px] bg-gray-100 rounded-lg ${
                       editType === "general"
-                        ? "bg-green-500 text-white"
+                        ? "bg-indigo-600 text-white"
                         : "border-gray-300 text-gray-700"
                     }`}
                     onClick={() => setEditType("general")}
@@ -92,7 +92,7 @@ const BusinessEditModal: React.FC<BusinessEditModalProps> = ({
                     type="button"
                     className={`flex items-center gap-2 px-3 py-[10px] bg-gray-100 rounded-lg ${
                       editType === "franchise"
-                        ? "bg-green-500 text-white"
+                        ? "bg-indigo-600 text-white"
                         : "border-gray-300 text-gray-700"
                     }`}
                     onClick={() => setEditType("franchise")}
