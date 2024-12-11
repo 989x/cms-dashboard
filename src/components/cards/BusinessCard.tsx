@@ -122,7 +122,7 @@ const BusinessCard: React.FC<BusinessItem> = ({
       <BusinessEditModal
         isOpen={isEditModalOpen}
         onClose={() => setEditModalOpen(false)}
-        id={id}
+        id={String(id)} // Convert id to string
         title={currentTitle}
         description={currentDescription}
         branches={currentBranches}

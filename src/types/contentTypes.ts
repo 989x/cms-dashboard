@@ -1,5 +1,5 @@
 export interface ContentItem {
-  id: string | number;
+  id: string;
   title: string | null;
   date: string | null; // ISO 8601 format, but can be null
   tags: string[] | null;
