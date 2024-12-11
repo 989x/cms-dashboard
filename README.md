@@ -18,7 +18,7 @@ docker build -t cms-dashboard .
 To run the container in detached mode, use:
 
 ```bash
-docker run -d -p 3000:3000 cms-dashboard
+docker run -d -p 4000:4000 cms-dashboard
 ```
 
 
@@ -74,7 +74,8 @@ src/
 - .dockerignore
 - Dockerfile
 - pnpm-lock.yaml: Lockfile for dependencies managed by pnpm
-- tailwind.config.ts: Tailwind CSS configuration
+- next.config.ts
+- tailwind.config.ts
 - .env.example: Example environment variables file, used for providing a template for environment variables
 - .env.local: Local environment variables file, specific to the developer’s machine (not tracked by git)
 ```

@@ -7,13 +7,6 @@ pnpm-debug.log
 out
 dist
 
-# Ignore configuration files
-.DS_Store
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
-
 # Ignore logs
 logs
 *.log
