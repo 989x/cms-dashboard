@@ -1,5 +1,5 @@
 export interface BusinessItem {
-  id: string;
+  id: string | number;
   title: string;
   image: string;
   contacts: {

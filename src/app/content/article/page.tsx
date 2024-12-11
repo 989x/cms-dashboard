@@ -16,7 +16,7 @@ export default function ArticlePage() {
     if (!hasAuthToken()) {
       router.push('/login');
     }
-  }, []);
+  }, [router]); // Add 'router' as a dependency
   
   const [filteredArticles, setFilteredArticles] = useState(mockContentArticles);
 

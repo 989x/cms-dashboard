@@ -12,9 +12,9 @@ export default function Home() {
   useEffect(() => {
     // Redirect to login if not authenticated
     if (!hasAuthToken()) {
-      router.push("/login");
+      router.push('/login');
     }
-  }, []);
+  }, [router]); // Add 'router' as a dependency
 
   return (
     <div className="w-full max-w-5xl mx-auto px-4 sm:px-6">

@@ -25,8 +25,12 @@ export default function LoginPage() {
       const data = await login(username, password);
       storeAuthToken(data.token);
       router.push("/");
-    } catch (err: any) {
-      setError(err.message || "Login failed");
+    } catch (err) {
+      if (err instanceof Error) {
+        setError(err.message || "Login failed");
+      } else {
+        setError("An unexpected error occurred");
+      }
     }
   };
 

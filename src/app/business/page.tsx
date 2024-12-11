@@ -16,7 +16,7 @@ export default function Home() {
     if (!hasAuthToken()) {
       router.push('/login');
     }
-  }, []);
+  }, [router]); // Add 'router' as a dependency
   
   const [filteredBusinesses, setFilteredBusinesses] = useState(mockBusiness);
 
