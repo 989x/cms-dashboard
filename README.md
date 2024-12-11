@@ -2,10 +2,24 @@
 
 A modern CMS dashboard built with **Next.js** and configured with optional tools for an optimal development experience.
 
-## Documentation
 
-For a comprehensive guide on setting up **Next.js** with **pnpm**, check out this article:  
-[How to Install Next.js with pnpm](https://medium.com/frontendweb/how-to-install-nextjs-with-pnpm-a958f1b3e9ad)
+## Docker Commands
+
+### Build the Docker Image
+
+To build the Docker image, use the following command:
+
+```bash
+docker build -t cms-dashboard .
+```
+
+### Run the Docker Container in Detached Mode
+
+To run the container in detached mode, use:
+
+```bash
+docker run -d -p 3000:3000 cms-dashboard
+```
 
 
 ## File structure
@@ -57,11 +71,20 @@ src/
   - businessTypes.ts
   - contentTypes.ts
 
+- .dockerignore
+- Dockerfile
 - pnpm-lock.yaml: Lockfile for dependencies managed by pnpm
 - tailwind.config.ts: Tailwind CSS configuration
 - .env.example: Example environment variables file, used for providing a template for environment variables
 - .env.local: Local environment variables file, specific to the developer’s machine (not tracked by git)
 ```
+
+
+## Documentation
+
+For a comprehensive guide on setting up **Next.js** with **pnpm**, check out this article:  
+[How to Install Next.js with pnpm](https://medium.com/frontendweb/how-to-install-nextjs-with-pnpm-a958f1b3e9ad)
+
 
 ## Commands
 
@@ -71,6 +94,7 @@ pnpm create next-app
 
 pnpm add react-icons
 ```
+
 
 ## Example Configuration
 
