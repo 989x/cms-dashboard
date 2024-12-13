@@ -39,33 +39,34 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
-        <div className="text-center">
-          <div className="mx-auto mb-6 w-16 h-16">
-            <Image
-              src="/favicon.png"
-              alt="Logo"
-              width={64}
-              height={64}
-              priority
-              className="mx-auto"
-            />
-          </div>
-          <h1 className="text-xl font-bold text-gray-800 mb-2">Welcome back!</h1>
-          <p className="text-gray-600 text-sm font-medium mb-6">
+    <div className="flex items-center justify-center h-screen sm:bg-gray-200">
+      <div className="bg-white px-4 sm:p-8 sm:rounded-xl sm:shadow-md w-full sm:max-w-md">
+        <div className="mb-10 sm:mb-8 flex flex-col sm:items-center">
+          <Image
+            src="/favicon.png"
+            alt="Logo"
+            width={56}
+            height={56}
+            priority
+          />
+          <h1 className="text-2xl font-bold text-gray-800 mt-6 sm:mt-4 text-left sm:text-center">
+            Welcome back!
+          </h1>
+          <p className="text-gray-600 text-sm mt-2 text-left sm:text-center">
             Access to the CMS at{" "}
-            <button className="text-blue-600 font-semibold">{SERVER_IP}</button>
+            <span className="text-blue-600 font-medium">{SERVER_IP}</span>
           </p>
         </div>
         {error && (
-          <p className="text-red-500 text-sm text-center mb-4">{error}</p>
+          <p className="text-red-500 text-sm mb-4 text-left sm:text-center">{error}</p>
         )}
-        <div className="space-y-5 text-sm">
+        <div className="space-y-5">
           <div>
-            <label className="block text-gray-600 font-medium mb-2">Username</label>
+            <label className="block text-gray-600 font-medium mb-2">
+              Username
+            </label>
             <input
-              type="username"
+              type="text"
               placeholder="Enter your username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
