@@ -23,7 +23,7 @@ export default function PromotionPage() {
   }, [router]);
 
   const handleSearch = (query: string) => {
-    const results = mockPromotions.filter((promo) =>
+    const results = promotions.filter((promo) =>
       promo.title.toLowerCase().includes(query.toLowerCase())
     );
     setFilteredPromotions(results);
@@ -35,7 +35,7 @@ export default function PromotionPage() {
 
   return (
     <div className="w-full max-w-5xl mx-auto px-4 sm:px-6">
-      <h1 className="text-lg sm:text-xl font-bold mb-6 sm:mb-8">Promotions</h1>
+      <h1 className="text-lg sm:text-xl font-bold mb-6 sm:mb-8">Manage Promotions</h1>
 
       {/* Search and Filter Bar */}
       <SearchAndFilterBar onSearch={handleSearch} onFilter={handleFilter} />
@@ -50,11 +50,15 @@ export default function PromotionPage() {
           filteredPromotions.map((promo) => (
             <PromotionCard
               key={promo._id}
+              _id={promo._id}
               title={promo.title}
+              description={promo.description}
               imageUrl={promo.imageUrl}
               linkUrl={promo.linkUrl}
+              status={promo.status}
               activeFrom={promo.activeFrom}
               activeUntil={promo.activeUntil}
+              views={promo.views}
             />
           ))
         ) : (

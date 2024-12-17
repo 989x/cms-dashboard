@@ -17,6 +17,14 @@ const links = [
   "https://example.com/discount",
 ];
 
+const descriptions = [
+  "Don't miss this amazing sale!",
+  "Hurry, limited stock available!",
+  "Shop now and save big.",
+  "Exclusive deals for a limited time.",
+  "Great offers only this season.",
+];
+
 // Function to generate random date within range
 const randomDate = (start: Date, end: Date): string => {
   return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime())).toISOString();
@@ -32,8 +40,11 @@ export const generateRandomPromotions = (count: number): PromotionItem[] => {
     promotions.push({
       _id: `promo_${i + 1}`,
       title: titles[Math.floor(Math.random() * titles.length)],
+      description: descriptions[Math.floor(Math.random() * descriptions.length)], // Random description
       imageUrl: `https://picsum.photos/seed/promo${i}/600/400`, // Generate random image
       linkUrl: links[Math.floor(Math.random() * links.length)],
+      views: Math.floor(Math.random() * 1000), // Random views (0-999)
+      status: Math.random() > 0.5 ? "visible" : "hidden", // Random status: visible/hidden
       isActive: Math.random() > 0.5, // Random true/false
       activeFrom,
       activeUntil,
