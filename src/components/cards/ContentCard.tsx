@@ -77,18 +77,18 @@ const ContentCard: React.FC<ContentItem> = ({
       </div>
       <div className="border-t border-gray-200 my-3"></div>
       <div className="flex items-center justify-between">
-        <div className="flex gap-2">
-          <span className="text-[13px] font-medium text-gray-600">Status:</span>
+        <div className="flex gap-2 text-[13px] font-medium">
+          <span className="text-gray-600">Status:</span>
           <button className="flex items-center gap-1">
             {currentStatus === 'visible' ? (
               <>
                 <FiEye className="h-4 w-4 text-green-500" />
-                <span className="text-[13px] font-medium text-green-600">Visible</span>
+                <span className="text-green-600">Visible</span>
               </>
             ) : (
               <>
                 <FiEyeOff className="h-4 w-4 text-gray-500" />
-                <span className="text-[13px] font-medium text-gray-600">Hidden</span>
+                <span className="text-gray-600">Hidden</span>
               </>
             )}
           </button>

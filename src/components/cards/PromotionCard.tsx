@@ -44,55 +44,55 @@ const PromotionCard: React.FC<PromotionCardProps> = ({
           />
         </div>
 
-{/* Promotion Details */}
-<div className="flex-1 flex flex-col gap-2 justify-center">
-  <h2 className="font-semibold line-clamp-1">{title}</h2>
-  <p className="text-sm text-gray-600 line-clamp-2 leading-relaxed">
-    {description}
-  </p>
+        {/* Promotion Details */}
+        <div className="flex-1 flex flex-col gap-2 justify-center">
+          <h2 className="font-semibold line-clamp-1">{title}</h2>
+          <p className="text-sm text-gray-600 line-clamp-2 leading-relaxed">
+            {description}
+          </p>
 
-  <div className="flex flex-col text-sm text-gray-500 gap-2">
-    {/* Row 1 */}
-    <div className="flex items-center gap-x-2.5">
-      <div className="flex items-center gap-x-1.5">
-        <AiOutlineCalendar className="h-4 w-4" />
-        <span>
-          {formatToThaiDate(activeFrom)} - {formatToThaiDate(activeUntil)}
-        </span>
-      </div>
-      <span className="h-4 w-[1.5px] bg-gray-300"></span>
-      <div className="flex items-center gap-x-1.5">
-        <AiOutlineEye className="h-4 w-4" />
-        <span>{views} views</span>
-      </div>
-    </div>
+          <div className="flex flex-col text-sm text-gray-500 gap-2">
+            {/* Row 1 */}
+            <div className="flex items-center gap-x-2.5">
+              <div className="flex items-center gap-x-1.5">
+                <AiOutlineCalendar className="h-4 w-4" />
+                <span>
+                  {formatToThaiDate(activeFrom)} - {formatToThaiDate(activeUntil)}
+                </span>
+              </div>
+              <span className="h-4 w-[1.5px] bg-gray-300"></span>
+              <div className="flex items-center gap-x-1.5">
+                <AiOutlineEye className="h-4 w-4" />
+                <span>{views} views</span>
+              </div>
+            </div>
 
-    {/* Row 2 */}
-    <div className="flex items-center gap-x-2.5">
-      <div className="flex items-center gap-x-1.5">
-        <AiOutlineClockCircle className="h-4 w-4" />
-        <span>Duration: {duration} days</span>
-      </div>
-      <span className="h-4 w-[1.5px] bg-gray-300"></span>
-      <div className="flex items-center gap-x-1.5">
-        <span>Remaining: {remainingDays} days</span>
-      </div>
-    </div>
-  </div>
+            {/* Row 2 */}
+            <div className="flex items-center gap-x-2.5">
+              <div className="flex items-center gap-x-1.5">
+                <AiOutlineClockCircle className="h-4 w-4" />
+                <span>Duration: {duration} days</span>
+              </div>
+              <span className="h-4 w-[1.5px] bg-gray-300"></span>
+              <div className="flex items-center gap-x-1.5">
+                <span>Remaining: {remainingDays} days</span>
+              </div>
+            </div>
+          </div>
 
-  {/* Show Link */}
-  <div className="text-sm font-medium">
-    <span className="text-gray-600">Go to:</span>{' '}
-    <a
-      href={linkUrl}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="text-blue-600 hover:underline"
-    >
-      {linkUrl}
-    </a>
-  </div>
-</div>
+          {/* Show Link */}
+          <div className="text-sm font-medium">
+            <span className="text-gray-600">Go to:</span>{' '}
+            <a
+              href={linkUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-600 hover:underline"
+            >
+              {linkUrl}
+            </a>
+          </div>
+        </div>
       </div>
 
       {/* Divider */}
@@ -101,8 +101,8 @@ const PromotionCard: React.FC<PromotionCardProps> = ({
       {/* Status and Actions */}
       <div className="flex items-center justify-between">
         {/* Status */}
-        <div className="flex items-center gap-2">
-          <span className="text-[13px] font-medium text-gray-600">Status:</span>
+        <div className="flex items-center gap-2 text-[13px] font-medium">
+          <span className="text-gray-600">Status:</span>
           {status === 'visible' ? (
             <span className="flex items-center gap-1 text-green-600">
               <FiEye className="h-4 w-4" /> Visible
