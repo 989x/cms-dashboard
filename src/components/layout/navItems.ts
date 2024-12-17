@@ -38,7 +38,7 @@ export const navItems = [
         description: "Create new promotions for the landing page",
       },
       {
-        href: "/promotions/manage",
+        href: "/promotion",
         label: "Manage Promotion",
         icon: FiTag,
         description: "View and update existing promotions on the landing page",

@@ -29,8 +29,9 @@ src/
 - api/
   - config.ts: Configuration file for API (reads from `.env`)
   - login.ts: Handles login API requests
-  - business.ts: Mock or API for business data
-  - news.ts: Mock or API for news data
+  - business.ts: Mock or API
+  - news.ts: Mock or API
+  - promotion.ts: Mock or API
 
 - app/
   - business/
@@ -42,6 +43,8 @@ src/
   - login/
     - layout.tsx: Layout for the login page (handles metadata)
     - page.tsx: Login page with UI and authentication logic
+  - promotion/
+    - page.tsx
   - client-layout.tsx: Client-side layout logic (handles conditional rendering of Sidebar)
   - layout.tsx: Root layout for the app
   - not-found.tsx
@@ -54,6 +57,7 @@ src/
   - cards/
     - BusinessCard.tsx
     - ContentCard.tsx
+    - PromotionCard.tsx
   - modals/
     - BusinessEditModal/
       - ...forms and index.tsx
@@ -70,6 +74,7 @@ src/
 - types/
   - businessTypes.ts
   - contentTypes.ts
+  - promotionTypes.ts
 
 - .dockerignore
 - Dockerfile
