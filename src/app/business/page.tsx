@@ -5,7 +5,7 @@ import { hasAuthToken } from "@/utils/authStorage";
 
 import { useEffect, useState } from "react";
 import { mockBusiness } from "@/api/business";
-import SearchAndFilterBar from "@/components/SearchAndFilter";
+import SearchSortBar from "@/components/SearchSortBar";
 import BusinessCard from "@/components/cards/BusinessCard";
 
 export default function Home() {
@@ -36,10 +36,11 @@ export default function Home() {
       <h1 className="text-lg sm:text-xl font-bold mb-6 sm:mb-8">
         Manage All Business Listings
       </h1>
-      <SearchAndFilterBar onSearch={handleSearch} onFilter={handleFilter} />
-      <p className="text-gray-600 text-sm font-medium mt-4 mb-8">
-        Found {filteredBusinesses.length} results
-      </p>
+      <SearchSortBar
+        onSearch={handleSearch}
+        onFilter={handleFilter}
+        resultCount={filteredBusinesses.length}
+      />
       <div className="grid gap-4">
         {filteredBusinesses.map((business) => (
           <BusinessCard

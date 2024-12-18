@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { PromotionItem } from "@/types/shared.types";
 import PromotionCard from "@/components/cards/PromotionCard";
-import SearchAndFilterBar from "@/components/SearchAndFilter";
+import SearchSortBar from "@/components/SearchSortBar";
 import { mockPromotions } from "@/api/promotion";
 
 export default function PromotionPage() {
@@ -51,13 +51,12 @@ export default function PromotionPage() {
     <div className="max-w-5xl mx-auto px-4 sm:px-6">
       <h1 className="text-lg sm:text-xl font-bold mb-6 sm:mb-8">Manage Promotions</h1>
 
-      {/* Search and Filter */}
-      <SearchAndFilterBar onSearch={handleSearch} onFilter={handleFilter} />
-
-      {/* Results Count */}
-      <p className="text-gray-600 text-sm font-medium mt-4 mb-6">
-        Found {filteredPromotions.length} results
-      </p>
+      {/* Search, Sort, and Filter */}
+      <SearchSortBar
+        onSearch={handleSearch}
+        onFilter={handleFilter}
+        resultCount={filteredPromotions.length}
+      />
 
       {/* Promotion List */}
       <div className="grid gap-6">

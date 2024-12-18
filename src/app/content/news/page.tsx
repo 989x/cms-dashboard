@@ -5,7 +5,7 @@ import { hasAuthToken } from "@/utils/authStorage";
 
 import { useEffect, useState } from "react";
 import { mockContentNews } from "@/api/content";
-import SearchAndFilterBar from "@/components/SearchAndFilter";
+import SearchSortBar from "@/components/SearchSortBar";
 import ContentCard from "@/components/cards/ContentCard";
 
 export default function NewsPage() {
@@ -21,8 +21,10 @@ export default function NewsPage() {
   const [filteredNews, setFilteredNews] = useState(mockContentNews);
 
   const handleSearch = (query: string) => {
-    // Update logic for handling search if needed (currently empty behavior)
-    setFilteredNews(mockContentNews); // Resets to default data
+    const results = mockContentNews.filter((news) =>
+      news.title?.toLowerCase().includes(query.toLowerCase())
+    );
+    setFilteredNews(results);
   };
 
   const handleFilter = () => {
@@ -34,10 +36,11 @@ export default function NewsPage() {
       <h1 className="text-lg sm:text-xl font-bold mb-6 sm:mb-8">
         Manage News Content
       </h1>
-      <SearchAndFilterBar onSearch={handleSearch} onFilter={handleFilter} />
-      <p className="text-gray-600 text-sm font-medium mt-4 mb-8">
-        Found {filteredNews.length} results
-      </p>
+      <SearchSortBar
+        onSearch={handleSearch}
+        onFilter={handleFilter}
+        resultCount={filteredNews.length}
+      />
       <div className="grid gap-4">
         {filteredNews.map((news) => (
           <ContentCard

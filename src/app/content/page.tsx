@@ -5,7 +5,7 @@ import { hasAuthToken } from "@/utils/authStorage";
 
 import { useEffect, useState } from "react";
 import { mockContents } from "@/api/content";
-import SearchAndFilterBar from "@/components/SearchAndFilter";
+import SearchSortBar from "@/components/SearchSortBar";
 import ContentCard from "@/components/cards/ContentCard";
 
 export default function Home() {
@@ -36,25 +36,26 @@ export default function Home() {
       <h1 className="text-lg sm:text-xl font-bold mb-6 sm:mb-8">
         Manage All Content
       </h1>
-      <SearchAndFilterBar onSearch={handleSearch} onFilter={handleFilter} />
-      <p className="text-gray-600 text-sm font-medium mt-4 mb-8">
-        Found {filteredNews.length} results
-      </p>
+      <SearchSortBar
+        onSearch={handleSearch}
+        onFilter={handleFilter}
+        resultCount={filteredNews.length}
+      />
       <div className="grid gap-4">
-        {filteredNews.map((news) => (
+        {filteredNews.map((content) => (
           <ContentCard
-            key={news._id}
-            _id={news._id}
-            title={news.title}
-            image_url={news.image_url}
-            tags={news.tags}
-            created_at={news.created_at}
-            updated_at={news.updated_at}
-            description={news.description}
-            link_url={news.link_url}
-            views={news.views}
-            is_active={news.is_active}
-            content_type={news.content_type}
+            key={content._id}
+            _id={content._id}
+            title={content.title}
+            image_url={content.image_url}
+            tags={content.tags}
+            created_at={content.created_at}
+            updated_at={content.updated_at}
+            description={content.description}
+            link_url={content.link_url}
+            views={content.views}
+            is_active={content.is_active}
+            content_type={content.content_type}
           />
         ))}
       </div>

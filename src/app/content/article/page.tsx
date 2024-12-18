@@ -5,7 +5,7 @@ import { hasAuthToken } from "@/utils/authStorage";
 
 import { useEffect, useState } from "react";
 import { mockContentArticles } from "@/api/content";
-import SearchAndFilterBar from "@/components/SearchAndFilter";
+import SearchSortBar from "@/components/SearchSortBar";
 import ContentCard from "@/components/cards/ContentCard";
 
 export default function ArticlePage() {
@@ -36,25 +36,26 @@ export default function ArticlePage() {
       <h1 className="text-lg sm:text-xl font-bold mb-6 sm:mb-8">
         Manage Article Content
       </h1>
-      <SearchAndFilterBar onSearch={handleSearch} onFilter={handleFilter} />
-      <p className="text-gray-600 text-sm font-medium mt-4 mb-8">
-        Found {filteredArticles.length} results
-      </p>
+      <SearchSortBar
+        onSearch={handleSearch}
+        onFilter={handleFilter}
+        resultCount={filteredArticles.length}
+      />
       <div className="grid gap-4">
         {filteredArticles.map((article) => (
           <ContentCard
             key={article._id}
             _id={article._id}
             title={article.title}
-            image_url={article.image_url} // Corrected from `image`
+            image_url={article.image_url}
             tags={article.tags}
-            created_at={article.created_at} // Corrected from `date`
+            created_at={article.created_at}
             updated_at={article.updated_at}
             description={article.description}
-            link_url={article.link_url} // Corrected from `link`
+            link_url={article.link_url}
             views={article.views}
-            is_active={article.is_active} // Corrected from `status`
-            content_type={article.content_type} // Corrected from `type`
+            is_active={article.is_active}
+            content_type={article.content_type}
           />
         ))}
       </div>
