@@ -21,6 +21,7 @@ export default function ArticlePage() {
   const [articles, setArticles] = useState(mockContentArticles);
   const [filteredArticles, setFilteredArticles] = useState(mockContentArticles);
   const [sortBy, setSortBy] = useState("Related"); // Default sorting by 'Related'
+  const [sortOrder, setSortOrder] = useState("Ascending"); // Default sort order
 
   // Search Logic with Filtering
   const handleSearch = (query: string) => {
@@ -31,14 +32,21 @@ export default function ArticlePage() {
   };
 
   // Handle Sorting
-  const handleSortChange = (sortBy: string) => {
+  const handleSortChange = (sortBy: string, sortOrder: string) => {
     setSortBy(sortBy);
+    setSortOrder(sortOrder); // Update the sort order
     const sortedArticles = [...filteredArticles];
 
     if (sortBy === "Status") {
-      sortedArticles.sort((a, b) => Number(b.is_active) - Number(a.is_active));
+      sortedArticles.sort((a, b) =>
+        sortOrder === "Ascending"
+          ? Number(a.is_active) - Number(b.is_active)
+          : Number(b.is_active) - Number(a.is_active)
+      );
     } else if (sortBy === "Views") {
-      sortedArticles.sort((a, b) => b.views - a.views);
+      sortedArticles.sort((a, b) =>
+        sortOrder === "Ascending" ? a.views - b.views : b.views - a.views
+      );
     } else {
       // Default to "Related" (Sorting by title for example)
       sortedArticles.sort((a, b) => a.title.localeCompare(b.title)); // Example for "Related"

@@ -15,6 +15,7 @@ export default function PromotionPage() {
   const [filteredPromotions, setFilteredPromotions] = useState<PromotionItem[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [sortBy, setSortBy] = useState<string>("Related");
+  const [sortOrder, setSortOrder] = useState<string>("Ascending"); // Default sort order
 
   // Authentication and Data Fetching
   useEffect(() => {
@@ -40,16 +41,25 @@ export default function PromotionPage() {
   };
 
   // Handle sorting
-  const handleSortChange = (sortBy: string) => {
+  const handleSortChange = (sortBy: string, sortOrder: string) => {
     setSortBy(sortBy);
+    setSortOrder(sortOrder); // Update the sort order based on user choice
     const sortedPromotions = [...filteredPromotions];
 
     if (sortBy === "Status") {
-      sortedPromotions.sort((a, b) => Number(b.is_active) - Number(a.is_active));
+      // Sort by active status in the selected order
+      sortedPromotions.sort((a, b) =>
+        sortOrder === "Ascending"
+          ? Number(a.is_active) - Number(b.is_active)
+          : Number(b.is_active) - Number(a.is_active)
+      );
     } else if (sortBy === "Views") {
-      sortedPromotions.sort((a, b) => b.views - a.views);
+      // Sort by views in the selected order
+      sortedPromotions.sort((a, b) =>
+        sortOrder === "Ascending" ? a.views - b.views : b.views - a.views
+      );
     } else {
-      // Default to "Related" (You can change this logic to match real "Related" sorting)
+      // Default to "Related" (Sorting by title for example)
       sortedPromotions.sort((a, b) => a.title.localeCompare(b.title)); // Example for "Related"
     }
 

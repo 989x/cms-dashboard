@@ -16,6 +16,7 @@ export default function GeneralBusinessPage() {
   const [filteredBusinesses, setFilteredBusinesses] = useState(mockGeneralBusiness);
   const [isLoading, setIsLoading] = useState(true);
   const [sortBy, setSortBy] = useState("Related"); // Default sorting by 'Related'
+  const [sortOrder, setSortOrder] = useState("Ascending"); // Default sort order
 
   // Authentication and Data Fetching
   useEffect(() => {
@@ -39,14 +40,21 @@ export default function GeneralBusinessPage() {
   };
 
   // Handle Sorting
-  const handleSortChange = (sortBy: string) => {
+  const handleSortChange = (sortBy: string, sortOrder: string) => {
     setSortBy(sortBy);
+    setSortOrder(sortOrder); // Update the sort order
     const sortedBusinesses = [...filteredBusinesses];
 
     if (sortBy === "Status") {
-      sortedBusinesses.sort((a, b) => Number(b.is_active) - Number(a.is_active));
+      sortedBusinesses.sort((a, b) =>
+        sortOrder === "Ascending"
+          ? Number(a.is_active) - Number(b.is_active)
+          : Number(b.is_active) - Number(a.is_active)
+      );
     } else if (sortBy === "Views") {
-      sortedBusinesses.sort((a, b) => b.views - a.views);
+      sortedBusinesses.sort((a, b) =>
+        sortOrder === "Ascending" ? a.views - b.views : b.views - a.views
+      );
     } else {
       // Default to "Related" (Sorting by title for example)
       sortedBusinesses.sort((a, b) => a.title.localeCompare(b.title)); // Example for "Related"
