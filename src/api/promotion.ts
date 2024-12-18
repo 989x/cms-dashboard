@@ -44,7 +44,7 @@ export const generateRandomPromotions = (count: number): PromotionItem[] => {
       image_url: `https://picsum.photos/seed/promo${i}/600/400`, // Generate random image
       link_url: links[Math.floor(Math.random() * links.length)],
       views: Math.floor(Math.random() * 1000), // Random views (0-999)
-      is_active: true, // Align with PromotionItem type (true/false for `is_active`)
+      is_active: Math.random() > 0.5, // Boolean value
       active_from,
       active_until,
       created_at: new Date().toISOString(),

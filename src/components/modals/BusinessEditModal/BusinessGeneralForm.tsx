@@ -9,8 +9,8 @@ interface BusinessGeneralFormProps {
   onLinkChange: (value: string) => void;
   type: "general" | "franchise";
   onTypeChange: (value: "general" | "franchise") => void;
-  status: "visible" | "hidden";
-  onStatusChange: (value: "visible" | "hidden") => void;
+  isActive: boolean;
+  onIsActiveChange: (value: boolean) => void;
 }
 
 const BusinessGeneralForm: React.FC<BusinessGeneralFormProps> = ({
@@ -22,8 +22,8 @@ const BusinessGeneralForm: React.FC<BusinessGeneralFormProps> = ({
   onLinkChange,
   type,
   onTypeChange,
-  status,
-  onStatusChange,
+  isActive,
+  onIsActiveChange,
 }) => {
   return (
     <>
@@ -55,27 +55,27 @@ const BusinessGeneralForm: React.FC<BusinessGeneralFormProps> = ({
           </div>
         </div>
 
-        {/* Status Field */}
+        {/* Active Status Field */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-start sm:justify-end gap-4">
           <label className="block font-medium">Status</label>
           <div className="flex bg-gray-100 rounded-full p-1 gap-1">
             <button
               type="button"
               className={`flex-1 px-4 py-2 font-medium text-center rounded-full ${
-                status === "visible" ? "bg-green-500 text-white" : "bg-transparent text-gray-700"
+                isActive ? "bg-green-500 text-white" : "bg-transparent text-gray-700"
               }`}
-              onClick={() => onStatusChange("visible")}
+              onClick={() => onIsActiveChange(true)}
             >
-              Visible
+              Active
             </button>
             <button
               type="button"
               className={`flex-1 px-4 py-2 font-medium text-center rounded-full ${
-                status === "hidden" ? "bg-red-500 text-white" : "bg-transparent text-gray-700"
+                !isActive ? "bg-red-500 text-white" : "bg-transparent text-gray-700"
               }`}
-              onClick={() => onStatusChange("hidden")}
+              onClick={() => onIsActiveChange(false)}
             >
-              Hidden
+              Inactive
             </button>
           </div>
         </div>
@@ -96,7 +96,7 @@ const BusinessGeneralForm: React.FC<BusinessGeneralFormProps> = ({
       <div className="mb-5 flex items-start gap-4">
         {/* Branch Section */}
         <div className="flex-shrink-0" style={{ flexBasis: "20%" }}>
-          <label className="block font-medium mb-2">Branch</label>
+          <label className="block font-medium mb-2">Branches</label>
           <input
             type="number"
             value={branches}

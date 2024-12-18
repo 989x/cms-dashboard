@@ -1,52 +1,53 @@
 import { useState } from "react";
-import { BusinessEditModalProps } from "@/types/edit.types";
+import { BusinessItem } from "@/types/shared.types";
 import { FiX, FiSave, FiXCircle } from "react-icons/fi";
 import BusinessContactForm from "./BusinessContactForm";
 import BusinessDescForm from "./BusinessDescForm";
 import BusinessGeneralForm from "./BusinessGeneralForm";
 
+interface BusinessEditModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  businessData: BusinessItem;
+  onSave: (data: BusinessItem) => void;
+}
+
 const BusinessEditModal: React.FC<BusinessEditModalProps> = ({
-  isOpen, onClose,
-  id, title, link, description, branches, status, type, contacts,
+  isOpen,
+  onClose,
+  businessData,
   onSave,
 }) => {
-  const [editTitle, setEditTitle] = useState(title);
-  const [editDescription, setEditDescription] = useState(description);
-  const [editBranches, setEditBranches] = useState(branches);
-  const [editLink, setEditLink] = useState(link);
-  const [editStatus, setEditStatus] = useState(status);
-  const [editType, setEditType] = useState(type);
-  const [editContacts, setEditContacts] = useState(contacts || []);
+  const [editData, setEditData] = useState<BusinessItem>(businessData);
 
-  const handleAddContact = () => {
-    setEditContacts([...editContacts, { name: "", phone: "", email: "" }]);
-  };
-
-  const handleRemoveContact = (index: number) => {
-    setEditContacts(editContacts.filter((_, i) => i !== index));
+  const handleFieldChange = (field: keyof BusinessItem, value: any) => {
+    setEditData((prev) => ({ ...prev, [field]: value }));
   };
 
   const handleContactChange = (index: number, field: string, value: string) => {
-    const updatedContacts = [...editContacts];
+    const updatedContacts = [...editData.contacts];
     updatedContacts[index] = { ...updatedContacts[index], [field]: value };
-    setEditContacts(updatedContacts);
+    handleFieldChange("contacts", updatedContacts);
+  };
+
+  const handleAddContact = () => {
+    handleFieldChange("contacts", [
+      ...editData.contacts,
+      { name: "", phone: "", email: "" },
+    ]);
+  };
+
+  const handleRemoveContact = (index: number) => {
+    handleFieldChange(
+      "contacts",
+      editData.contacts.filter((_, i) => i !== index)
+    );
   };
 
   const handleSave = () => {
-    const payload = {
-      id,
-      title: editTitle,
-      description: editDescription,
-      branches: editBranches,
-      status: editStatus,
-      type: editType,
-      contacts: editContacts,
-      link: editLink,
-    };
-  
-    console.log("Saving business data:", payload);
-    onSave(payload);
-  };  
+    console.log("Saving business data:", editData);
+    onSave(editData);
+  };
 
   if (!isOpen) return null;
 
@@ -59,7 +60,7 @@ const BusinessEditModal: React.FC<BusinessEditModalProps> = ({
             <h2 className="text-lg font-semibold flex items-center gap-3">
               Edit Business
               <span className="bg-gray-100 text-sm text-gray-600 px-2 py-1 rounded">
-                ID: {id}
+                ID: {editData._id}
               </span>
             </h2>
             <button onClick={onClose} className="text-gray-800" aria-label="Close">
@@ -67,6 +68,7 @@ const BusinessEditModal: React.FC<BusinessEditModalProps> = ({
             </button>
           </div>
 
+          {/* Form */}
           <form
             onSubmit={(e) => {
               e.preventDefault();
@@ -74,26 +76,26 @@ const BusinessEditModal: React.FC<BusinessEditModalProps> = ({
             }}
           >
             <BusinessGeneralForm
-              title={editTitle}
-              onTitleChange={setEditTitle}
-              branches={editBranches}
-              onBranchesChange={setEditBranches}
-              link={editLink}
-              onLinkChange={setEditLink}
-              type={editType}
-              onTypeChange={setEditType}
-              status={editStatus}
-              onStatusChange={setEditStatus}
+              title={editData.title}
+              onTitleChange={(value) => handleFieldChange("title", value)}
+              branches={editData.branches}
+              onBranchesChange={(value) => handleFieldChange("branches", value)}
+              link={editData.link_url}
+              onLinkChange={(value) => handleFieldChange("link_url", value)}
+              type={editData.business_type}
+              onTypeChange={(value) => handleFieldChange("business_type", value)}
+              isActive={editData.is_active}
+              onIsActiveChange={(value) => handleFieldChange("is_active", value)}
             />
             <BusinessContactForm
-              contacts={editContacts}
+              contacts={editData.contacts}
               onAddContact={handleAddContact}
               onRemoveContact={handleRemoveContact}
               onContactChange={handleContactChange}
             />
             <BusinessDescForm
-              description={editDescription}
-              onDescriptionChange={setEditDescription}
+              description={editData.description}
+              onDescriptionChange={(value) => handleFieldChange("description", value)}
             />
 
             <div className="flex justify-end text-sm font-medium gap-3 mt-8">

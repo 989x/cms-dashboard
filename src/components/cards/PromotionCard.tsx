@@ -1,20 +1,18 @@
-import React from 'react';
-import Image from 'next/image';
-import { AiOutlineCalendar, AiOutlineEye, AiOutlineClockCircle } from 'react-icons/ai';
-import { FiEdit, FiEye, FiEyeOff, FiTrash2 } from 'react-icons/fi';
-import { formatToThaiDate, calculateDuration, calculateRemainingDays } from '@/utils/formatDate';
-import { PromotionItem } from '@/types/shared.types';
+import React from "react";
+import Image from "next/image";
+import { AiOutlineCalendar, AiOutlineEye, AiOutlineClockCircle } from "react-icons/ai";
+import { FiEdit, FiEye, FiEyeOff, FiTrash2 } from "react-icons/fi";
+import { formatToThaiDate, calculateDuration, calculateRemainingDays } from "@/utils/formatDate";
+import { PromotionItem } from "@/types/shared.types";
 
-interface PromotionCardProps extends PromotionItem {}
-
-const PromotionCard: React.FC<PromotionCardProps> = ({
+const PromotionCard: React.FC<PromotionItem> = ({
   _id,
   title,
   description,
   image_url,
   link_url,
   views,
-  status,
+  is_active,
   active_from,
   active_until,
 }) => {
@@ -27,7 +25,7 @@ const PromotionCard: React.FC<PromotionCardProps> = ({
         {/* Promotion Image */}
         <div className="relative w-full sm:w-[280px] aspect-video flex-shrink-0">
           <Image
-            src={image_url || '/loading-image.jpg'}
+            src={image_url || "/loading-image.jpg"}
             alt={title}
             layout="fill"
             objectFit="cover"
@@ -38,9 +36,7 @@ const PromotionCard: React.FC<PromotionCardProps> = ({
         {/* Promotion Details */}
         <div className="flex-1 flex flex-col gap-2 justify-center">
           <h2 className="font-semibold line-clamp-1">{title}</h2>
-          <p className="text-sm text-gray-600 line-clamp-2 leading-relaxed">
-            {description}
-          </p>
+          <p className="text-sm text-gray-600 line-clamp-2 leading-relaxed">{description}</p>
 
           <div className="flex flex-col text-sm text-gray-500 gap-2">
             {/* Row 1 */}
@@ -73,7 +69,7 @@ const PromotionCard: React.FC<PromotionCardProps> = ({
 
           {/* Show Link */}
           <div className="text-sm font-medium">
-            <span className="text-gray-600">Go to:</span>{' '}
+            <span className="text-gray-600">Go to:</span>{" "}
             <a
               href={link_url}
               target="_blank"
@@ -94,13 +90,13 @@ const PromotionCard: React.FC<PromotionCardProps> = ({
         {/* Status */}
         <div className="flex items-center gap-2 text-[13px] font-medium">
           <span className="text-gray-600">Status:</span>
-          {status === 'visible' ? (
+          {is_active ? (
             <span className="flex items-center gap-1 text-green-600">
-              <FiEye className="h-4 w-4" /> Visible
+              <FiEye className="h-4 w-4" /> Active
             </span>
           ) : (
             <span className="flex items-center gap-1 text-gray-600">
-              <FiEyeOff className="h-4 w-4" /> Hidden
+              <FiEyeOff className="h-4 w-4" /> Inactive
             </span>
           )}
         </div>

@@ -31,69 +31,69 @@ const BusinessCard: React.FC<BusinessItem> = ({
   branches,
 }) => {
   const [isEditModalOpen, setEditModalOpen] = useState(false);
-  const [currentTitle, setCurrentTitle] = useState(title);
-  const [currentDescription, setCurrentDescription] = useState(description);
-  const [currentBranches, setCurrentBranches] = useState(branches);
-  const [currentIsActive, setCurrentIsActive] = useState(is_active);
+  const [currentData, setCurrentData] = useState<BusinessItem>({
+    _id,
+    is_active,
+    business_type,
+    title,
+    images,
+    link_url,
+    contacts,
+    created_at,
+    updated_at,
+    description,
+    views,
+    branches,
+  });
 
-  const handleSave = (data: {
-    _id: string;
-    title: string;
-    description: string;
-    branches: number;
-    is_active: boolean;
-    business_type: "general" | "franchise";
-  }) => {
-    setCurrentTitle(data.title);
-    setCurrentDescription(data.description);
-    setCurrentBranches(data.branches);
-    setCurrentIsActive(data.is_active);
+  const handleSave = (updatedData: BusinessItem) => {
+    setCurrentData(updatedData);
     setEditModalOpen(false);
   };
 
-  const TypeIcon = business_type === "franchise" ? FiShare2 : FiGlobe;
+  const TypeIcon = currentData.business_type === "franchise" ? FiShare2 : FiGlobe;
 
   return (
     <div className="block">
       <div className="flex flex-col sm:flex-row sm:items-center gap-4">
         <div className="relative w-full sm:w-[280px] aspect-video flex-shrink-0">
           <Image
-            src={images?.[0] || "/loading-image.jpg"}
-            alt={currentTitle || "No Title"}
+            src={currentData.images?.[0] || "/loading-image.jpg"}
+            alt={currentData.title || "No Title"}
             layout="fill"
             objectFit="cover"
             className="rounded-md"
           />
         </div>
         <div className="flex-1 flex flex-col gap-2 justify-center">
-          <h2 className="font-semibold line-clamp-1">{currentTitle || "Untitled"}</h2>
+          <h2 className="font-semibold line-clamp-1">{currentData.title || "Untitled"}</h2>
           <div className="flex items-center text-sm text-gray-500 gap-2.5">
             <span className="flex items-center gap-1.5">
               <TypeIcon className="h-4 w-4 text-blue-500" />
               <span className="font-medium">
-                {business_type === "franchise" ? "Franchise" : "General"}
+                {currentData.business_type === "franchise" ? "Franchise" : "General"}
               </span>
             </span>
             <span className="h-4 w-[1.5px] bg-gray-300"></span>
             <span className="flex items-center gap-1.5">
               <AiOutlineCalendar className="h-4 w-4" />
-              {formatToThaiDate(created_at)}
+              {formatToThaiDate(currentData.created_at)}
             </span>
             <span className="h-4 w-[1.5px] bg-gray-300"></span>
             <span className="flex items-center gap-1.5">
               <AiOutlineEye className="h-4 w-4" />
-              {views ?? "0"}
+              {currentData.views ?? "0"}
             </span>
           </div>
           <p className="text-sm text-gray-800 line-clamp-2 leading-relaxed">
-            {currentDescription || "No description available."}
+            {currentData.description || "No description available."}
           </p>
           <div className="flex items-center text-sm text-gray-600 gap-2">
             <span className="font-semibold text-gray-800">Branches:</span>
-            <span>{currentBranches}</span>
+            <span>{currentData.branches}</span>
           </div>
           <div className="flex flex-wrap gap-2 text-sm text-gray-600">
-            {contacts?.map((contact, index) => (
+            {currentData.contacts?.map((contact, index) => (
               <div
                 key={index}
                 className="flex flex-col sm:flex-row sm:items-center sm:gap-1"
@@ -116,7 +116,7 @@ const BusinessCard: React.FC<BusinessItem> = ({
         <div className="flex gap-2">
           <span className="text-[13px] font-medium text-gray-600">Status:</span>
           <button className="flex items-center gap-1">
-            {currentIsActive ? (
+            {currentData.is_active ? (
               <>
                 <FiEye className="h-4 w-4 text-green-500" />
                 <span className="text-[13px] font-medium text-green-600">Active</span>
@@ -145,22 +145,12 @@ const BusinessCard: React.FC<BusinessItem> = ({
       </div>
 
       {/* Modal */}
-      {/* <BusinessEditModal
+      <BusinessEditModal
         isOpen={isEditModalOpen}
         onClose={() => setEditModalOpen(false)}
-        _id={String(_id)}
-        title={currentTitle}
-        description={currentDescription}
-        branches={currentBranches}
-        is_active={currentIsActive}
-        business_type={business_type}
-        contacts={contacts}
-        images={images}
-        link_url={link_url}
-        created_at={created_at}
-        updated_at={updated_at}
+        businessData={currentData}
         onSave={handleSave}
-      /> */}
+      />
     </div>
   );
 };
