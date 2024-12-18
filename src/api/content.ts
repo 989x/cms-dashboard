@@ -1,4 +1,4 @@
-import { ContentItem } from "@/types/contentTypes";
+import { ContentItem } from "@/types/shared.types";
 
 export const generateRandomContents = (count: number): ContentItem[] => {
   const loremWords = [

@@ -3,7 +3,7 @@
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { mockPromotions } from '@/api/promotion';
-import { PromotionItem } from '@/types/promotionTypes';
+import { PromotionItem } from '@/types/shared.types';
 import PromotionCard from '@/components/cards/PromotionCard';
 import SearchAndFilterBar from '@/components/SearchAndFilter';
 

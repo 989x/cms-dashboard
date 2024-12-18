@@ -1,4 +1,4 @@
-import { BusinessItem } from "@/types/businessTypes";
+import { BusinessItem } from "@/types/shared.types";
 
 export const generateRandomBusiness = (count: number): BusinessItem[] => {
   const businessNames = [

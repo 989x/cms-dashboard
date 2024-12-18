@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ContentEditModalProps } from "@/types/contentTypes";
+import { ContentEditModalProps } from "@/types/edit.types";
 import ContentDescForm from "./ContentDescForm";
 import ContentGeneralForm from "./ContentGeneralForm";
 import { FiX, FiSave, FiXCircle } from "react-icons/fi";

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { BusinessEditModalProps } from "@/types/businessTypes";
+import { BusinessEditModalProps } from "@/types/edit.types";
 import { FiX, FiSave, FiXCircle } from "react-icons/fi";
 import BusinessContactForm from "./BusinessContactForm";
 import BusinessDescForm from "./BusinessDescForm";

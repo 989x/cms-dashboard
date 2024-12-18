@@ -1,4 +1,4 @@
-import { PromotionItem } from "@/types/promotionTypes";
+import { PromotionItem } from "@/types/shared.types";
 
 // Mock data for random promotions
 const titles = [

@@ -1,19 +1,19 @@
-export interface BusinessItem {
+export interface ContentEditModalProps {
+  isOpen: boolean;
+  onClose: () => void;
   id: string;
+  status: 'visible' | 'hidden';
+  contentType: 'news' | 'article';
   title: string;
-  image: string;
-  contacts: {
-    email: string;
-    name: string;
-    phone: string;
-  }[];
-  date: string;
   description: string;
-  link: string;
-  views: number;
-  status: "visible" | "hidden";
-  type: "general" | "franchise";
-  branches: number;
+  tags: string[] | null;
+  onSave: (data: {
+    title: string;
+    description: string;
+    tags: string[];
+    status: 'visible' | 'hidden';
+    contentType: 'news' | 'article';
+  }) => void;
 }
 
 export interface BusinessEditModalProps {
@@ -23,8 +23,8 @@ export interface BusinessEditModalProps {
   title: string;
   description: string;
   branches: number;
-  status: "visible" | "hidden";
-  type: "general" | "franchise";
+  status: 'visible' | 'hidden';
+  type: 'general' | 'franchise';
   contacts: {
     email: string;
     name: string;
@@ -38,8 +38,8 @@ export interface BusinessEditModalProps {
     title: string;
     description: string;
     branches: number;
-    status: "visible" | "hidden";
-    type: "general" | "franchise";
+    status: 'visible' | 'hidden';
+    type: 'general' | 'franchise';
     contacts: {
       email: string;
       name: string;

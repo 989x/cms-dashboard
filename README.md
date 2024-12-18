@@ -72,9 +72,8 @@ src/
   - formatDate.ts
 
 - types/
-  - businessTypes.ts
-  - contentTypes.ts
-  - promotionTypes.ts
+  - edit.types.ts: For edit modals like BusinessEditModal and ContentEditModal
+  - shared.types.ts: For entities such as BusinessItem and ContentItem
 
 - .dockerignore
 - Dockerfile
