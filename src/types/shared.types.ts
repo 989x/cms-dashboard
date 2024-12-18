@@ -1,5 +1,6 @@
 export interface FranchiseForm {
   _id: string; // MongoDB unique identifier, e.g., "60f7b5a2c2a4d12345abc678"
+  is_active: boolean;
   full_name: string;
   email: string;
   phone_number: string;
@@ -9,50 +10,52 @@ export interface FranchiseForm {
   branch_count: number;
   additional_details: string;
   created_at: Date; // ISO timestamp, e.g., "2024-06-19T12:00:00Z"
-  updated_at: Date; // ISO timestamp, e.g., "2024-06-19T12:00:00Z"
-  is_active: boolean;
+  updated_at: Date; // ISO timestamp
 }
 
 export interface ContentItem {
-  _id: string; // MongoDB unique identifier, e.g., "60f7b5a2c2a4d12345abc678"
-  title: string | null;
-  date: string | null; // ISO timestamp, e.g., "2024-06-19T12:00:00Z"
-  tags: string[] | null;
-  description: string | null;
-  image: string | null;
-  link: string | null;
-  views: number | null;
-  status: 'visible' | 'hidden';
-  type: 'news' | 'article';
+  _id: string; // MongoDB unique identifier
+  is_active: boolean;
+  link_url: string;
+  content_type: "news" | "article";
+  title: string;
+  description: string;
+  tags: string[];
+  image_url: string;
+  views: number;
+  created_at: string; // ISO timestamp
+  updated_at: string; // ISO timestamp
 }
 
 export interface BusinessItem {
-  _id: string; // MongoDB unique identifier, e.g., "60f7b5a2c2a4d12345abc678"
+  _id: string; // MongoDB unique identifier
+  is_active: boolean;
+  link_url: string;
+  business_type: "general" | "franchise";
   title: string;
-  image: string;
+  description: string;
+  images: string[]; // Array of image URLs for multiple images
   contacts: {
     email: string;
     name: string;
     phone: string;
   }[];
-  date: string; // ISO timestamp, e.g., "2024-06-19T12:00:00Z"
-  description: string;
-  link: string;
   views: number;
-  status: 'visible' | 'hidden';
-  type: 'general' | 'franchise';
   branches: number;
+  created_at: string; // ISO timestamp
+  updated_at: string; // ISO timestamp
 }
 
 export interface PromotionItem {
-  _id: string; // MongoDB unique identifier, e.g., "60f7b5a2c2a4d12345abc678"
+  _id: string; // MongoDB unique identifier
+  is_active: boolean;
+  link_url: string;
   title: string;
   description: string;
   image_url: string;
-  link_url: string;
   views: number;
-  status: 'visible' | 'hidden';
-  is_active: boolean;
-  active_from: string; // ISO timestamp, e.g., "2024-06-19T12:00:00Z"
-  active_until: string; // ISO timestamp, e.g., "2024-06-30T12:00:00Z"
+  active_from: string; // ISO timestamp
+  active_until: string; // ISO timestamp
+  created_at: string; // ISO timestamp
+  updated_at: string; // ISO timestamp
 }

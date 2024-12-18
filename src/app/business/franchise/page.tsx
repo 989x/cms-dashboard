@@ -1,12 +1,12 @@
 "use client";
 
-import { useRouter } from 'next/navigation';
-import { hasAuthToken } from '@/utils/authStorage';
+import { useRouter } from "next/navigation";
+import { hasAuthToken } from "@/utils/authStorage";
 
-import { useEffect, useState } from 'react';
-import { mockFranchiseBusiness } from '@/api/business';
-import SearchAndFilterBar from '@/components/SearchAndFilter';
-import BusinessCard from '@/components/cards/BusinessCard';
+import { useEffect, useState } from "react";
+import { mockFranchiseBusiness } from "@/api/business";
+import SearchAndFilterBar from "@/components/SearchAndFilter";
+import BusinessCard from "@/components/cards/BusinessCard";
 
 export default function FranchiseBusinessPage() {
   const router = useRouter();
@@ -14,21 +14,21 @@ export default function FranchiseBusinessPage() {
   useEffect(() => {
     // Redirect to login if not authenticated
     if (!hasAuthToken()) {
-      router.push('/login');
+      router.push("/login");
     }
-  }, [router]); // Add 'router' as a dependency
-  
+  }, [router]);
+
   const [filteredBusinesses, setFilteredBusinesses] = useState(mockFranchiseBusiness);
 
   const handleSearch = (query: string) => {
     const results = mockFranchiseBusiness.filter((business) =>
-      business.title?.toLowerCase().includes(query.toLowerCase())
+      business.title.toLowerCase().includes(query.toLowerCase())
     );
     setFilteredBusinesses(results);
   };
 
   const handleFilter = () => {
-    alert('Filter button clicked');
+    alert("Filter button clicked");
   };
 
   return (
@@ -46,14 +46,15 @@ export default function FranchiseBusinessPage() {
             key={business._id}
             _id={business._id}
             title={business.title}
-            image={business.image}
+            images={business.images}
             contacts={business.contacts}
-            date={business.date}
+            created_at={business.created_at}
+            updated_at={business.updated_at}
             description={business.description}
-            link={business.link}
+            link_url={business.link_url}
             views={business.views}
-            status={business.status}
-            type={business.type}
+            is_active={business.is_active}
+            business_type={business.business_type}
             branches={business.branches}
           />
         ))}

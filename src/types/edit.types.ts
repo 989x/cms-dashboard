@@ -2,17 +2,17 @@ export interface ContentEditModalProps {
   isOpen: boolean;
   onClose: () => void;
   _id: string;
-  status: 'visible' | 'hidden';
-  contentType: 'news' | 'article';
+  is_active: boolean;
+  content_type: "news" | "article";
   title: string;
   description: string;
-  tags: string[] | null;
+  tags: string[];
   onSave: (data: {
     title: string;
     description: string;
     tags: string[];
-    status: 'visible' | 'hidden';
-    contentType: 'news' | 'article';
+    is_active: boolean;
+    content_type: "news" | "article";
   }) => void;
 }
 

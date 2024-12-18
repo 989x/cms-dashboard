@@ -1,12 +1,12 @@
 "use client";
 
-import { useRouter } from 'next/navigation';
-import { hasAuthToken } from '@/utils/authStorage';
+import { useRouter } from "next/navigation";
+import { hasAuthToken } from "@/utils/authStorage";
 
-import { useEffect, useState } from 'react';
-import { mockBusiness } from '@/api/business';
-import SearchAndFilterBar from '@/components/SearchAndFilter';
-import BusinessCard from '@/components/cards/BusinessCard';
+import { useEffect, useState } from "react";
+import { mockBusiness } from "@/api/business";
+import SearchAndFilterBar from "@/components/SearchAndFilter";
+import BusinessCard from "@/components/cards/BusinessCard";
 
 export default function Home() {
   const router = useRouter();
@@ -14,27 +14,27 @@ export default function Home() {
   useEffect(() => {
     // Redirect to login if not authenticated
     if (!hasAuthToken()) {
-      router.push('/login');
+      router.push("/login");
     }
-  }, [router]); // Add 'router' as a dependency
-  
+  }, [router]);
+
   const [filteredBusinesses, setFilteredBusinesses] = useState(mockBusiness);
 
   const handleSearch = (query: string) => {
     const results = mockBusiness.filter((business) =>
-      business.title?.toLowerCase().includes(query.toLowerCase())
+      business.title.toLowerCase().includes(query.toLowerCase())
     );
     setFilteredBusinesses(results);
   };
 
   const handleFilter = () => {
-    alert('Filter button clicked');
+    alert("Filter button clicked");
   };
 
   return (
     <div className="w-full max-w-5xl mx-auto px-4 sm:px-6">
       <h1 className="text-lg sm:text-xl font-bold mb-6 sm:mb-8">
-        Manage All Business Listing
+        Manage All Business Listings
       </h1>
       <SearchAndFilterBar onSearch={handleSearch} onFilter={handleFilter} />
       <p className="text-gray-600 text-sm font-medium mt-4 mb-8">
@@ -46,14 +46,15 @@ export default function Home() {
             key={business._id}
             _id={business._id}
             title={business.title}
-            image={business.image}
-            contacts={business.contacts}
-            date={business.date}
             description={business.description}
-            link={business.link}
+            images={business.images}
+            contacts={business.contacts}
+            created_at={business.created_at}
+            updated_at={business.updated_at}
+            link_url={business.link_url}
             views={business.views}
-            status={business.status}
-            type={business.type}
+            is_active={business.is_active}
+            business_type={business.business_type}
             branches={business.branches}
           />
         ))}

@@ -1,30 +1,40 @@
-import React, { useState } from 'react';
-import Image from 'next/image';
-import { ContentItem } from '@/types/shared.types';
-import { formatToThaiDate } from '@/utils/formatDate';
-import ContentEditModal from '../modals/ContentEditModal';
-import { AiOutlineCalendar, AiOutlineEye } from 'react-icons/ai';
-import { FiEdit, FiEye, FiEyeOff, FiTrash2, FiBook, FiFileText } from 'react-icons/fi';
+
+
+import React, { useState } from "react";
+import Image from "next/image";
+import { ContentItem } from "@/types/shared.types";
+import { formatToThaiDate } from "@/utils/formatDate";
+import ContentEditModal from "../modals/ContentEditModal";
+import { AiOutlineCalendar, AiOutlineEye } from "react-icons/ai";
+import { FiEdit, FiEye, FiEyeOff, FiTrash2, FiBook, FiFileText } from "react-icons/fi";
 
 const ContentCard: React.FC<ContentItem> = ({
-  _id, status, type, title, image, tags, date, description, views, 
+  _id,
+  is_active,
+  content_type,
+  title,
+  image_url,
+  tags,
+  created_at,
+  description,
+  views,
 }) => {
   const [isEditModalOpen, setEditModalOpen] = useState(false);
-  const [currentStatus, setCurrentStatus] = useState(status);
-  const [currentContentType, setCurrentContentType] = useState(type);
+  const [currentIsActive, setCurrentIsActive] = useState(is_active);
+  const [currentContentType, setCurrentContentType] = useState(content_type);
   const [currentTitle, setCurrentTitle] = useState(title || "");
   const [currentDescription, setCurrentDescription] = useState(description || "");
   const [currentTags, setCurrentTags] = useState(tags || []);
 
   const handleSave = (data: {
-    status: "visible" | "hidden";
-    contentType: "news" | "article";
+    is_active: boolean;
+    content_type: "news" | "article";
     title: string;
     description: string;
     tags: string[];
   }) => {
-    setCurrentStatus(data.status);
-    setCurrentContentType(data.contentType);
+    setCurrentIsActive(data.is_active);
+    setCurrentContentType(data.content_type);
     setCurrentTitle(data.title);
     setCurrentDescription(data.description);
     setCurrentTags(data.tags);
@@ -38,36 +48,38 @@ const ContentCard: React.FC<ContentItem> = ({
       <div className="flex flex-col sm:flex-row sm:items-center gap-4">
         <div className="relative w-full sm:w-[280px] aspect-video flex-shrink-0">
           <Image
-            src={image || '/loading-image.jpg'}
-            alt={currentTitle || 'No Title'}
+            src={image_url || "/loading-image.jpg"}
+            alt={currentTitle || "No Title"}
             layout="fill"
             objectFit="cover"
             className="rounded-md"
           />
         </div>
         <div className="flex-1 flex flex-col gap-2 justify-center">
-          <h2 className="font-semibold line-clamp-1">{currentTitle || 'Untitled'}</h2>
+          <h2 className="font-semibold line-clamp-1">{currentTitle || "Untitled"}</h2>
           <div className="flex items-center text-sm text-gray-500 gap-2.5">
             <span className="flex items-center gap-1.5">
               <TypeIcon className="h-4 w-4 text-blue-500" />
               <span className="font-medium">
-                {currentContentType === 'article' ? 'Article' : 'News'}
+                {currentContentType === "article" ? "Article" : "News"}
               </span>
             </span>
             <span className="h-4 w-[1.5px] bg-gray-300"></span>
             <span className="flex items-center gap-1.5">
               <AiOutlineCalendar className="h-4 w-4" />
-              {formatToThaiDate(date)}
+              {formatToThaiDate(created_at)}
             </span>
             <span className="h-4 w-[1.5px] bg-gray-300"></span>
             <span className="flex items-center gap-1.5">
               <AiOutlineEye className="h-4 w-4" />
-              {views ?? '0'}
+              {views ?? "0"}
             </span>
           </div>
-          <p className="text-sm text-gray-800 line-clamp-2 leading-relaxed">{currentDescription || 'No description available.'}</p>
+          <p className="text-sm text-gray-800 line-clamp-2 leading-relaxed">
+            {currentDescription || "No description available."}
+          </p>
           <div className="flex gap-2.5">
-            {currentTags.map((tag, index) => (
+            {currentTags?.map((tag, index) => (
               <span key={index} className="font-semibold text-sm text-blue-500">
                 {tag}
               </span>
@@ -80,15 +92,15 @@ const ContentCard: React.FC<ContentItem> = ({
         <div className="flex gap-2 text-[13px] font-medium">
           <span className="text-gray-600">Status:</span>
           <button className="flex items-center gap-1">
-            {currentStatus === 'visible' ? (
+            {currentIsActive ? (
               <>
                 <FiEye className="h-4 w-4 text-green-500" />
-                <span className="text-green-600">Visible</span>
+                <span className="text-green-600">Active</span>
               </>
             ) : (
               <>
                 <FiEyeOff className="h-4 w-4 text-gray-500" />
-                <span className="text-gray-600">Hidden</span>
+                <span className="text-gray-600">Inactive</span>
               </>
             )}
           </button>
@@ -111,17 +123,17 @@ const ContentCard: React.FC<ContentItem> = ({
       </div>
 
       {/* Modal */}
-      <ContentEditModal
+      {/* <ContentEditModal
         isOpen={isEditModalOpen}
         onClose={() => setEditModalOpen(false)}
         _id={_id}
-        status={currentStatus}
-        contentType={currentContentType}
+        is_active={currentIsActive}
+        content_type={currentContentType}
         title={currentTitle}
         description={currentDescription}
         tags={currentTags}
         onSave={handleSave}
-      />
+      /> */}
     </div>
   );
 };

@@ -1,10 +1,10 @@
 import { FiBook, FiFileText } from "react-icons/fi";
 
 interface GeneralFormProps {
-  contentType: string;
+  content_type: "news" | "article";
   onContentTypeChange: (value: "news" | "article") => void;
-  status: string;
-  onStatusChange: (value: "visible" | "hidden") => void;
+  is_active: boolean;
+  onIsActiveChange: (value: boolean) => void;
   title: string;
   onTitleChange: (value: string) => void;
   tags: string;
@@ -12,10 +12,10 @@ interface GeneralFormProps {
 }
 
 const ContentGeneralForm: React.FC<GeneralFormProps> = ({
-  contentType,
+  content_type,
   onContentTypeChange,
-  status,
-  onStatusChange,
+  is_active,
+  onIsActiveChange,
   title,
   onTitleChange,
   tags,
@@ -31,7 +31,7 @@ const ContentGeneralForm: React.FC<GeneralFormProps> = ({
             <button
               type="button"
               className={`flex items-center gap-2 px-3 py-[10px] bg-gray-100 rounded-lg ${
-                contentType === "article" ? "bg-indigo-600 text-white" : "border-gray-300 text-gray-700"
+                content_type === "article" ? "bg-indigo-600 text-white" : "border-gray-300 text-gray-700"
               }`}
               onClick={() => onContentTypeChange("article")}
             >
@@ -41,7 +41,7 @@ const ContentGeneralForm: React.FC<GeneralFormProps> = ({
             <button
               type="button"
               className={`flex items-center gap-2 px-3 py-[10px] bg-gray-100 rounded-lg ${
-                contentType === "news" ? "bg-indigo-600 text-white" : "border-gray-300 text-gray-700"
+                content_type === "news" ? "bg-indigo-600 text-white" : "border-gray-300 text-gray-700"
               }`}
               onClick={() => onContentTypeChange("news")}
             >
@@ -58,18 +58,18 @@ const ContentGeneralForm: React.FC<GeneralFormProps> = ({
             <button
               type="button"
               className={`flex-1 px-4 py-2 font-medium text-center rounded-full ${
-                status === "visible" ? "bg-green-500 text-white" : "bg-transparent text-gray-700"
+                is_active ? "bg-green-500 text-white" : "bg-transparent text-gray-700"
               }`}
-              onClick={() => onStatusChange("visible")}
+              onClick={() => onIsActiveChange(true)}
             >
               Visible
             </button>
             <button
               type="button"
               className={`flex-1 px-4 py-2 font-medium text-center rounded-full ${
-                status === "hidden" ? "bg-red-500 text-white" : "bg-transparent text-gray-700"
+                !is_active ? "bg-red-500 text-white" : "bg-transparent text-gray-700"
               }`}
-              onClick={() => onStatusChange("hidden")}
+              onClick={() => onIsActiveChange(false)}
             >
               Hidden
             </button>

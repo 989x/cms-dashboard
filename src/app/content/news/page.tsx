@@ -1,12 +1,12 @@
 "use client";
 
-import { useRouter } from 'next/navigation';
-import { hasAuthToken } from '@/utils/authStorage';
+import { useRouter } from "next/navigation";
+import { hasAuthToken } from "@/utils/authStorage";
 
-import { useEffect, useState } from 'react';
-import { mockContentNews } from '@/api/content';
-import SearchAndFilterBar from '@/components/SearchAndFilter';
-import ContentCard from '@/components/cards/ContentCard';
+import { useEffect, useState } from "react";
+import { mockContentNews } from "@/api/content";
+import SearchAndFilterBar from "@/components/SearchAndFilter";
+import ContentCard from "@/components/cards/ContentCard";
 
 export default function NewsPage() {
   const router = useRouter();
@@ -14,21 +14,19 @@ export default function NewsPage() {
   useEffect(() => {
     // Redirect to login if not authenticated
     if (!hasAuthToken()) {
-      router.push('/login');
+      router.push("/login");
     }
-  }, [router]); // Add 'router' as a dependency
-  
+  }, [router]);
+
   const [filteredNews, setFilteredNews] = useState(mockContentNews);
 
   const handleSearch = (query: string) => {
-    const results = mockContentNews.filter((news) =>
-      news.title?.toLowerCase().includes(query.toLowerCase())
-    );
-    setFilteredNews(results);
+    // Update logic for handling search if needed (currently empty behavior)
+    setFilteredNews(mockContentNews); // Resets to default data
   };
 
   const handleFilter = () => {
-    alert('Filter button clicked');
+    alert("Filter button clicked");
   };
 
   return (
@@ -46,14 +44,15 @@ export default function NewsPage() {
             key={news._id}
             _id={news._id}
             title={news.title}
-            image={news.image}
+            image_url={news.image_url}
             tags={news.tags}
-            date={news.date}
+            created_at={news.created_at}
+            updated_at={news.updated_at}
             description={news.description}
-            link={news.link}
+            link_url={news.link_url}
             views={news.views}
-            status={news.status}
-            type={news.type}
+            is_active={news.is_active}
+            content_type={news.content_type}
           />
         ))}
       </div>

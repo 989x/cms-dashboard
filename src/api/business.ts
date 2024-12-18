@@ -4,24 +4,19 @@ export const generateRandomBusiness = (count: number): BusinessItem[] => {
   const businessNames = [
     "FreshMart", "TechSavvy", "HomeStyle Bakery", "GreenLife Store",
     "AutoCare Center", "TravelEasy Agency", "BrightFuture Academy",
-    "UrbanFitness Gym", "Cloud9 Coffee", "EcoFriendly Supplies"
+    "UrbanFitness Gym", "Cloud9 Coffee", "EcoFriendly Supplies",
   ];
   const descriptions = [
-    "Providing top-notch services and products for our customers.",
-    "A trusted name in the industry with years of experience.",
-    "Delivering quality and value to our clients every day.",
-    "A family-run business committed to excellence.",
-    "Your go-to place for all your needs.",
-    "Innovating for a better future.",
-    "Dedicated to creating a memorable experience.",
-    "The best choice for quality and service.",
-    "Trusted by thousands of happy customers.",
-    "Leading the way in sustainable business practices."
+    "The best place for all your needs!",
+    "Affordable and reliable services.",
+    "Your trusted partner in success.",
+    "We bring quality closer to you.",
+    "Making your life easier, one step at a time.",
   ];
   const names = ["John", "Jane", "Alice", "Bob", "Chris", "Sophia", "Michael", "Emma"];
   const emails = [
     "info@example.com", "contact@example.com", "support@example.com",
-    "hello@example.com", "sales@example.com"
+    "hello@example.com", "sales@example.com",
   ];
   const links = [
     "https://example.com/business1",
@@ -38,42 +33,46 @@ export const generateRandomBusiness = (count: number): BusinessItem[] => {
   const generateRandomPhoneNumber = () =>
     `(${Math.floor(Math.random() * 900) + 100}) ${Math.floor(Math.random() * 900) + 100}-${Math.floor(Math.random() * 9000) + 1000}`;
   const generateRandomId = () =>
-    Array.from({ length: 6 }, () =>
+    Array.from({ length: 24 }, () =>
       "abcdefghijklmnopqrstuvwxyz0123456789".charAt(Math.floor(Math.random() * 36))
     ).join("");
   const getRandomLink = () => links[Math.floor(Math.random() * links.length)];
+  const generateRandomImages = () =>
+    Array.from({ length: Math.floor(Math.random() * 5) + 1 }, (_, index) => 
+      `https://picsum.photos/300/200?random=${Math.floor(Math.random() * 100) + index}`
+    );
 
   return Array.from({ length: count }, () => {
-    const title = getRandomBusinessName();
-    const description = `${title}: ${getRandomDescription()}`;
     return {
-      id: generateRandomId(),
-      title,
-      date: new Date().toISOString(),
+      _id: generateRandomId(),
+      title: getRandomBusinessName(),
+      description: getRandomDescription(),
+      images: generateRandomImages(),
       contacts: Array.from({ length: Math.floor(Math.random() * 3) + 1 }, () => ({
         name: getRandomName(),
         phone: generateRandomPhoneNumber(),
         email: getRandomEmail(),
       })),
-      description,
-      image: `https://picsum.photos/300/200?random=${Math.floor(Math.random() * 100) + 1}`,
-      link: getRandomLink(),
+      link_url: getRandomLink(),
       views: Math.floor(Math.random() * 1000),
-      status: Math.random() > 0.5 ? "visible" : "hidden",
-      type: Math.random() > 0.5 ? "general" : "franchise",
-      branches: Math.floor(Math.random() * 20) + 1, 
+      business_type: Math.random() > 0.5 ? "general" : "franchise",
+      branches: Math.floor(Math.random() * 20) + 1,
+      is_active: Math.random() > 0.5,
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString(),
     };
   });
 };
 
+// Generate mock data
 export const mockBusiness = generateRandomBusiness(30);
 
 // Generate mock data for general businesses
-export const mockGeneralBusiness = generateRandomBusiness(30).filter(
-  (business) => business.type === "general"
+export const mockGeneralBusiness = mockBusiness.filter(
+  (business) => business.business_type === "general"
 );
 
 // Generate mock data for franchise businesses
-export const mockFranchiseBusiness = generateRandomBusiness(30).filter(
-  (business) => business.type === "franchise"
+export const mockFranchiseBusiness = mockBusiness.filter(
+  (business) => business.business_type === "franchise"
 );

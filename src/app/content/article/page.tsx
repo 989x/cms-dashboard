@@ -1,12 +1,12 @@
 "use client";
 
-import { useRouter } from 'next/navigation';
-import { hasAuthToken } from '@/utils/authStorage';
+import { useRouter } from "next/navigation";
+import { hasAuthToken } from "@/utils/authStorage";
 
-import { useEffect, useState } from 'react';
-import { mockContentArticles } from '@/api/content';
-import SearchAndFilterBar from '@/components/SearchAndFilter';
-import ContentCard from '@/components/cards/ContentCard';
+import { useEffect, useState } from "react";
+import { mockContentArticles } from "@/api/content";
+import SearchAndFilterBar from "@/components/SearchAndFilter";
+import ContentCard from "@/components/cards/ContentCard";
 
 export default function ArticlePage() {
   const router = useRouter();
@@ -14,10 +14,10 @@ export default function ArticlePage() {
   useEffect(() => {
     // Redirect to login if not authenticated
     if (!hasAuthToken()) {
-      router.push('/login');
+      router.push("/login");
     }
-  }, [router]); // Add 'router' as a dependency
-  
+  }, [router]);
+
   const [filteredArticles, setFilteredArticles] = useState(mockContentArticles);
 
   const handleSearch = (query: string) => {
@@ -28,7 +28,7 @@ export default function ArticlePage() {
   };
 
   const handleFilter = () => {
-    alert('Filter button clicked');
+    alert("Filter button clicked");
   };
 
   return (
@@ -46,14 +46,15 @@ export default function ArticlePage() {
             key={article._id}
             _id={article._id}
             title={article.title}
-            image={article.image}
+            image_url={article.image_url} // Corrected from `image`
             tags={article.tags}
-            date={article.date}
+            created_at={article.created_at} // Corrected from `date`
+            updated_at={article.updated_at}
             description={article.description}
-            link={article.link}
+            link_url={article.link_url} // Corrected from `link`
             views={article.views}
-            status={article.status}
-            type={article.type}
+            is_active={article.is_active} // Corrected from `status`
+            content_type={article.content_type} // Corrected from `type`
           />
         ))}
       </div>

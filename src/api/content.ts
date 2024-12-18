@@ -14,39 +14,41 @@ export const generateRandomContents = (count: number): ContentItem[] => {
 
   const generateRandomId = () => {
     const characters = "abcdefghijklmnopqrstuvwxyz0123456789";
-    return Array.from({ length: 6 }, () =>
+    return Array.from({ length: 24 }, () =>
       characters[Math.floor(Math.random() * characters.length)]
     ).join("");
   };
 
   return Array.from({ length: count }, () => {
-    const title = getRandomLorem(Math.floor(Math.random() * 5) + 5); // Title with 5 to 9 words
-    const description = getRandomLorem(title.split(" ").length * 60); // Description 60 times longer than the title
+    const title = getRandomLorem(Math.floor(Math.random() * 5) + 5); // Always non-null
+    const description = getRandomLorem(title.split(" ").length * 10); // Always non-null
     return {
-      id: generateRandomId(),
+      _id: generateRandomId(), // MongoDB ObjectId style
       title,
-      date: new Date().toISOString(),
+      description,
       tags: Array.from({ length: Math.floor(Math.random() * 3) + 1 }, () =>
         loremWords[Math.floor(Math.random() * loremWords.length)]
-      ),
-      description,
-      image: `https://picsum.photos/300/200?random=${Math.floor(Math.random() * 100) + 1}`, // Random image between 1-100
-      link: "#",
-      views: Math.floor(Math.random() * 1000),
-      status: Math.random() > 0.5 ? "visible" : "hidden",
-      type: Math.random() > 0.5 ? "news" : "article"
+      ), // Always an array of strings
+      image_url: `https://picsum.photos/300/200?random=${Math.floor(Math.random() * 100) + 1}`, // Always non-null
+      link_url: "#", // Always a placeholder link
+      views: Math.floor(Math.random() * 1000), // Always a number
+      is_active: Math.random() > 0.5, // Boolean value
+      content_type: Math.random() > 0.5 ? "news" : "article",
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString(),
     };
   });
 };
 
+// Generate mock data
 export const mockContents: ContentItem[] = generateRandomContents(30);
 
 // Generate mock data for articles
-export const mockContentArticles = generateRandomContents(30).filter(
-  (news) => news.type === "article"
+export const mockContentArticles = mockContents.filter(
+  (content) => content.content_type === "article"
 );
 
 // Generate mock data for news
-export const mockContentNews = generateRandomContents(30).filter(
-  (news) => news.type === "news"
+export const mockContentNews = mockContents.filter(
+  (content) => content.content_type === "news"
 );

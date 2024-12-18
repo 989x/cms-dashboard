@@ -1,69 +1,92 @@
-import React, { useState } from 'react';
-import Image from 'next/image';
-import { BusinessItem } from '@/types/shared.types';
-import { formatToThaiDate } from '@/utils/formatDate';
-import BusinessEditModal from '../modals/BusinessEditModal';
-import { AiOutlineCalendar, AiOutlineEye } from 'react-icons/ai';
-import { FiEdit, FiEye, FiEyeOff, FiTrash2, FiShare2, FiGlobe } from 'react-icons/fi';
+import React, { useState } from "react";
+import Image from "next/image";
+import { BusinessItem } from "@/types/shared.types";
+import { formatToThaiDate } from "@/utils/formatDate";
+import BusinessEditModal from "../modals/BusinessEditModal";
+import {
+  AiOutlineCalendar,
+  AiOutlineEye,
+} from "react-icons/ai";
+import {
+  FiEdit,
+  FiEye,
+  FiEyeOff,
+  FiTrash2,
+  FiShare2,
+  FiGlobe,
+} from "react-icons/fi";
 
 const BusinessCard: React.FC<BusinessItem> = ({
-  _id, status, type, title, image, link, contacts, date, description, views, branches,
+  _id,
+  is_active,
+  business_type,
+  title,
+  images,
+  link_url,
+  contacts,
+  created_at,
+  updated_at,
+  description,
+  views,
+  branches,
 }) => {
   const [isEditModalOpen, setEditModalOpen] = useState(false);
   const [currentTitle, setCurrentTitle] = useState(title);
   const [currentDescription, setCurrentDescription] = useState(description);
   const [currentBranches, setCurrentBranches] = useState(branches);
-  const [currentStatus, setCurrentStatus] = useState(status);
+  const [currentIsActive, setCurrentIsActive] = useState(is_active);
 
   const handleSave = (data: {
     _id: string;
     title: string;
     description: string;
     branches: number;
-    status: "visible" | "hidden";
-    type: "general" | "franchise";
+    is_active: boolean;
+    business_type: "general" | "franchise";
   }) => {
     setCurrentTitle(data.title);
     setCurrentDescription(data.description);
     setCurrentBranches(data.branches);
-    setCurrentStatus(data.status);
+    setCurrentIsActive(data.is_active);
     setEditModalOpen(false);
   };
 
-  const TypeIcon = type === "franchise" ? FiShare2 : FiGlobe;
+  const TypeIcon = business_type === "franchise" ? FiShare2 : FiGlobe;
 
   return (
     <div className="block">
       <div className="flex flex-col sm:flex-row sm:items-center gap-4">
         <div className="relative w-full sm:w-[280px] aspect-video flex-shrink-0">
           <Image
-            src={image || '/loading-image.jpg'}
-            alt={currentTitle || 'No Title'}
+            src={images?.[0] || "/loading-image.jpg"}
+            alt={currentTitle || "No Title"}
             layout="fill"
             objectFit="cover"
             className="rounded-md"
           />
         </div>
         <div className="flex-1 flex flex-col gap-2 justify-center">
-          <h2 className="font-semibold line-clamp-1">{currentTitle || 'Untitled'}</h2>
+          <h2 className="font-semibold line-clamp-1">{currentTitle || "Untitled"}</h2>
           <div className="flex items-center text-sm text-gray-500 gap-2.5">
             <span className="flex items-center gap-1.5">
               <TypeIcon className="h-4 w-4 text-blue-500" />
-              <span className="font-medium">{type === 'franchise' ? 'Franchise' : 'General'}</span>
+              <span className="font-medium">
+                {business_type === "franchise" ? "Franchise" : "General"}
+              </span>
             </span>
             <span className="h-4 w-[1.5px] bg-gray-300"></span>
             <span className="flex items-center gap-1.5">
               <AiOutlineCalendar className="h-4 w-4" />
-              {formatToThaiDate(date)}
+              {formatToThaiDate(created_at)}
             </span>
             <span className="h-4 w-[1.5px] bg-gray-300"></span>
             <span className="flex items-center gap-1.5">
               <AiOutlineEye className="h-4 w-4" />
-              {views ?? '0'}
+              {views ?? "0"}
             </span>
           </div>
           <p className="text-sm text-gray-800 line-clamp-2 leading-relaxed">
-            {currentDescription || 'No description available.'}
+            {currentDescription || "No description available."}
           </p>
           <div className="flex items-center text-sm text-gray-600 gap-2">
             <span className="font-semibold text-gray-800">Branches:</span>
@@ -77,7 +100,10 @@ const BusinessCard: React.FC<BusinessItem> = ({
               >
                 <span className="font-semibold text-gray-800">{contact.name}:</span>
                 <span>{contact.phone}</span>
-                <a href={`mailto:${contact.email}`} className="text-blue-500 underline">
+                <a
+                  href={`mailto:${contact.email}`}
+                  className="text-blue-500 underline"
+                >
                   {contact.email}
                 </a>
               </div>
@@ -90,15 +116,15 @@ const BusinessCard: React.FC<BusinessItem> = ({
         <div className="flex gap-2">
           <span className="text-[13px] font-medium text-gray-600">Status:</span>
           <button className="flex items-center gap-1">
-            {currentStatus === 'visible' ? (
+            {currentIsActive ? (
               <>
                 <FiEye className="h-4 w-4 text-green-500" />
-                <span className="text-[13px] font-medium text-green-600">Visible</span>
+                <span className="text-[13px] font-medium text-green-600">Active</span>
               </>
             ) : (
               <>
                 <FiEyeOff className="h-4 w-4 text-gray-500" />
-                <span className="text-[13px] font-medium text-gray-600">Hidden</span>
+                <span className="text-[13px] font-medium text-gray-600">Inactive</span>
               </>
             )}
           </button>
@@ -119,21 +145,22 @@ const BusinessCard: React.FC<BusinessItem> = ({
       </div>
 
       {/* Modal */}
-      <BusinessEditModal
+      {/* <BusinessEditModal
         isOpen={isEditModalOpen}
         onClose={() => setEditModalOpen(false)}
-        _id={String(_id)} // Convert id to string
+        _id={String(_id)}
         title={currentTitle}
         description={currentDescription}
         branches={currentBranches}
-        status={currentStatus}
-        type={type}
+        is_active={currentIsActive}
+        business_type={business_type}
         contacts={contacts}
-        image={image}
-        link={link}
-        date={date}
+        images={images}
+        link_url={link_url}
+        created_at={created_at}
+        updated_at={updated_at}
         onSave={handleSave}
-      />
+      /> */}
     </div>
   );
 };
