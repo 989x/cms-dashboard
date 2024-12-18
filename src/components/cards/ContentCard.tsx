@@ -1,5 +1,3 @@
-
-
 import React, { useState } from "react";
 import Image from "next/image";
 import { ContentItem } from "@/types/shared.types";
@@ -26,18 +24,12 @@ const ContentCard: React.FC<ContentItem> = ({
   const [currentDescription, setCurrentDescription] = useState(description || "");
   const [currentTags, setCurrentTags] = useState(tags || []);
 
-  const handleSave = (data: {
-    is_active: boolean;
-    content_type: "news" | "article";
-    title: string;
-    description: string;
-    tags: string[];
-  }) => {
-    setCurrentIsActive(data.is_active);
-    setCurrentContentType(data.content_type);
-    setCurrentTitle(data.title);
-    setCurrentDescription(data.description);
-    setCurrentTags(data.tags);
+  const handleSave = (updatedData: ContentItem) => {
+    setCurrentIsActive(updatedData.is_active);
+    setCurrentContentType(updatedData.content_type);
+    setCurrentTitle(updatedData.title);
+    setCurrentDescription(updatedData.description);
+    setCurrentTags(updatedData.tags);
     setEditModalOpen(false);
   };
 
@@ -123,17 +115,24 @@ const ContentCard: React.FC<ContentItem> = ({
       </div>
 
       {/* Modal */}
-      {/* <ContentEditModal
+      <ContentEditModal
         isOpen={isEditModalOpen}
         onClose={() => setEditModalOpen(false)}
-        _id={_id}
-        is_active={currentIsActive}
-        content_type={currentContentType}
-        title={currentTitle}
-        description={currentDescription}
-        tags={currentTags}
+        contentData={{
+          _id,
+          is_active: currentIsActive,
+          content_type: currentContentType,
+          title: currentTitle,
+          description: currentDescription,
+          tags: currentTags,
+          image_url,
+          created_at,
+          views,
+          updated_at: "",
+          link_url: "" 
+        }}
         onSave={handleSave}
-      /> */}
+      />
     </div>
   );
 };

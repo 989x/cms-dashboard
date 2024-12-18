@@ -1,9 +1,9 @@
 import { FiBook, FiFileText } from "react-icons/fi";
 
 interface GeneralFormProps {
-  content_type: "news" | "article";
+  contentType: "news" | "article";
   onContentTypeChange: (value: "news" | "article") => void;
-  is_active: boolean;
+  isActive: boolean;
   onIsActiveChange: (value: boolean) => void;
   title: string;
   onTitleChange: (value: string) => void;
@@ -12,15 +12,19 @@ interface GeneralFormProps {
 }
 
 const ContentGeneralForm: React.FC<GeneralFormProps> = ({
-  content_type,
+  contentType,
   onContentTypeChange,
-  is_active,
+  isActive,
   onIsActiveChange,
   title,
   onTitleChange,
   tags,
   onTagsChange,
 }) => {
+  const handleContentTypeChange = (type: "news" | "article") => {
+    onContentTypeChange(type);
+  };
+
   return (
     <>
       <div className="grid grid-cols-1 sm:grid-cols-2 items-center mb-5 gap-4">
@@ -30,20 +34,24 @@ const ContentGeneralForm: React.FC<GeneralFormProps> = ({
           <div className="flex gap-3">
             <button
               type="button"
-              className={`flex items-center gap-2 px-3 py-[10px] bg-gray-100 rounded-lg ${
-                content_type === "article" ? "bg-indigo-600 text-white" : "border-gray-300 text-gray-700"
+              className={`flex items-center gap-2 px-3 py-[10px] rounded-lg transition ${
+                contentType === "article"
+                  ? "bg-indigo-600 text-white"
+                  : "bg-gray-100 text-gray-700 hover:bg-indigo-100"
               }`}
-              onClick={() => onContentTypeChange("article")}
+              onClick={() => handleContentTypeChange("article")}
             >
               <FiBook className="h-5 w-5" />
               Article
             </button>
             <button
               type="button"
-              className={`flex items-center gap-2 px-3 py-[10px] bg-gray-100 rounded-lg ${
-                content_type === "news" ? "bg-indigo-600 text-white" : "border-gray-300 text-gray-700"
+              className={`flex items-center gap-2 px-3 py-[10px] rounded-lg transition ${
+                contentType === "news"
+                  ? "bg-indigo-600 text-white"
+                  : "bg-gray-100 text-gray-700 hover:bg-indigo-100"
               }`}
-              onClick={() => onContentTypeChange("news")}
+              onClick={() => handleContentTypeChange("news")}
             >
               <FiFileText className="h-5 w-5" />
               News
@@ -53,25 +61,25 @@ const ContentGeneralForm: React.FC<GeneralFormProps> = ({
 
         {/* Status */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-start sm:justify-end gap-4">
-          <label className="block font-medium">Status</label>
+          <label className="block font-medium">Active Status</label>
           <div className="flex bg-gray-100 rounded-full p-1 gap-1">
             <button
               type="button"
-              className={`flex-1 px-4 py-2 font-medium text-center rounded-full ${
-                is_active ? "bg-green-500 text-white" : "bg-transparent text-gray-700"
+              className={`flex-1 px-4 py-2 font-medium text-center rounded-full transition ${
+                isActive ? "bg-green-500 text-white" : "bg-transparent text-gray-700 hover:bg-gray-200"
               }`}
               onClick={() => onIsActiveChange(true)}
             >
-              Visible
+              Active
             </button>
             <button
               type="button"
-              className={`flex-1 px-4 py-2 font-medium text-center rounded-full ${
-                !is_active ? "bg-red-500 text-white" : "bg-transparent text-gray-700"
+              className={`flex-1 px-4 py-2 font-medium text-center rounded-full transition ${
+                !isActive ? "bg-red-500 text-white" : "bg-transparent text-gray-700 hover:bg-gray-200"
               }`}
               onClick={() => onIsActiveChange(false)}
             >
-              Hidden
+              Inactive
             </button>
           </div>
         </div>
@@ -84,7 +92,7 @@ const ContentGeneralForm: React.FC<GeneralFormProps> = ({
           type="text"
           value={title}
           onChange={(e) => onTitleChange(e.target.value)}
-          className="w-full p-2.5 border rounded-lg"
+          className="w-full p-2.5 border rounded-lg focus:ring focus:ring-indigo-300"
         />
       </div>
 
@@ -96,7 +104,7 @@ const ContentGeneralForm: React.FC<GeneralFormProps> = ({
           value={tags}
           onChange={(e) => onTagsChange(e.target.value)}
           placeholder="Enter tags separated by commas (e.g., Cloud, Service, Technology)"
-          className="w-full p-2.5 border rounded-lg"
+          className="w-full p-2.5 border rounded-lg focus:ring focus:ring-indigo-300"
         />
       </div>
     </>

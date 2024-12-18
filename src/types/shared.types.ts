@@ -49,13 +49,13 @@ export interface BusinessItem {
 export interface PromotionItem {
   _id: string; // MongoDB unique identifier
   is_active: boolean;
+  active_from: string; // ISO timestamp
+  active_until: string; // ISO timestamp
   link_url: string;
   title: string;
   description: string;
   image_url: string;
   views: number;
-  active_from: string; // ISO timestamp
-  active_until: string; // ISO timestamp
   created_at: string; // ISO timestamp
   updated_at: string; // ISO timestamp
 }
