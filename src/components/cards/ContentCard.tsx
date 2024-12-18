@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
-import { ContentItem } from '@/types/contentTypes';
+import { ContentItem } from '@/types/shared.types';
 import { formatToThaiDate } from '@/utils/formatDate';
 import ContentEditModal from '../modals/ContentEditModal';
 import { AiOutlineCalendar, AiOutlineEye } from 'react-icons/ai';
 import { FiEdit, FiEye, FiEyeOff, FiTrash2, FiBook, FiFileText } from 'react-icons/fi';
 
 const ContentCard: React.FC<ContentItem> = ({
-  id, status, type, title, image, tags, date, description, views, 
+  _id, status, type, title, image, tags, date, description, views, 
 }) => {
   const [isEditModalOpen, setEditModalOpen] = useState(false);
   const [currentStatus, setCurrentStatus] = useState(status);
@@ -114,7 +114,7 @@ const ContentCard: React.FC<ContentItem> = ({
       <ContentEditModal
         isOpen={isEditModalOpen}
         onClose={() => setEditModalOpen(false)}
-        id={id}
+        _id={_id}
         status={currentStatus}
         contentType={currentContentType}
         title={currentTitle}

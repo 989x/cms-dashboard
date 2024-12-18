@@ -43,8 +43,8 @@ export default function GeneralBusinessPage() {
       <div className="grid gap-4">
         {filteredBusinesses.map((business) => (
           <BusinessCard
-            key={business.id}
-            id={business.id}
+            key={business._id}
+            _id={business._id}
             title={business.title}
             image={business.image}
             contacts={business.contacts}

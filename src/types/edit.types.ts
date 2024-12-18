@@ -1,7 +1,7 @@
 export interface ContentEditModalProps {
   isOpen: boolean;
   onClose: () => void;
-  id: string;
+  _id: string;
   status: 'visible' | 'hidden';
   contentType: 'news' | 'article';
   title: string;
@@ -19,7 +19,7 @@ export interface ContentEditModalProps {
 export interface BusinessEditModalProps {
   isOpen: boolean;
   onClose: () => void;
-  id: string;
+  _id: string;
   title: string;
   description: string;
   branches: number;
@@ -34,7 +34,7 @@ export interface BusinessEditModalProps {
   date: string;
   link: string;
   onSave: (data: {
-    id: string;
+    _id: string;
     title: string;
     description: string;
     branches: number;

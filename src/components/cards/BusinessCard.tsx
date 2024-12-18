@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
-import { BusinessItem } from '@/types/businessTypes';
+import { BusinessItem } from '@/types/shared.types';
 import { formatToThaiDate } from '@/utils/formatDate';
 import BusinessEditModal from '../modals/BusinessEditModal';
 import { AiOutlineCalendar, AiOutlineEye } from 'react-icons/ai';
 import { FiEdit, FiEye, FiEyeOff, FiTrash2, FiShare2, FiGlobe } from 'react-icons/fi';
 
 const BusinessCard: React.FC<BusinessItem> = ({
-  id, status, type, title, image, link, contacts, date, description, views, branches,
+  _id, status, type, title, image, link, contacts, date, description, views, branches,
 }) => {
   const [isEditModalOpen, setEditModalOpen] = useState(false);
   const [currentTitle, setCurrentTitle] = useState(title);
@@ -16,7 +16,7 @@ const BusinessCard: React.FC<BusinessItem> = ({
   const [currentStatus, setCurrentStatus] = useState(status);
 
   const handleSave = (data: {
-    id: string;
+    _id: string;
     title: string;
     description: string;
     branches: number;
@@ -122,7 +122,7 @@ const BusinessCard: React.FC<BusinessItem> = ({
       <BusinessEditModal
         isOpen={isEditModalOpen}
         onClose={() => setEditModalOpen(false)}
-        id={String(id)} // Convert id to string
+        _id={String(_id)} // Convert id to string
         title={currentTitle}
         description={currentDescription}
         branches={currentBranches}

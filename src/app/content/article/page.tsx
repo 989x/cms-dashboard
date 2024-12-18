@@ -43,8 +43,8 @@ export default function ArticlePage() {
       <div className="grid gap-4">
         {filteredArticles.map((article) => (
           <ContentCard
-            key={article.id}
-            id={article.id}
+            key={article._id}
+            _id={article._id}
             title={article.title}
             image={article.image}
             tags={article.tags}

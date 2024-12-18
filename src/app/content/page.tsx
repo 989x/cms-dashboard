@@ -43,8 +43,8 @@ export default function Home() {
       <div className="grid gap-4">
         {filteredNews.map((news) => (
           <ContentCard
-            key={news.id}
-            id={news.id}
+            key={news._id}
+            _id={news._id}
             title={news.title}
             image={news.image}
             tags={news.tags}

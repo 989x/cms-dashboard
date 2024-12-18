@@ -6,7 +6,7 @@ import { FiX, FiSave, FiXCircle } from "react-icons/fi";
 
 const ContentEditModal: React.FC<ContentEditModalProps> = ({
   isOpen, onClose,
-  id, title, description, tags = [], status, contentType,
+  _id, title, description, tags = [], status, contentType,
   onSave,
 }) => {
   const [editStatus, setEditStatus] = useState(status);
@@ -38,7 +38,7 @@ const ContentEditModal: React.FC<ContentEditModalProps> = ({
             <h2 className="text-lg font-semibold flex items-center gap-3">
               Edit Content
               <span className="bg-gray-100 text-sm text-gray-600 px-2 py-1 rounded">
-                ID: {id}
+                ID: {_id}
               </span>
             </h2>
             <button onClick={onClose} className="text-gray-800" aria-label="Close">

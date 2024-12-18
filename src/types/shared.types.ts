@@ -1,5 +1,5 @@
 export interface ContentItem {
-  id: string;
+  _id: string;
   title: string | null;
   date: string | null; // ISO 8601 format, but can be null
   tags: string[] | null;
@@ -12,7 +12,7 @@ export interface ContentItem {
 }
 
 export interface BusinessItem {
-  id: string;
+  _id: string;
   title: string;
   image: string;
   contacts: {
