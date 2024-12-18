@@ -1,68 +1,72 @@
 "use client";
 
-import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
-import { mockPromotions } from '@/api/promotion';
-import { PromotionItem } from '@/types/shared.types';
-import PromotionCard from '@/components/cards/PromotionCard';
-import SearchAndFilterBar from '@/components/SearchAndFilter';
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { PromotionItem } from "@/types/shared.types";
+import PromotionCard from "@/components/cards/PromotionCard";
+import SearchAndFilterBar from "@/components/SearchAndFilter";
+import { mockPromotions } from "@/api/promotion";
 
 export default function PromotionPage() {
   const router = useRouter();
+
+  // State for promotions and filtered data
   const [promotions, setPromotions] = useState<PromotionItem[]>([]);
   const [filteredPromotions, setFilteredPromotions] = useState<PromotionItem[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
+  // Authentication and Data Fetching
   useEffect(() => {
-    // Redirect to login if not authenticated
-    if (!localStorage.getItem("authToken")) {
-      router.push('/login');
+    const authToken = localStorage.getItem("authToken");
+
+    if (!authToken) {
+      router.replace("/login");
+      return;
     }
-    // Set promotions from mock data
+
+    // Set promotions data immediately
     setPromotions(mockPromotions);
     setFilteredPromotions(mockPromotions);
+    setIsLoading(false);
   }, [router]);
 
+  // Search Logic with Filtering
   const handleSearch = (query: string) => {
-    const results = promotions.filter((promo) =>
+    const filtered = promotions.filter((promo) =>
       promo.title.toLowerCase().includes(query.toLowerCase())
     );
-    setFilteredPromotions(results);
+    setFilteredPromotions(filtered);
   };
 
+  // Filter Placeholder
   const handleFilter = () => {
-    alert('Filter button clicked');
+    console.log("Filter clicked: Future implementation!");
   };
+
+  if (isLoading) {
+    return <div className="text-center mt-10">Loading promotions...</div>;
+  }
 
   return (
-    <div className="w-full max-w-5xl mx-auto px-4 sm:px-6">
+    <div className="max-w-5xl mx-auto px-4 sm:px-6">
       <h1 className="text-lg sm:text-xl font-bold mb-6 sm:mb-8">Manage Promotions</h1>
 
-      {/* Search and Filter Bar */}
+      {/* Search and Filter */}
       <SearchAndFilterBar onSearch={handleSearch} onFilter={handleFilter} />
 
-      <p className="text-gray-600 text-sm font-medium mt-4 mb-8">
+      {/* Results Count */}
+      <p className="text-gray-600 text-sm font-medium mt-4 mb-6">
         Found {filteredPromotions.length} results
       </p>
 
       {/* Promotion List */}
       <div className="grid gap-6">
         {filteredPromotions.length > 0 ? (
-          filteredPromotions.map((promo) => (
-            <PromotionCard
-              key={promo._id}
-              _id={promo._id}
-              title={promo.title}
-              description={promo.description}
-              imageUrl={promo.imageUrl}
-              linkUrl={promo.linkUrl}
-              status={promo.status}
-              activeFrom={promo.activeFrom}
-              activeUntil={promo.activeUntil}
-              views={promo.views}
-            />
+          filteredPromotions.map((promotion) => (
+            <PromotionCard key={promotion._id} {...promotion} />
           ))
         ) : (
-          <p>No promotions available at this time.</p>
+          <p className="text-gray-500 text-center">No promotions available.</p>
         )}
       </div>
     </div>

@@ -3,32 +3,23 @@ import Image from 'next/image';
 import { AiOutlineCalendar, AiOutlineEye, AiOutlineClockCircle } from 'react-icons/ai';
 import { FiEdit, FiEye, FiEyeOff, FiTrash2 } from 'react-icons/fi';
 import { formatToThaiDate, calculateDuration, calculateRemainingDays } from '@/utils/formatDate';
+import { PromotionItem } from '@/types/shared.types';
 
-interface PromotionCardProps {
-  _id: string;
-  title: string;
-  description: string;
-  imageUrl: string;
-  linkUrl: string;
-  views: number;
-  status: 'visible' | 'hidden';
-  activeFrom: string;
-  activeUntil: string;
-}
+interface PromotionCardProps extends PromotionItem {}
 
 const PromotionCard: React.FC<PromotionCardProps> = ({
   _id,
   title,
   description,
-  imageUrl,
-  linkUrl,
+  image_url,
+  link_url,
   views,
   status,
-  activeFrom,
-  activeUntil,
+  active_from,
+  active_until,
 }) => {
-  const duration = calculateDuration(activeFrom, activeUntil);
-  const remainingDays = calculateRemainingDays(activeUntil);
+  const duration = calculateDuration(active_from, active_until);
+  const remainingDays = calculateRemainingDays(active_until);
 
   return (
     <div className="block">
@@ -36,7 +27,7 @@ const PromotionCard: React.FC<PromotionCardProps> = ({
         {/* Promotion Image */}
         <div className="relative w-full sm:w-[280px] aspect-video flex-shrink-0">
           <Image
-            src={imageUrl || '/loading-image.jpg'}
+            src={image_url || '/loading-image.jpg'}
             alt={title}
             layout="fill"
             objectFit="cover"
@@ -57,7 +48,7 @@ const PromotionCard: React.FC<PromotionCardProps> = ({
               <div className="flex items-center gap-x-1.5">
                 <AiOutlineCalendar className="h-4 w-4" />
                 <span>
-                  {formatToThaiDate(activeFrom)} - {formatToThaiDate(activeUntil)}
+                  {formatToThaiDate(active_from)} - {formatToThaiDate(active_until)}
                 </span>
               </div>
               <span className="h-4 w-[1.5px] bg-gray-300"></span>
@@ -84,12 +75,12 @@ const PromotionCard: React.FC<PromotionCardProps> = ({
           <div className="text-sm font-medium">
             <span className="text-gray-600">Go to:</span>{' '}
             <a
-              href={linkUrl}
+              href={link_url}
               target="_blank"
               rel="noopener noreferrer"
               className="text-blue-600 hover:underline"
             >
-              {linkUrl}
+              {link_url}
             </a>
           </div>
         </div>
