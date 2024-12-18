@@ -18,15 +18,36 @@ export default function Home() {
     }
   }, [router]);
 
+  const [contents, setContents] = useState(mockContents);
   const [filteredNews, setFilteredNews] = useState(mockContents);
+  const [sortBy, setSortBy] = useState("Related"); // Default sorting by 'Related'
 
+  // Search Logic with Filtering
   const handleSearch = (query: string) => {
-    const results = mockContents.filter((content) =>
+    const filtered = contents.filter((content) =>
       content.title?.toLowerCase().includes(query.toLowerCase())
     );
-    setFilteredNews(results);
+    setFilteredNews(filtered);
   };
 
+  // Handle Sorting
+  const handleSortChange = (sortBy: string) => {
+    setSortBy(sortBy);
+    const sortedContents = [...filteredNews];
+
+    if (sortBy === "Status") {
+      sortedContents.sort((a, b) => Number(b.is_active) - Number(a.is_active));
+    } else if (sortBy === "Views") {
+      sortedContents.sort((a, b) => b.views - a.views);
+    } else {
+      // Default to "Related" (Sorting by title for example)
+      sortedContents.sort((a, b) => a.title.localeCompare(b.title)); // Example for "Related"
+    }
+
+    setFilteredNews(sortedContents);
+  };
+
+  // Filter Placeholder
   const handleFilter = () => {
     alert("Filter button clicked");
   };
@@ -36,28 +57,37 @@ export default function Home() {
       <h1 className="text-lg sm:text-xl font-bold mb-6 sm:mb-8">
         Manage All Content
       </h1>
+
+      {/* Search, Sort, and Filter */}
       <SearchSortBar
         onSearch={handleSearch}
         onFilter={handleFilter}
         resultCount={filteredNews.length}
+        onSortChange={handleSortChange}
       />
+
+      {/* Content List */}
       <div className="grid gap-4">
-        {filteredNews.map((content) => (
-          <ContentCard
-            key={content._id}
-            _id={content._id}
-            title={content.title}
-            image_url={content.image_url}
-            tags={content.tags}
-            created_at={content.created_at}
-            updated_at={content.updated_at}
-            description={content.description}
-            link_url={content.link_url}
-            views={content.views}
-            is_active={content.is_active}
-            content_type={content.content_type}
-          />
-        ))}
+        {filteredNews.length > 0 ? (
+          filteredNews.map((content) => (
+            <ContentCard
+              key={content._id}
+              _id={content._id}
+              title={content.title}
+              image_url={content.image_url}
+              tags={content.tags}
+              created_at={content.created_at}
+              updated_at={content.updated_at}
+              description={content.description}
+              link_url={content.link_url}
+              views={content.views}
+              is_active={content.is_active}
+              content_type={content.content_type}
+            />
+          ))
+        ) : (
+          <p className="text-gray-500 text-center">No content available.</p>
+        )}
       </div>
     </div>
   );

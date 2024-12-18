@@ -14,6 +14,7 @@ export default function PromotionPage() {
   const [promotions, setPromotions] = useState<PromotionItem[]>([]);
   const [filteredPromotions, setFilteredPromotions] = useState<PromotionItem[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [sortBy, setSortBy] = useState<string>("Related");
 
   // Authentication and Data Fetching
   useEffect(() => {
@@ -38,6 +39,23 @@ export default function PromotionPage() {
     setFilteredPromotions(filtered);
   };
 
+  // Handle sorting
+  const handleSortChange = (sortBy: string) => {
+    setSortBy(sortBy);
+    const sortedPromotions = [...filteredPromotions];
+
+    if (sortBy === "Status") {
+      sortedPromotions.sort((a, b) => Number(b.is_active) - Number(a.is_active));
+    } else if (sortBy === "Views") {
+      sortedPromotions.sort((a, b) => b.views - a.views);
+    } else {
+      // Default to "Related" (You can change this logic to match real "Related" sorting)
+      sortedPromotions.sort((a, b) => a.title.localeCompare(b.title)); // Example for "Related"
+    }
+
+    setFilteredPromotions(sortedPromotions);
+  };
+
   // Filter Placeholder
   const handleFilter = () => {
     console.log("Filter clicked: Future implementation!");
@@ -56,6 +74,7 @@ export default function PromotionPage() {
         onSearch={handleSearch}
         onFilter={handleFilter}
         resultCount={filteredPromotions.length}
+        onSortChange={handleSortChange}
       />
 
       {/* Promotion List */}
