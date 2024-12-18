@@ -121,6 +121,7 @@ const ContentCard: React.FC<ContentItem> = ({
         contentData={{
           _id,
           is_active: currentIsActive,
+          link_url: "",
           content_type: currentContentType,
           title: currentTitle,
           description: currentDescription,
@@ -128,8 +129,7 @@ const ContentCard: React.FC<ContentItem> = ({
           image_url,
           created_at,
           views,
-          updated_at: "",
-          link_url: "" 
+          updated_at: new Date().toISOString(),
         }}
         onSave={handleSave}
       />
