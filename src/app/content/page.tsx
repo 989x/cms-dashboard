@@ -19,40 +19,40 @@ export default function Home() {
   }, [router]);
 
   const [contents, setContents] = useState(mockContents);
-  const [filteredNews, setFilteredNews] = useState(mockContents);
+  const [filteredContents, setFilteredContents] = useState(mockContents);
   const [sortBy, setSortBy] = useState("Related"); // Default sorting by 'Related'
-  const [sortOrder, setSortOrder] = useState("Ascending"); // Default sort order
 
   // Search Logic with Filtering
   const handleSearch = (query: string) => {
     const filtered = contents.filter((content) =>
       content.title?.toLowerCase().includes(query.toLowerCase())
     );
-    setFilteredNews(filtered);
+    setFilteredContents(filtered);
   };
 
   // Handle Sorting
-  const handleSortChange = (sortBy: string, sortOrder: string) => {
+  const handleSortChange = (sortBy: string) => {
     setSortBy(sortBy);
-    setSortOrder(sortOrder); // Update the sorting order
-    const sortedContents = [...filteredNews];
+    const sortedContents = [...filteredContents];
 
-    if (sortBy === "Status") {
-      sortedContents.sort((a, b) =>
-        sortOrder === "Ascending"
-          ? Number(a.is_active) - Number(b.is_active)
-          : Number(b.is_active) - Number(a.is_active)
-      );
-    } else if (sortBy === "Views") {
-      sortedContents.sort((a, b) =>
-        sortOrder === "Ascending" ? a.views - b.views : b.views - a.views
-      );
+    if (sortBy === "Status: Inactive") {
+      // Sort by inactive first
+      sortedContents.sort((a, b) => Number(a.is_active) - Number(b.is_active));
+    } else if (sortBy === "Status: Active") {
+      // Sort by active first
+      sortedContents.sort((a, b) => Number(b.is_active) - Number(a.is_active));
+    } else if (sortBy === "Views: Ascending") {
+      // Sort by views in ascending order
+      sortedContents.sort((a, b) => a.views - b.views);
+    } else if (sortBy === "Views: Descending") {
+      // Sort by views in descending order
+      sortedContents.sort((a, b) => b.views - a.views);
     } else {
-      // Default to "Related" (Sorting by title for example)
-      sortedContents.sort((a, b) => a.title.localeCompare(b.title)); // Example for "Related"
+      // Default to "Related" (e.g., alphabetical sort by title)
+      sortedContents.sort((a, b) => a.title.localeCompare(b.title));
     }
 
-    setFilteredNews(sortedContents);
+    setFilteredContents(sortedContents);
   };
 
   // Filter Placeholder
@@ -70,14 +70,14 @@ export default function Home() {
       <SearchSortBar
         onSearch={handleSearch}
         onFilter={handleFilter}
-        resultCount={filteredNews.length}
+        resultCount={filteredContents.length}
         onSortChange={handleSortChange}
       />
 
       {/* Content List */}
       <div className="grid gap-4">
-        {filteredNews.length > 0 ? (
-          filteredNews.map((content) => (
+        {filteredContents.length > 0 ? (
+          filteredContents.map((content) => (
             <ContentCard
               key={content._id}
               _id={content._id}

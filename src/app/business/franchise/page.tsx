@@ -1,8 +1,6 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { hasAuthToken } from "@/utils/authStorage";
-
 import { useEffect, useState } from "react";
 import { mockFranchiseBusiness } from "@/api/business";
 import SearchSortBar from "@/components/SearchSortBar";
@@ -16,7 +14,6 @@ export default function FranchiseBusinessPage() {
   const [filteredBusinesses, setFilteredBusinesses] = useState(mockFranchiseBusiness);
   const [isLoading, setIsLoading] = useState(true);
   const [sortBy, setSortBy] = useState("Related"); // Default sorting by 'Related'
-  const [sortOrder, setSortOrder] = useState("Ascending"); // Default order is Ascending
 
   // Authentication and Data Fetching
   useEffect(() => {
@@ -40,24 +37,25 @@ export default function FranchiseBusinessPage() {
   };
 
   // Handle Sorting
-  const handleSortChange = (sortBy: string, sortOrder: string) => {
+  const handleSortChange = (sortBy: string) => {
     setSortBy(sortBy);
-    setSortOrder(sortOrder);
     const sortedBusinesses = [...filteredBusinesses];
 
-    if (sortBy === "Status") {
-      sortedBusinesses.sort((a, b) =>
-        sortOrder === "Ascending"
-          ? Number(a.is_active) - Number(b.is_active)
-          : Number(b.is_active) - Number(a.is_active)
-      );
-    } else if (sortBy === "Views") {
-      sortedBusinesses.sort((a, b) =>
-        sortOrder === "Ascending" ? a.views - b.views : b.views - a.views
-      );
+    if (sortBy === "Status: Inactive") {
+      // Sort by inactive first
+      sortedBusinesses.sort((a, b) => Number(a.is_active) - Number(b.is_active));
+    } else if (sortBy === "Status: Active") {
+      // Sort by active first
+      sortedBusinesses.sort((a, b) => Number(b.is_active) - Number(a.is_active));
+    } else if (sortBy === "Views: Ascending") {
+      // Sort by views in ascending order
+      sortedBusinesses.sort((a, b) => a.views - b.views);
+    } else if (sortBy === "Views: Descending") {
+      // Sort by views in descending order
+      sortedBusinesses.sort((a, b) => b.views - a.views);
     } else {
-      // Default to "Related" (Sorting by title for example)
-      sortedBusinesses.sort((a, b) => a.title.localeCompare(b.title)); // Example for "Related"
+      // Default to "Related" (e.g., alphabetical sort by title)
+      sortedBusinesses.sort((a, b) => a.title.localeCompare(b.title));
     }
 
     setFilteredBusinesses(sortedBusinesses);

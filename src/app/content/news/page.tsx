@@ -21,7 +21,6 @@ export default function NewsPage() {
   const [newsArticles, setNewsArticles] = useState(mockContentNews);
   const [filteredNews, setFilteredNews] = useState(mockContentNews);
   const [sortBy, setSortBy] = useState("Related"); // Default sorting by 'Related'
-  const [sortOrder, setSortOrder] = useState("Ascending"); // Default sort order
 
   // Search Logic with Filtering
   const handleSearch = (query: string) => {
@@ -32,24 +31,25 @@ export default function NewsPage() {
   };
 
   // Handle Sorting
-  const handleSortChange = (sortBy: string, sortOrder: string) => {
+  const handleSortChange = (sortBy: string) => {
     setSortBy(sortBy);
-    setSortOrder(sortOrder); // Update the sort order
     const sortedNews = [...filteredNews];
 
-    if (sortBy === "Status") {
-      sortedNews.sort((a, b) =>
-        sortOrder === "Ascending"
-          ? Number(a.is_active) - Number(b.is_active)
-          : Number(b.is_active) - Number(a.is_active)
-      );
-    } else if (sortBy === "Views") {
-      sortedNews.sort((a, b) =>
-        sortOrder === "Ascending" ? a.views - b.views : b.views - a.views
-      );
+    if (sortBy === "Status: Inactive") {
+      // Sort by inactive first
+      sortedNews.sort((a, b) => Number(a.is_active) - Number(b.is_active));
+    } else if (sortBy === "Status: Active") {
+      // Sort by active first
+      sortedNews.sort((a, b) => Number(b.is_active) - Number(a.is_active));
+    } else if (sortBy === "Views: Ascending") {
+      // Sort by views in ascending order
+      sortedNews.sort((a, b) => a.views - b.views);
+    } else if (sortBy === "Views: Descending") {
+      // Sort by views in descending order
+      sortedNews.sort((a, b) => b.views - a.views);
     } else {
-      // Default to "Related" (Sorting by title for example)
-      sortedNews.sort((a, b) => a.title.localeCompare(b.title)); // Example for "Related"
+      // Default to "Related" (e.g., alphabetical sort by title)
+      sortedNews.sort((a, b) => a.title.localeCompare(b.title));
     }
 
     setFilteredNews(sortedNews);

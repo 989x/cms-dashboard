@@ -1,14 +1,13 @@
-// Updated SearchSortBar.tsx
 import { useState } from 'react';
 import { MdFilterList } from 'react-icons/md';
 import { SearchIcon, DropdownArrowIcon } from './SearchSvg';
 
 const sortOptions = [
-  { label: "Related", value: "Related", order: "" },
-  { label: "Status (Inactive)", value: "Status: Inactive", order: "" },
-  { label: "Status (Active)", value: "Status: Active", order: "" },
-  { label: "Views (Ascending)", value: "Views: Ascending", order: "" },
-  { label: "Views (Descending)", value: "Views: Descending", order: "" },
+  { label: "Related", sortBy: "Related" },
+  { label: "Status (Inactive First)", sortBy: "Status: Inactive" },
+  { label: "Status (Active First)", sortBy: "Status: Active" },
+  { label: "Views (Low to High)", sortBy: "Views: Ascending" },
+  { label: "Views (High to Low)", sortBy: "Views: Descending" },
 ];
 
 export default function SearchSortBar({
@@ -20,7 +19,7 @@ export default function SearchSortBar({
   onSearch: (query: string) => void;
   onFilter: () => void;
   resultCount: number;
-  onSortChange: (sortBy: string, sortOrder: string) => void;
+  onSortChange: (sortBy: string) => void;
 }) {
   const [searchQuery, setSearchQuery] = useState('');
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -34,9 +33,9 @@ export default function SearchSortBar({
     setIsDropdownOpen(!isDropdownOpen);
   };
 
-  const handleSortChange = (sortBy: string) => {
-    setSelectedSort(sortBy);
-    onSortChange(sortBy, ''); // Notify parent
+  const handleSortChange = (option: { label: string; sortBy: string }) => {
+    setSelectedSort(option.label);
+    onSortChange(option.sortBy);
     setIsDropdownOpen(false);
   };
 
@@ -82,11 +81,11 @@ export default function SearchSortBar({
               <ul className="divide-y divide-gray-100">
                 {sortOptions.map((option, index) => (
                   <li
-                  key={index}
-                  onClick={() => handleSortChange(option.value)}
-                  className={`px-4 py-3 cursor-pointer hover:bg-gray-100 whitespace-nowrap ${
-                    selectedSort === option.value ? 'text-blue-500 font-medium' : ''
-                  }`}
+                    key={index}
+                    onClick={() => handleSortChange(option)}
+                    className={`px-4 py-3 cursor-pointer hover:bg-gray-100 whitespace-nowrap ${
+                      selectedSort === option.label ? 'text-blue-500 font-medium' : ''
+                    }`}
                   >
                     {option.label}
                   </li>

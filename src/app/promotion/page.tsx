@@ -15,7 +15,6 @@ export default function PromotionPage() {
   const [filteredPromotions, setFilteredPromotions] = useState<PromotionItem[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [sortBy, setSortBy] = useState<string>("Related");
-  const [sortOrder, setSortOrder] = useState<string>("Ascending"); // Default sort order
 
   // Authentication and Data Fetching
   useEffect(() => {
@@ -41,26 +40,25 @@ export default function PromotionPage() {
   };
 
   // Handle sorting
-  const handleSortChange = (sortBy: string, sortOrder: string) => {
+  const handleSortChange = (sortBy: string) => {
     setSortBy(sortBy);
-    setSortOrder(sortOrder); // Update the sort order based on user choice
     const sortedPromotions = [...filteredPromotions];
 
-    if (sortBy === "Status") {
-      // Sort by active status in the selected order
-      sortedPromotions.sort((a, b) =>
-        sortOrder === "Ascending"
-          ? Number(a.is_active) - Number(b.is_active)
-          : Number(b.is_active) - Number(a.is_active)
-      );
-    } else if (sortBy === "Views") {
-      // Sort by views in the selected order
-      sortedPromotions.sort((a, b) =>
-        sortOrder === "Ascending" ? a.views - b.views : b.views - a.views
-      );
+    if (sortBy === "Status: Inactive") {
+      // Sort by inactive first
+      sortedPromotions.sort((a, b) => Number(a.is_active) - Number(b.is_active));
+    } else if (sortBy === "Status: Active") {
+      // Sort by active first
+      sortedPromotions.sort((a, b) => Number(b.is_active) - Number(a.is_active));
+    } else if (sortBy === "Views: Ascending") {
+      // Sort by views in ascending order
+      sortedPromotions.sort((a, b) => a.views - b.views);
+    } else if (sortBy === "Views: Descending") {
+      // Sort by views in descending order
+      sortedPromotions.sort((a, b) => b.views - a.views);
     } else {
-      // Default to "Related" (Sorting by title for example)
-      sortedPromotions.sort((a, b) => a.title.localeCompare(b.title)); // Example for "Related"
+      // Default to "Related" (e.g., alphabetical sort by title)
+      sortedPromotions.sort((a, b) => a.title.localeCompare(b.title));
     }
 
     setFilteredPromotions(sortedPromotions);
