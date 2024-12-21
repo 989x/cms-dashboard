@@ -3,6 +3,7 @@ interface SortableItem {
   is_active?: boolean;
   views?: number;
   title?: string;
+  created_at?: string; // ISO timestamp
 }
 
 export const sortItems = <T extends SortableItem>(
@@ -24,6 +25,16 @@ export const sortItems = <T extends SortableItem>(
       break;
     case "Views: Descending":
       sortedItems.sort((a, b) => (b.views || 0) - (a.views || 0));
+      break;
+    case "Date: Newest First":
+      sortedItems.sort((a, b) =>
+        new Date(b.created_at || "").getTime() - new Date(a.created_at || "").getTime()
+      );
+      break;
+    case "Date: Oldest First":
+      sortedItems.sort((a, b) =>
+        new Date(a.created_at || "").getTime() - new Date(b.created_at || "").getTime()
+      );
       break;
     default:
       // Default to alphabetical sort for a key defined in keyMap or 'title'

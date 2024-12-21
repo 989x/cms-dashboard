@@ -8,6 +8,8 @@ const sortOptions = [
   { label: "Status (Active First)", sortBy: "Status: Active" },
   { label: "Views (Low to High)", sortBy: "Views: Ascending" },
   { label: "Views (High to Low)", sortBy: "Views: Descending" },
+  { label: "Date (Newest First)", sortBy: "Date: Newest First" },
+  { label: "Date (Oldest First)", sortBy: "Date: Oldest First" },
 ];
 
 export default function SearchSection({

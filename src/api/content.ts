@@ -19,7 +19,22 @@ export const generateRandomContents = (count: number): ContentItem[] => {
     ).join("");
   };
 
-  return Array.from({ length: count }, () => {
+  const generateUniqueDates = (count: number): string[] => {
+    const baseDate = new Date();
+    const uniqueDates = new Set<string>();
+
+    while (uniqueDates.size < count) {
+      const randomOffset = Math.floor(Math.random() * 365 * 24 * 60 * 60 * 1000); // Random offset within a year
+      const randomDate = new Date(baseDate.getTime() - randomOffset).toISOString();
+      uniqueDates.add(randomDate);
+    }
+
+    return Array.from(uniqueDates);
+  };
+
+  const uniqueDates = generateUniqueDates(count);
+
+  return Array.from({ length: count }, (_, index) => {
     const title = getRandomLorem(Math.floor(Math.random() * 5) + 5); // Always non-null
     const description = getRandomLorem(title.split(" ").length * 10); // Always non-null
     return {
@@ -34,8 +49,8 @@ export const generateRandomContents = (count: number): ContentItem[] => {
       views: Math.floor(Math.random() * 1000), // Always a number
       is_active: Math.random() > 0.5, // Boolean value
       content_type: Math.random() > 0.5 ? "news" : "article",
-      created_at: new Date().toISOString(),
-      updated_at: new Date().toISOString(),
+      created_at: uniqueDates[index],
+      updated_at: uniqueDates[index],
     };
   });
 };

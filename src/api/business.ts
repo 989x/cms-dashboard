@@ -38,11 +38,26 @@ export const generateRandomBusiness = (count: number): BusinessItem[] => {
     ).join("");
   const getRandomLink = () => links[Math.floor(Math.random() * links.length)];
   const generateRandomImages = () =>
-    Array.from({ length: Math.floor(Math.random() * 5) + 1 }, (_, index) => 
+    Array.from({ length: Math.floor(Math.random() * 5) + 1 }, (_, index) =>
       `https://picsum.photos/300/200?random=${Math.floor(Math.random() * 100) + index}`
     );
 
-  return Array.from({ length: count }, () => {
+  const generateUniqueDates = (count: number): string[] => {
+    const baseDate = new Date();
+    const uniqueDates = new Set<string>();
+
+    while (uniqueDates.size < count) {
+      const randomOffset = Math.floor(Math.random() * 365 * 24 * 60 * 60 * 1000); // Random offset within a year
+      const randomDate = new Date(baseDate.getTime() - randomOffset).toISOString();
+      uniqueDates.add(randomDate);
+    }
+
+    return Array.from(uniqueDates);
+  };
+
+  const uniqueDates = generateUniqueDates(count);
+
+  return Array.from({ length: count }, (_, index) => {
     return {
       _id: generateRandomId(),
       title: getRandomBusinessName(),
@@ -58,8 +73,8 @@ export const generateRandomBusiness = (count: number): BusinessItem[] => {
       business_type: Math.random() > 0.5 ? "general" : "franchise",
       branches: Math.floor(Math.random() * 20) + 1,
       is_active: Math.random() > 0.5,
-      created_at: new Date().toISOString(),
-      updated_at: new Date().toISOString(),
+      created_at: uniqueDates[index],
+      updated_at: uniqueDates[index],
     };
   });
 };
