@@ -1,6 +1,7 @@
-import { useState } from 'react';
-import { MdFilterList } from 'react-icons/md';
-import { SearchIcon, DropdownArrowIcon } from './SearchSvg';
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { SearchIcon, DropdownArrowIcon } from "./SearchSvg";
+import { MdRefresh } from "react-icons/md";
 
 const sortOptions = [
   { label: "Related", sortBy: "Related" },
@@ -14,18 +15,17 @@ const sortOptions = [
 
 export default function SearchSection({
   onSearch,
-  onFilter,
   resultCount,
   onSortChange,
 }: {
   onSearch: (query: string) => void;
-  onFilter: () => void;
   resultCount: number;
   onSortChange: (sortBy: string) => void;
 }) {
-  const [searchQuery, setSearchQuery] = useState('');
+  const router = useRouter();
+  const [searchQuery, setSearchQuery] = useState("");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [selectedSort, setSelectedSort] = useState('Related');
+  const [selectedSort, setSelectedSort] = useState("Related");
 
   const handleSearch = () => {
     onSearch(searchQuery);
@@ -42,6 +42,11 @@ export default function SearchSection({
   };
 
   const getSortLabel = () => selectedSort;
+
+  // Handle page refresh
+  const handleRefresh = () => {
+    window.location.reload(); // Reload the current page
+  };
 
   return (
     <div className="w-full max-w-4xl">
@@ -60,11 +65,11 @@ export default function SearchSection({
         </div>
 
         <button
-          onClick={onFilter}
-          className="font-medium text-sm text-gray-700 px-4 py-2 border rounded-lg flex items-center gap-2"
+          onClick={handleRefresh}
+          className="font-medium text-sm text-gray-700 px-3 py-2 border rounded-lg flex items-center gap-2"
         >
-          <MdFilterList className="h-5 w-5" />
-          Filter
+          <MdRefresh className="h-5 w-5" />
+          Refresh
         </button>
       </div>
 
@@ -86,7 +91,7 @@ export default function SearchSection({
                     key={index}
                     onClick={() => handleSortChange(option)}
                     className={`px-4 py-3 cursor-pointer hover:bg-gray-100 whitespace-nowrap ${
-                      selectedSort === option.label ? 'text-blue-500 font-medium' : ''
+                      selectedSort === option.label ? "text-blue-500 font-medium" : ""
                     }`}
                   >
                     {option.label}

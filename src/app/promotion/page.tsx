@@ -12,26 +12,18 @@ import { sortItems } from "@/utils/sortItems";
 export default function PromotionPage() {
   const router = useRouter();
 
-  // State for promotions and filtered data
-  const [promotions, setPromotions] = useState<PromotionItem[]>([]);
-  const [filteredPromotions, setFilteredPromotions] = useState<PromotionItem[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [sortBy, setSortBy] = useState<string>("Related");
+  const [promotions] = useState<PromotionItem[]>(mockPromotions); // Static original data
+  const [filteredPromotions, setFilteredPromotions] = useState<PromotionItem[]>(mockPromotions); // Filtered data state
+  const [sortBy, setSortBy] = useState<string>("Related"); // Current sorting option
 
-  // Authentication and Data Fetching
+  // Authentication Check
   useEffect(() => {
     if (!hasAuthToken()) {
       router.replace("/login");
-      return;
     }
-
-    // Set promotions data immediately
-    setPromotions(mockPromotions);
-    setFilteredPromotions(mockPromotions);
-    setIsLoading(false);
   }, [router]);
 
-  // Search Logic with Filtering
+  // Search Logic
   const handleSearch = (query: string) => {
     const filtered = promotions.filter((promo) =>
       promo.title.toLowerCase().includes(query.toLowerCase())
@@ -39,30 +31,20 @@ export default function PromotionPage() {
     setFilteredPromotions(filtered);
   };
 
-  // Handle sorting
+  // Sort Logic
   const handleSortChange = (sortBy: string) => {
     setSortBy(sortBy);
-    const sortedPromotions = sortItems(filteredPromotions, sortBy, { default: "title" });
-    setFilteredPromotions(sortedPromotions);
+    const sorted = sortItems(filteredPromotions, sortBy, { default: "title" });
+    setFilteredPromotions(sorted);
   };
-
-  // Filter Placeholder
-  const handleFilter = () => {
-    console.log("Filter clicked: Future implementation!");
-  };
-
-  if (isLoading) {
-    return <div className="text-center mt-10">Loading promotions...</div>;
-  }
 
   return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6">
       <h1 className="text-lg sm:text-xl font-bold mb-6 sm:mb-8">Manage Promotions</h1>
 
-      {/* Search, Sort, and Filter */}
+      {/* Search, Sort, and Refresh */}
       <SearchSection
         onSearch={handleSearch}
-        onFilter={handleFilter}
         resultCount={filteredPromotions.length}
         onSortChange={handleSortChange}
       />

@@ -62,7 +62,6 @@ export default function ArticlePage() {
       {/* Search, Sort, and Filter */}
       <SearchSection
         onSearch={handleSearch}
-        onFilter={handleFilter}
         resultCount={filteredArticles.length}
         onSortChange={handleSortChange}
       />

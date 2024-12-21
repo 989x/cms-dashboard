@@ -62,7 +62,6 @@ export default function Home() {
       {/* Search, Sort, and Filter */}
       <SearchSection
         onSearch={handleSearch}
-        onFilter={handleFilter}
         resultCount={filteredContents.length}
         onSortChange={handleSortChange}
       />

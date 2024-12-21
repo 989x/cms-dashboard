@@ -62,7 +62,6 @@ export default function NewsPage() {
       {/* Search, Sort, and Filter */}
       <SearchSection
         onSearch={handleSearch}
-        onFilter={handleFilter}
         resultCount={filteredNews.length}
         onSortChange={handleSortChange}
       />

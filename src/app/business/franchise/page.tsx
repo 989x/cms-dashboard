@@ -62,7 +62,6 @@ export default function FranchiseBusinessPage() {
       {/* Search, Sort, and Filter */}
       <SearchSection
         onSearch={handleSearch}
-        onFilter={handleFilter}
         resultCount={filteredBusinesses.length}
         onSortChange={handleSortChange}
       />
