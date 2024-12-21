@@ -67,7 +67,7 @@ export default function ArticlePage() {
       />
 
       {/* Article List */}
-      <div className="grid gap-6">
+      <div className="grid gap-4">
         {filteredArticles.length > 0 ? (
           filteredArticles.map((article) => (
             <ContentCard key={article._id} {...article} />

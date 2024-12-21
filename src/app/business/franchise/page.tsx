@@ -67,7 +67,7 @@ export default function FranchiseBusinessPage() {
       />
 
       {/* Business List */}
-      <div className="grid gap-6">
+      <div className="grid gap-4">
         {filteredBusinesses.length > 0 ? (
           filteredBusinesses.map((business) => (
             <BusinessCard key={business._id} {...business} />

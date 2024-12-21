@@ -67,7 +67,7 @@ export default function NewsPage() {
       />
 
       {/* News List */}
-      <div className="grid gap-6">
+      <div className="grid gap-4">
         {filteredNews.length > 0 ? (
           filteredNews.map((news) => (
             <ContentCard key={news._id} {...news} />

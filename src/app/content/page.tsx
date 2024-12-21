@@ -67,7 +67,7 @@ export default function Home() {
       />
 
       {/* Content List */}
-      <div className="grid gap-6">
+      <div className="grid gap-4">
         {filteredContents.length > 0 ? (
           filteredContents.map((content) => (
             <ContentCard key={content._id} {...content} />
