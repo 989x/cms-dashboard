@@ -4,8 +4,10 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { PromotionItem } from "@/types/shared.types";
 import PromotionCard from "@/components/cards/PromotionCard";
-import SearchSortBar from "@/components/SearchSortBar";
+import SearchSection from "@/components/SearchSection";
 import { mockPromotions } from "@/api/promotion";
+import { hasAuthToken } from "@/utils/authStorage";
+import { sortItems } from "@/utils/sortItems";
 
 export default function PromotionPage() {
   const router = useRouter();
@@ -18,9 +20,7 @@ export default function PromotionPage() {
 
   // Authentication and Data Fetching
   useEffect(() => {
-    const authToken = localStorage.getItem("authToken");
-
-    if (!authToken) {
+    if (!hasAuthToken()) {
       router.replace("/login");
       return;
     }
@@ -42,25 +42,7 @@ export default function PromotionPage() {
   // Handle sorting
   const handleSortChange = (sortBy: string) => {
     setSortBy(sortBy);
-    const sortedPromotions = [...filteredPromotions];
-
-    if (sortBy === "Status: Inactive") {
-      // Sort by inactive first
-      sortedPromotions.sort((a, b) => Number(a.is_active) - Number(b.is_active));
-    } else if (sortBy === "Status: Active") {
-      // Sort by active first
-      sortedPromotions.sort((a, b) => Number(b.is_active) - Number(a.is_active));
-    } else if (sortBy === "Views: Ascending") {
-      // Sort by views in ascending order
-      sortedPromotions.sort((a, b) => a.views - b.views);
-    } else if (sortBy === "Views: Descending") {
-      // Sort by views in descending order
-      sortedPromotions.sort((a, b) => b.views - a.views);
-    } else {
-      // Default to "Related" (e.g., alphabetical sort by title)
-      sortedPromotions.sort((a, b) => a.title.localeCompare(b.title));
-    }
-
+    const sortedPromotions = sortItems(filteredPromotions, sortBy, { default: "title" });
     setFilteredPromotions(sortedPromotions);
   };
 
@@ -78,7 +60,7 @@ export default function PromotionPage() {
       <h1 className="text-lg sm:text-xl font-bold mb-6 sm:mb-8">Manage Promotions</h1>
 
       {/* Search, Sort, and Filter */}
-      <SearchSortBar
+      <SearchSection
         onSearch={handleSearch}
         onFilter={handleFilter}
         resultCount={filteredPromotions.length}

@@ -10,7 +10,7 @@ const sortOptions = [
   { label: "Views (High to Low)", sortBy: "Views: Descending" },
 ];
 
-export default function SearchSortBar({
+export default function SearchSection({
   onSearch,
   onFilter,
   resultCount,

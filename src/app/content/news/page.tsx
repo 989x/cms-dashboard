@@ -1,73 +1,66 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-import { hasAuthToken } from "@/utils/authStorage";
-
 import { useEffect, useState } from "react";
-import { mockContentNews } from "@/api/content";
-import SearchSortBar from "@/components/SearchSortBar";
+import { useRouter } from "next/navigation";
+import { ContentItem } from "@/types/shared.types";
 import ContentCard from "@/components/cards/ContentCard";
+import SearchSection from "@/components/SearchSection";
+import { mockContentNews } from "@/api/content";
+import { hasAuthToken } from "@/utils/authStorage";
+import { sortItems } from "@/utils/sortItems";
 
 export default function NewsPage() {
   const router = useRouter();
 
-  useEffect(() => {
-    // Redirect to login if not authenticated
-    if (!hasAuthToken()) {
-      router.push("/login");
-    }
-  }, [router]);
+  // State for news articles and filtered data
+  const [newsArticles, setNewsArticles] = useState<ContentItem[]>([]);
+  const [filteredNews, setFilteredNews] = useState<ContentItem[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [sortBy, setSortBy] = useState<string>("Related");
 
-  const [newsArticles, setNewsArticles] = useState(mockContentNews);
-  const [filteredNews, setFilteredNews] = useState(mockContentNews);
-  const [sortBy, setSortBy] = useState("Related"); // Default sorting by 'Related'
+  // Authentication and Data Fetching
+  useEffect(() => {
+    if (!hasAuthToken()) {
+      router.replace("/login");
+      return;
+    }
+
+    // Set news articles data immediately
+    setNewsArticles(mockContentNews);
+    setFilteredNews(mockContentNews);
+    setIsLoading(false);
+  }, [router]);
 
   // Search Logic with Filtering
   const handleSearch = (query: string) => {
     const filtered = newsArticles.filter((news) =>
-      news.title?.toLowerCase().includes(query.toLowerCase())
+      news.title.toLowerCase().includes(query.toLowerCase())
     );
     setFilteredNews(filtered);
   };
 
-  // Handle Sorting
+  // Handle sorting
   const handleSortChange = (sortBy: string) => {
     setSortBy(sortBy);
-    const sortedNews = [...filteredNews];
-
-    if (sortBy === "Status: Inactive") {
-      // Sort by inactive first
-      sortedNews.sort((a, b) => Number(a.is_active) - Number(b.is_active));
-    } else if (sortBy === "Status: Active") {
-      // Sort by active first
-      sortedNews.sort((a, b) => Number(b.is_active) - Number(a.is_active));
-    } else if (sortBy === "Views: Ascending") {
-      // Sort by views in ascending order
-      sortedNews.sort((a, b) => a.views - b.views);
-    } else if (sortBy === "Views: Descending") {
-      // Sort by views in descending order
-      sortedNews.sort((a, b) => b.views - a.views);
-    } else {
-      // Default to "Related" (e.g., alphabetical sort by title)
-      sortedNews.sort((a, b) => a.title.localeCompare(b.title));
-    }
-
+    const sortedNews = sortItems(filteredNews, sortBy, { default: "title" });
     setFilteredNews(sortedNews);
   };
 
   // Filter Placeholder
   const handleFilter = () => {
-    alert("Filter button clicked");
+    console.log("Filter clicked: Future implementation!");
   };
 
+  if (isLoading) {
+    return <div className="text-center mt-10">Loading news articles...</div>;
+  }
+
   return (
-    <div className="w-full max-w-5xl mx-auto px-4 sm:px-6">
-      <h1 className="text-lg sm:text-xl font-bold mb-6 sm:mb-8">
-        Manage News Content
-      </h1>
+    <div className="max-w-5xl mx-auto px-4 sm:px-6">
+      <h1 className="text-lg sm:text-xl font-bold mb-6 sm:mb-8">Manage News Content</h1>
 
       {/* Search, Sort, and Filter */}
-      <SearchSortBar
+      <SearchSection
         onSearch={handleSearch}
         onFilter={handleFilter}
         resultCount={filteredNews.length}
@@ -75,23 +68,10 @@ export default function NewsPage() {
       />
 
       {/* News List */}
-      <div className="grid gap-4">
+      <div className="grid gap-6">
         {filteredNews.length > 0 ? (
           filteredNews.map((news) => (
-            <ContentCard
-              key={news._id}
-              _id={news._id}
-              title={news.title}
-              image_url={news.image_url}
-              tags={news.tags}
-              created_at={news.created_at}
-              updated_at={news.updated_at}
-              description={news.description}
-              link_url={news.link_url}
-              views={news.views}
-              is_active={news.is_active}
-              content_type={news.content_type}
-            />
+            <ContentCard key={news._id} {...news} />
           ))
         ) : (
           <p className="text-gray-500 text-center">No news articles available.</p>
