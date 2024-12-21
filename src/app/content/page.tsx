@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { ContentItem } from "@/types/shared.types";
 import ContentCard from "@/components/cards/ContentCard";
-import SearchSection from "@/components/SearchSection";
+import SearchSection from "@/components/search/SearchSection";
 import { mockContents } from "@/api/content";
 import { hasAuthToken } from "@/utils/authStorage";
 import { sortItems } from "@/utils/sortItems";

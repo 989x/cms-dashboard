@@ -65,7 +65,8 @@ src/
       - ...forms and index.tsx
     - HTMLEditor.tsx
     - HTMLPreview.module.css
-  - SearchSortBar.tsx
+  - search/
+    - SearchSection.tsx
 
 - utils/
   - authStorage.ts: Utility for handling authentication tokens

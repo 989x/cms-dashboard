@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { BusinessItem } from "@/types/shared.types";
 import BusinessCard from "@/components/cards/BusinessCard";
-import SearchSection from "@/components/SearchSection";
+import SearchSection from "@/components/search/SearchSection";
 import { mockBusiness } from "@/api/business";
 import { hasAuthToken } from "@/utils/authStorage";
 import { sortItems } from "@/utils/sortItems";

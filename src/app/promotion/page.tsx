@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { PromotionItem } from "@/types/shared.types";
 import PromotionCard from "@/components/cards/PromotionCard";
-import SearchSection from "@/components/SearchSection";
+import SearchSection from "@/components/search/SearchSection";
 import { mockPromotions } from "@/api/promotion";
 import { hasAuthToken } from "@/utils/authStorage";
 import { sortItems } from "@/utils/sortItems";
@@ -68,7 +68,7 @@ export default function PromotionPage() {
       />
 
       {/* Promotion List */}
-      <div className="grid gap-6">
+      <div className="grid gap-4">
         {filteredPromotions.length > 0 ? (
           filteredPromotions.map((promotion) => (
             <PromotionCard key={promotion._id} {...promotion} />
