@@ -31,6 +31,7 @@ const ContentForm: React.FC<ContentFormProps> = ({ formData, onChange, onSubmit,
   };
 
   const handleRefresh = () => {
+    // ใช้วิธี "Key-based Component Re-rendering" หรือ "Triggering Re-render with Key Prop"
     // บังคับให้ React รู้จักการเปลี่ยนแปลงด้วยการเปลี่ยน key
     setRefreshKey((prev) => prev + 1);
   };
@@ -95,6 +96,12 @@ const ContentForm: React.FC<ContentFormProps> = ({ formData, onChange, onSubmit,
         </div>
       </div>
 
+      {/* Image URL Field */}
+      <ImageUrlField
+        value={formData.image_url}
+        onChange={(value) => handleInputChange("image_url", value)}
+      />
+
       {/* Title Field */}
       <div className="mb-4">
         <label htmlFor="title" className="block font-medium text-gray-700 mb-3">
@@ -114,12 +121,6 @@ const ContentForm: React.FC<ContentFormProps> = ({ formData, onChange, onSubmit,
       <DescriptionField
         value={formData.description}
         onChange={(value) => handleInputChange("description", value)}
-      />
-
-      {/* Image URL Field */}
-      <ImageUrlField
-        value={formData.image_url}
-        onChange={(value) => handleInputChange("image_url", value)}
       />
 
       {/* Tags Field */}
