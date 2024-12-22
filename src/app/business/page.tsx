@@ -1,81 +1,13 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
-import { BusinessItem } from "@/types/shared.types";
-import BusinessCard from "@/components/cards/BusinessCard";
-import SearchSection from "@/components/search/SearchSection";
+import { withListPage } from "@/hoc/withListPage";
 import { mockBusiness } from "@/api/business";
-import { hasAuthToken } from "@/utils/authStorage";
-import { sortItems } from "@/utils/sortItems";
+import BusinessCard from "@/components/cards/BusinessCard";
 
-export default function Home() {
-  const router = useRouter();
+const BusinessPage = withListPage({
+  title: "Manage All Business Listings",
+  fetchData: () => mockBusiness,
+  renderCard: (business) => <BusinessCard key={business._id} {...business} />,
+});
 
-  // State for businesses and filtered data
-  const [businesses, setBusinesses] = useState<BusinessItem[]>([]);
-  const [filteredBusinesses, setFilteredBusinesses] = useState<BusinessItem[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [sortBy, setSortBy] = useState<string>("Related");
-
-  // Authentication and Data Fetching
-  useEffect(() => {
-    if (!hasAuthToken()) {
-      router.replace("/login");
-      return;
-    }
-
-    // Set businesses data immediately
-    setBusinesses(mockBusiness);
-    setFilteredBusinesses(mockBusiness);
-    setIsLoading(false);
-  }, [router]);
-
-  // Search Logic with Filtering
-  const handleSearch = (query: string) => {
-    const filtered = businesses.filter((business) =>
-      business.title.toLowerCase().includes(query.toLowerCase())
-    );
-    setFilteredBusinesses(filtered);
-  };
-
-  // Handle sorting
-  const handleSortChange = (sortBy: string) => {
-    setSortBy(sortBy);
-    const sortedBusinesses = sortItems(filteredBusinesses, sortBy, { default: "title" });
-    setFilteredBusinesses(sortedBusinesses);
-  };
-
-  // Filter Placeholder
-  const handleFilter = () => {
-    console.log("Filter clicked: Future implementation!");
-  };
-
-  if (isLoading) {
-    return <div className="text-center mt-10">Loading businesses...</div>;
-  }
-
-  return (
-    <div className="max-w-5xl mx-auto px-4 sm:px-6">
-      <h1 className="text-lg sm:text-xl font-bold mb-6 sm:mb-8">Manage All Business Listings</h1>
-
-      {/* Search, Sort, and Filter */}
-      <SearchSection
-        onSearch={handleSearch}
-        resultCount={filteredBusinesses.length}
-        onSortChange={handleSortChange}
-      />
-
-      {/* Business List */}
-      <div className="grid gap-4">
-        {filteredBusinesses.length > 0 ? (
-          filteredBusinesses.map((business) => (
-            <BusinessCard key={business._id} {...business} />
-          ))
-        ) : (
-          <p className="text-gray-500 text-center">No businesses available.</p>
-        )}
-      </div>
-    </div>
-  );
-}
+export default BusinessPage;
