@@ -22,7 +22,7 @@ const HTMLEditor: React.FC<HTMLEditorProps> = ({ value, onChange }) => {
   };
 
   return (
-    <div className="pt-2">
+    <div className="pt-2 text-sm">
       <div className="mb-5 font-medium flex justify-between items-center">
         <div className="flex gap-3">
           <button

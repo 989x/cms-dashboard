@@ -6,7 +6,11 @@ import ContentEditModal from "../modals/ContentEditModal";
 import { AiOutlineCalendar, AiOutlineEye } from "react-icons/ai";
 import { FiEdit, FiEye, FiEyeOff, FiTrash2, FiBook, FiFileText } from "react-icons/fi";
 
-const ContentCard: React.FC<ContentItem> = ({
+interface ContentCardProps extends ContentItem {
+  previewMode?: boolean;
+}
+
+const ContentCard: React.FC<ContentCardProps> = ({
   _id,
   is_active,
   content_type,
@@ -16,6 +20,7 @@ const ContentCard: React.FC<ContentItem> = ({
   created_at,
   description,
   views,
+  previewMode = false,
 }) => {
   const [isEditModalOpen, setEditModalOpen] = useState(false);
   const [currentIsActive, setCurrentIsActive] = useState(is_active);
@@ -98,19 +103,25 @@ const ContentCard: React.FC<ContentItem> = ({
           </button>
         </div>
         <div className="flex gap-3 text-xs">
-          <button
-            className="flex items-center gap-2 px-3 py-2 border text-blue-600 font-semibold rounded-md transition-colors duration-200 hover:bg-blue-600 hover:text-white"
-            onClick={() => setEditModalOpen(true)}
-          >
-            <FiEdit className="h-4 w-4" />
-            Edit
-          </button>
-          <button
-            className="flex items-center gap-2 px-3 py-2 border text-red-600 font-semibold rounded-md transition-colors duration-200 hover:bg-red-600 hover:text-white"
-          >
-            <FiTrash2 className="h-4 w-4" />
-            Delete
-          </button>
+          {previewMode ? (
+            <span className="text-gray-500 font-medium">Preview Mode</span>
+          ) : (
+            <>
+              <button
+                className="flex items-center gap-2 px-3 py-2 border text-blue-600 font-semibold rounded-md transition-colors duration-200 hover:bg-blue-600 hover:text-white"
+                onClick={() => setEditModalOpen(true)}
+              >
+                <FiEdit className="h-4 w-4" />
+                Edit
+              </button>
+              <button
+                className="flex items-center gap-2 px-3 py-2 border text-red-600 font-semibold rounded-md transition-colors duration-200 hover:bg-red-600 hover:text-white"
+              >
+                <FiTrash2 className="h-4 w-4" />
+                Delete
+              </button>
+            </>
+          )}
         </div>
       </div>
 
