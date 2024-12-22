@@ -4,10 +4,11 @@ import { ContentItem } from "@/types/shared.types";
 import { formatToThaiDate } from "@/utils/formatDate";
 import ContentEditModal from "../modals/ContentEditModal";
 import { AiOutlineCalendar, AiOutlineEye } from "react-icons/ai";
-import { FiEdit, FiEye, FiEyeOff, FiTrash2, FiBook, FiFileText } from "react-icons/fi";
+import { FiEdit, FiEye, FiEyeOff, FiTrash2, FiBook, FiFileText, FiRefreshCw } from "react-icons/fi";
 
 interface ContentCardProps extends ContentItem {
   previewMode?: boolean;
+  onRefresh?: () => void;
 }
 
 const ContentCard: React.FC<ContentCardProps> = ({
@@ -21,6 +22,7 @@ const ContentCard: React.FC<ContentCardProps> = ({
   description,
   views,
   previewMode = false,
+  onRefresh,
 }) => {
   const [isEditModalOpen, setEditModalOpen] = useState(false);
   const [currentIsActive, setCurrentIsActive] = useState(is_active);
@@ -45,7 +47,7 @@ const ContentCard: React.FC<ContentCardProps> = ({
       <div className="flex flex-col sm:flex-row sm:items-center gap-4">
         <div className="relative w-full sm:w-[280px] aspect-video flex-shrink-0">
           <Image
-            src={image_url || "/loading-image.jpg"}
+            src={image_url || "/smokegray.webp"}
             alt={currentTitle || "No Title"}
             layout="fill"
             objectFit="cover"
@@ -104,7 +106,13 @@ const ContentCard: React.FC<ContentCardProps> = ({
         </div>
         <div className="flex gap-3 text-xs">
           {previewMode ? (
-            <span className="text-gray-500 font-medium">Preview Mode</span>
+            <button
+              className="flex items-center gap-2 px-3 py-2 border text-gray-600 font-semibold rounded-md transition-colors duration-200 hover:bg-gray-300 hover:text-gray-900"
+              onClick={onRefresh}
+            >
+              <FiRefreshCw className="h-4 w-4" />
+              Refresh
+            </button>
           ) : (
             <>
               <button

@@ -58,7 +58,7 @@ const BusinessCard: React.FC<BusinessItem> = ({
       <div className="flex flex-col sm:flex-row sm:items-center gap-4">
         <div className="relative w-full sm:w-[280px] aspect-video flex-shrink-0">
           <Image
-            src={currentData.images?.[0] || "/loading-image.jpg"}
+            src={currentData.images?.[0] || "/smokegray.webp"}
             alt={currentData.title || "No Title"}
             layout="fill"
             objectFit="cover"

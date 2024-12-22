@@ -25,7 +25,7 @@ const PromotionCard: React.FC<PromotionItem> = ({
         {/* Promotion Image */}
         <div className="relative w-full sm:w-[280px] aspect-video flex-shrink-0">
           <Image
-            src={image_url || "/loading-image.jpg"}
+            src={image_url || "/smokegray.webp"}
             alt={title}
             layout="fill"
             objectFit="cover"

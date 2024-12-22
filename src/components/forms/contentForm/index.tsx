@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import DescriptionField from "./DescriptionField";
 import ImageUrlField from "./ImageUrlField";
 import ContentCard from "@/components/cards/ContentCard";
@@ -24,8 +24,15 @@ interface ContentFormProps {
 }
 
 const ContentForm: React.FC<ContentFormProps> = ({ formData, onChange, onSubmit, previewMode = true }) => {
+  const [refreshKey, setRefreshKey] = useState(0);
+
   const handleInputChange = (field: string, value: any) => {
     onChange(field, value);
+  };
+
+  const handleRefresh = () => {
+    // บังคับให้ React รู้จักการเปลี่ยนแปลงด้วยการเปลี่ยน key
+    setRefreshKey((prev) => prev + 1);
   };
 
   return (
@@ -33,18 +40,10 @@ const ContentForm: React.FC<ContentFormProps> = ({ formData, onChange, onSubmit,
       {/* Post Preview */}
       <div className="mb-6">
         <ContentCard
-          _id=""
-          is_active={true}
-          link_url=""
-          content_type={formData.content_type}
-          title={formData.title}
-          image_url={formData.image_url}
-          tags={formData.tags}
-          created_at={formData.created_at || new Date().toISOString()}
-          description={formData.description}
-          views={formData.views || 0}
-          updated_at={new Date().toISOString()}
+          key={refreshKey} // ใช้ key เพื่อ trigger การ re-render
+          {...formData}
           previewMode={previewMode}
+          onRefresh={handleRefresh}
         />
       </div>
 
