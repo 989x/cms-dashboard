@@ -1,4 +1,4 @@
-import HTMLEditor from "../HTMLEditor";
+import HTMLEditor from "../../forms/HTMLManage/HTMLEditor";
 
 interface BusinessDescFormProps {
   description: string;

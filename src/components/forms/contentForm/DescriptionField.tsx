@@ -1,4 +1,4 @@
-import HTMLEditor from "@/components/modals/HTMLEditor";
+import HTMLEditor from "@/components/forms/HTMLManage/HTMLEditor";
 
 interface DescriptionFieldProps {
   value: string;
