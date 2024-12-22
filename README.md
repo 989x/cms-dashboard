@@ -68,6 +68,9 @@ src/
   - search/
     - SearchSection.tsx
 
+- hoc/
+  - withListPage.tsx: A reusable Higher-Order Component (HOC) for list-based pages, managing filtering, sorting, and rendering logic.
+
 - utils/
   - authStorage.ts: Utility for handling authentication tokens
   - formatDate.ts
