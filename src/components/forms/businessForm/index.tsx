@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import BusinessCard from "@/components/cards/BusinessCard";
 import { BusinessItem } from "@/types/shared.types";
 import HTMLEditor from "@/components/forms/HTMLManage/HTMLEditor";
 
@@ -6,14 +7,30 @@ interface BusinessFormProps {
   formData: BusinessItem;
   onChange: (field: string, value: any) => void;
   onSubmit: (e: React.FormEvent) => void;
+  previewMode?: boolean;
 }
 
-const BusinessForm: React.FC<BusinessFormProps> = ({ formData, onChange, onSubmit }) => {
+const BusinessForm: React.FC<BusinessFormProps> = ({
+  formData,
+  onChange,
+  onSubmit,
+  previewMode = true,
+}) => {
+  const [refreshKey, setRefreshKey] = useState(0);
+
   const handleInputChange = (field: string, value: any) => {
     onChange(field, value);
   };
 
-  const handleContactChange = (index: number, field: keyof BusinessItem["contacts"][number], value: string) => {
+  const handleRefresh = () => {
+    setRefreshKey((prev) => prev + 1);
+  };
+
+  const handleContactChange = (
+    index: number,
+    field: keyof BusinessItem["contacts"][number],
+    value: string
+  ) => {
     const updatedContacts = [...formData.contacts];
     updatedContacts[index] = { ...updatedContacts[index], [field]: value };
     onChange("contacts", updatedContacts);
@@ -21,6 +38,16 @@ const BusinessForm: React.FC<BusinessFormProps> = ({ formData, onChange, onSubmi
 
   return (
     <form onSubmit={onSubmit} className="space-y-6">
+      {/* Business Preview */}
+      <div className="mb-6">
+        <BusinessCard
+          key={refreshKey}
+          {...formData}
+          previewMode={previewMode}
+          onRefresh={handleRefresh}
+        />
+      </div>
+
       {/* Business Type and Link URL */}
       <div className="mb-4 flex gap-8">
         <div>

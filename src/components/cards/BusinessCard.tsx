@@ -15,8 +15,14 @@ import {
   FiShare2,
   FiGlobe,
 } from "react-icons/fi";
+import { MdRefresh } from "react-icons/md";
 
-const BusinessCard: React.FC<BusinessItem> = ({
+interface BusinessCardProps extends BusinessItem {
+  previewMode?: boolean;
+  onRefresh?: () => void;
+}
+
+const BusinessCard: React.FC<BusinessCardProps> = ({
   _id,
   is_active,
   business_type,
@@ -29,6 +35,8 @@ const BusinessCard: React.FC<BusinessItem> = ({
   description,
   views,
   branches,
+  previewMode = false,
+  onRefresh,
 }) => {
   const [isEditModalOpen, setEditModalOpen] = useState(false);
   const [currentData, setCurrentData] = useState<BusinessItem>({
@@ -49,6 +57,11 @@ const BusinessCard: React.FC<BusinessItem> = ({
   const handleSave = (updatedData: BusinessItem) => {
     setCurrentData(updatedData);
     setEditModalOpen(false);
+    if (onRefresh) onRefresh();
+  };
+
+  const handleRefresh = () => {
+    if (onRefresh) onRefresh();
   };
 
   const TypeIcon = currentData.business_type === "franchise" ? FiShare2 : FiGlobe;
@@ -130,17 +143,29 @@ const BusinessCard: React.FC<BusinessItem> = ({
           </button>
         </div>
         <div className="flex gap-3 text-xs">
-          <button
-            className="flex items-center gap-2 px-3 py-2 border text-blue-600 font-semibold rounded-md transition-colors duration-200 hover:bg-blue-600 hover:text-white"
-            onClick={() => setEditModalOpen(true)}
-          >
-            <FiEdit className="h-4 w-4" />
-            Edit
-          </button>
-          <button className="flex items-center gap-2 px-3 py-2 border text-red-600 font-semibold rounded-md transition-colors duration-200 hover:bg-red-600 hover:text-white">
-            <FiTrash2 className="h-4 w-4" />
-            Delete
-          </button>
+          {previewMode ? (
+            <button
+              className="flex items-center gap-2 px-3 py-2 border text-gray-600 font-semibold rounded-md transition-colors duration-200 hover:bg-gray-300 hover:text-gray-900"
+              onClick={handleRefresh}
+            >
+              <MdRefresh className="h-5 w-5" />
+              Refresh
+            </button>
+          ) : (
+            <>
+              <button
+                className="flex items-center gap-2 px-3 py-2 border text-blue-600 font-semibold rounded-md transition-colors duration-200 hover:bg-blue-600 hover:text-white"
+                onClick={() => setEditModalOpen(true)}
+              >
+                <FiEdit className="h-4 w-4" />
+                Edit
+              </button>
+              <button className="flex items-center gap-2 px-3 py-2 border text-red-600 font-semibold rounded-md transition-colors duration-200 hover:bg-red-600 hover:text-white">
+                <FiTrash2 className="h-4 w-4" />
+                Delete
+              </button>
+            </>
+          )}
         </div>
       </div>
 
