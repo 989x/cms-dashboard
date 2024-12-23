@@ -4,7 +4,8 @@ import { ContentItem } from "@/types/shared.types";
 import { formatToThaiDate } from "@/utils/formatDate";
 import ContentEditModal from "../modals/ContentEditModal";
 import { AiOutlineCalendar, AiOutlineEye } from "react-icons/ai";
-import { FiEdit, FiEye, FiEyeOff, FiTrash2, FiBook, FiFileText, FiRefreshCw } from "react-icons/fi";
+import { FiEdit, FiEye, FiEyeOff, FiTrash2, FiBook, FiFileText } from "react-icons/fi";
+import { MdRefresh } from "react-icons/md";
 
 interface ContentCardProps extends ContentItem {
   previewMode?: boolean;
@@ -119,7 +120,7 @@ const ContentCard: React.FC<ContentCardProps> = ({
               className="flex items-center gap-2 px-3 py-2 border text-gray-600 font-semibold rounded-md transition-colors duration-200 hover:bg-gray-300 hover:text-gray-900"
               onClick={handleRefresh}
             >
-              <FiRefreshCw className="h-4 w-4" />
+              <MdRefresh className="h-5 w-5" />
               Refresh
             </button>
           ) : (

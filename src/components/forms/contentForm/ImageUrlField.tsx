@@ -19,7 +19,7 @@ const ImageUrlField: React.FC<ImageUrlFieldProps> = ({ value, onChange, onApply 
       <label htmlFor="imageUrl" className="block text-[15px] font-medium text-gray-700">
         Image URL
       </label>
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-4">
         <input
           id="imageUrl"
           type="url"
@@ -30,7 +30,7 @@ const ImageUrlField: React.FC<ImageUrlFieldProps> = ({ value, onChange, onApply 
         <button
           type="button"
           onClick={onApply}
-          className="px-4 py-2 bg-indigo-600 text-white text-sm rounded-md hover:bg-indigo-700"
+          className="px-5 py-2 bg-white text-gray-700 text-sm rounded-md border border-gray-300 hover:bg-gray-100"
         >
           Apply
         </button>

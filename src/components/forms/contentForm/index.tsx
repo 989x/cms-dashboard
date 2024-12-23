@@ -63,7 +63,7 @@ const ContentForm: React.FC<ContentFormProps> = ({
       <div className="mb-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
         {/* Link URL Field */}
         <div>
-          <label htmlFor="link_url" className="block font-medium text-gray-700 mb-3">
+          <label htmlFor="link_url" className="block text-[15px] font-medium text-gray-700 mb-3">
             Link URL
           </label>
           <input
@@ -77,30 +77,30 @@ const ContentForm: React.FC<ContentFormProps> = ({
 
         {/* Content Type Field */}
         <div>
-          <label className="block font-medium text-gray-700 mb-3">Content Type</label>
+          <label className="block text-[15px] font-medium text-gray-700 mb-3">Content Type</label>
           <div className="flex gap-3">
             <button
               type="button"
-              className={`flex items-center gap-2 px-4 py-2 rounded-lg shadow-sm text-sm font-medium ${
+              className={`flex items-center gap-2 px-4 py-2 rounded-lg shadow-sm text-sm font-medium border ${
                 formData.content_type === "article"
-                  ? "bg-indigo-600 text-white"
-                  : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+                  ? "bg-indigo-600 text-white border-indigo-600"
+                  : "bg-transparent text-gray-700 border"
               }`}
               onClick={() => handleInputChange("content_type", "article")}
             >
-              <FiBook className="h-5 w-5" />
+              <FiBook className="h-[18px] w-[18px]" />
               Article
             </button>
             <button
               type="button"
-              className={`flex items-center gap-2 px-4 py-2 rounded-lg shadow-sm text-sm font-medium ${
+              className={`flex items-center gap-2 px-4 py-2 rounded-lg shadow-sm text-sm font-medium border ${
                 formData.content_type === "news"
-                  ? "bg-indigo-600 text-white"
-                  : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+                  ? "bg-indigo-600 text-white border-indigo-600"
+                  : "bg-transparent text-gray-700 border"
               }`}
               onClick={() => handleInputChange("content_type", "news")}
             >
-              <FiFileText className="h-5 w-5" />
+              <FiFileText className="h-[18px] w-[18px]" />
               News
             </button>
           </div>
@@ -116,7 +116,7 @@ const ContentForm: React.FC<ContentFormProps> = ({
 
       {/* Title Field */}
       <div className="mb-4">
-        <label htmlFor="title" className="block font-medium text-gray-700 mb-3">
+        <label htmlFor="title" className="block text-[15px] font-medium text-gray-700 mb-3">
           Title
         </label>
         <input
@@ -137,7 +137,7 @@ const ContentForm: React.FC<ContentFormProps> = ({
 
       {/* Tags Field */}
       <div className="mb-4">
-        <label className="block font-medium text-gray-700 mb-3">Tags</label>
+        <label className="block text-[15px] font-medium text-gray-700 mb-3">Tags</label>
         <div className="flex gap-2 items-center">
           <input
             type="text"
