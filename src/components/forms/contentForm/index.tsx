@@ -23,11 +23,22 @@ interface ContentFormProps {
   previewMode?: boolean;
 }
 
-const ContentForm: React.FC<ContentFormProps> = ({ formData, onChange, onSubmit, previewMode = true }) => {
+const ContentForm: React.FC<ContentFormProps> = ({
+  formData,
+  onChange,
+  onSubmit,
+  previewMode = true,
+}) => {
   const [refreshKey, setRefreshKey] = useState(0);
+  const [pendingImageUrl, setPendingImageUrl] = useState(formData.image_url);
 
   const handleInputChange = (field: string, value: any) => {
     onChange(field, value);
+  };
+
+  const handleImageApply = () => {
+    onChange("image_url", pendingImageUrl); // Update the formData image_url
+    handleRefresh();
   };
 
   const handleRefresh = () => {
@@ -98,8 +109,9 @@ const ContentForm: React.FC<ContentFormProps> = ({ formData, onChange, onSubmit,
 
       {/* Image URL Field */}
       <ImageUrlField
-        value={formData.image_url}
-        onChange={(value) => handleInputChange("image_url", value)}
+        value={pendingImageUrl}
+        onChange={(value) => setPendingImageUrl(value)} // Update pending image URL
+        onApply={handleImageApply} // Apply changes and refresh ContentCard
       />
 
       {/* Title Field */}

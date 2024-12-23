@@ -30,6 +30,8 @@ const ContentCard: React.FC<ContentCardProps> = ({
   const [currentTitle, setCurrentTitle] = useState(title || "");
   const [currentDescription, setCurrentDescription] = useState(description || "");
   const [currentTags, setCurrentTags] = useState(tags || []);
+  const [currentImageUrl, setCurrentImageUrl] = useState(image_url || "/default-fallback-image.png");
+  const [hasImageError, setImageError] = useState(false);
 
   const handleSave = (updatedData: ContentItem) => {
     setCurrentIsActive(updatedData.is_active);
@@ -40,6 +42,12 @@ const ContentCard: React.FC<ContentCardProps> = ({
     setEditModalOpen(false);
   };
 
+  const handleRefresh = () => {
+    setImageError(false); // Reset image error state
+    setCurrentImageUrl(image_url || "/default-fallback-image.png");
+    if (onRefresh) onRefresh(); // Call parent refresh if provided
+  };
+
   const TypeIcon = currentContentType === "article" ? FiBook : FiFileText;
 
   return (
@@ -47,11 +55,12 @@ const ContentCard: React.FC<ContentCardProps> = ({
       <div className="flex flex-col sm:flex-row sm:items-center gap-4">
         <div className="relative w-full sm:w-[280px] aspect-video flex-shrink-0">
           <Image
-            src={image_url || "/smokegray.webp"}
+            src={!hasImageError ? currentImageUrl : "/default-fallback-image.png"}
             alt={currentTitle || "No Title"}
             layout="fill"
             objectFit="cover"
             className="rounded-md"
+            onError={() => setImageError(true)} // Handle image error
           />
         </div>
         <div className="flex-1 flex flex-col gap-2 justify-center">
@@ -108,7 +117,7 @@ const ContentCard: React.FC<ContentCardProps> = ({
           {previewMode ? (
             <button
               className="flex items-center gap-2 px-3 py-2 border text-gray-600 font-semibold rounded-md transition-colors duration-200 hover:bg-gray-300 hover:text-gray-900"
-              onClick={onRefresh}
+              onClick={handleRefresh}
             >
               <FiRefreshCw className="h-4 w-4" />
               Refresh
@@ -145,7 +154,7 @@ const ContentCard: React.FC<ContentCardProps> = ({
           title: currentTitle,
           description: currentDescription,
           tags: currentTags,
-          image_url,
+          image_url: currentImageUrl,
           created_at,
           views,
           updated_at: new Date().toISOString(),
