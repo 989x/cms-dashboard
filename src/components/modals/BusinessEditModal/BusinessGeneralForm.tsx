@@ -35,7 +35,7 @@ const BusinessGeneralForm: React.FC<BusinessGeneralFormProps> = ({
             <button
               type="button"
               className={`flex items-center gap-2 px-3 py-[10px] bg-gray-100 rounded-lg ${
-                type === "general" ? "bg-indigo-600 text-white" : "border-gray-300 text-gray-700"
+                type === "general" ? "bg-blue-600 text-white" : "border-gray-300 text-gray-700"
               }`}
               onClick={() => onTypeChange("general")}
             >
@@ -45,7 +45,7 @@ const BusinessGeneralForm: React.FC<BusinessGeneralFormProps> = ({
             <button
               type="button"
               className={`flex items-center gap-2 px-3 py-[10px] bg-gray-100 rounded-lg ${
-                type === "franchise" ? "bg-indigo-600 text-white" : "border-gray-300 text-gray-700"
+                type === "franchise" ? "bg-blue-600 text-white" : "border-gray-300 text-gray-700"
               }`}
               onClick={() => onTypeChange("franchise")}
             >

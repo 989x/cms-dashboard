@@ -34,26 +34,26 @@ const ContentGeneralForm: React.FC<GeneralFormProps> = ({
           <div className="flex gap-3">
             <button
               type="button"
-              className={`flex items-center gap-2 px-3 py-[10px] rounded-lg transition ${
+              className={`flex items-center gap-2 px-3 py-2 rounded-lg transition ${
                 contentType === "article"
-                  ? "bg-indigo-600 text-white"
-                  : "bg-gray-100 text-gray-700 hover:bg-indigo-100"
+                  ? "bg-blue-600 text-white border-blue-600"
+                  : "bg-transparent text-gray-700 border"
               }`}
               onClick={() => handleContentTypeChange("article")}
             >
-              <FiBook className="h-5 w-5" />
+              <FiBook className="h-[18px] w-[18px]" />
               Article
             </button>
             <button
               type="button"
-              className={`flex items-center gap-2 px-3 py-[10px] rounded-lg transition ${
+              className={`flex items-center gap-2 px-3 py-2 rounded-lg transition ${
                 contentType === "news"
-                  ? "bg-indigo-600 text-white"
-                  : "bg-gray-100 text-gray-700 hover:bg-indigo-100"
+                  ? "bg-blue-600 text-white border-blue-600"
+                  : "bg-transparent text-gray-700 border"
               }`}
               onClick={() => handleContentTypeChange("news")}
             >
-              <FiFileText className="h-5 w-5" />
+              <FiFileText className="h-[18px] w-[18px]" />
               News
             </button>
           </div>
@@ -92,7 +92,7 @@ const ContentGeneralForm: React.FC<GeneralFormProps> = ({
           type="text"
           value={title}
           onChange={(e) => onTitleChange(e.target.value)}
-          className="w-full p-2.5 border rounded-lg focus:ring focus:ring-indigo-300"
+          className="w-full p-2.5 border rounded-lg focus:ring focus:ring-blue-300"
         />
       </div>
 
@@ -104,7 +104,7 @@ const ContentGeneralForm: React.FC<GeneralFormProps> = ({
           value={tags}
           onChange={(e) => onTagsChange(e.target.value)}
           placeholder="Enter tags separated by commas (e.g., Cloud, Service, Technology)"
-          className="w-full p-2.5 border rounded-lg focus:ring focus:ring-indigo-300"
+          className="w-full p-2.5 border rounded-lg focus:ring focus:ring-blue-300"
         />
       </div>
     </>

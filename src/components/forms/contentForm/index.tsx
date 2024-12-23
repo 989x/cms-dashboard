@@ -71,7 +71,7 @@ const ContentForm: React.FC<ContentFormProps> = ({
             type="url"
             value={formData.link_url}
             onChange={(e) => handleInputChange("link_url", e.target.value)}
-            className="block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            className="block w-full px-3 py-2 border border-gray-300 rounded-md text-sm"
           />
         </div>
 
@@ -81,9 +81,9 @@ const ContentForm: React.FC<ContentFormProps> = ({
           <div className="flex gap-3">
             <button
               type="button"
-              className={`flex items-center gap-2 px-4 py-2 rounded-lg shadow-sm text-sm font-medium border ${
+              className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium border ${
                 formData.content_type === "article"
-                  ? "bg-indigo-600 text-white border-indigo-600"
+                  ? "bg-blue-600 text-white border-blue-600"
                   : "bg-transparent text-gray-700 border"
               }`}
               onClick={() => handleInputChange("content_type", "article")}
@@ -93,9 +93,9 @@ const ContentForm: React.FC<ContentFormProps> = ({
             </button>
             <button
               type="button"
-              className={`flex items-center gap-2 px-4 py-2 rounded-lg shadow-sm text-sm font-medium border ${
+              className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium border ${
                 formData.content_type === "news"
-                  ? "bg-indigo-600 text-white border-indigo-600"
+                  ? "bg-blue-600 text-white border-blue-600"
                   : "bg-transparent text-gray-700 border"
               }`}
               onClick={() => handleInputChange("content_type", "news")}
@@ -124,7 +124,7 @@ const ContentForm: React.FC<ContentFormProps> = ({
           type="text"
           value={formData.title}
           onChange={(e) => handleInputChange("title", e.target.value)}
-          className="block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          className="block w-full px-3 py-2 border border-gray-300 rounded-md text-sm"
           required
         />
       </div>
@@ -152,7 +152,7 @@ const ContentForm: React.FC<ContentFormProps> = ({
                 }
               }
             }}
-            className="block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            className="block w-full px-3 py-2 border border-gray-300 rounded-md text-sm"
           />
         </div>
         <div className="mt-2 flex gap-2 flex-wrap">
@@ -180,14 +180,12 @@ const ContentForm: React.FC<ContentFormProps> = ({
       </div>
 
       {/* Submit Button */}
-      <div>
-        <button
-          type="submit"
-          className="w-full inline-flex justify-center items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-        >
-          Submit
-        </button>
-      </div>
+      <button
+        type="submit"
+        className="w-full inline-flex justify-center items-center px-4 py-2 border rounded-md text-sm font-medium text-white bg-blue-600"
+      >
+        Submit
+      </button>
     </form>
   );
 };
