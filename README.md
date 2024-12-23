@@ -58,13 +58,17 @@ src/
     - BusinessCard.tsx
     - ContentCard.tsx
     - PromotionCard.tsx
+  - forms/
+    - contentForm/
+      - ...forms and index.tsx
+    - HTMLManage/
+      - HTMLEditor.tsx
+      - HTMLPreview.module.css
   - modals/
     - BusinessEditModal/
       - ...forms and index.tsx
     - ContentEditModal/
       - ...forms and index.tsx
-    - HTMLEditor.tsx
-    - HTMLPreview.module.css
   - search/
     - SearchSection.tsx
 

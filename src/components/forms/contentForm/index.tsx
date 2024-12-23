@@ -184,7 +184,7 @@ const ContentForm: React.FC<ContentFormProps> = ({
         type="submit"
         className="w-full inline-flex justify-center items-center px-4 py-2 border rounded-md text-sm font-medium text-white bg-blue-600"
       >
-        Submit
+        Create New Post
       </button>
     </form>
   );
