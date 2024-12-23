@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import BusinessCard from "@/components/cards/BusinessCard";
+import ContactFields from "./ContactFields";
 import { BusinessItem } from "@/types/shared.types";
 import HTMLEditor from "@/components/forms/HTMLManage/HTMLEditor";
 
@@ -22,10 +23,6 @@ const BusinessForm: React.FC<BusinessFormProps> = ({
     onChange(field, value);
   };
 
-  const handleRefresh = () => {
-    setRefreshKey((prev) => prev + 1);
-  };
-
   const handleContactChange = (
     index: number,
     field: keyof BusinessItem["contacts"][number],
@@ -34,6 +31,27 @@ const BusinessForm: React.FC<BusinessFormProps> = ({
     const updatedContacts = [...formData.contacts];
     updatedContacts[index] = { ...updatedContacts[index], [field]: value };
     onChange("contacts", updatedContacts);
+  };
+
+  const handleAddContact = () => {
+    if (formData.contacts.length < 3) {
+      const newContacts = [
+        ...formData.contacts,
+        { email: "", name: "", phone: "" },
+      ];
+      onChange("contacts", newContacts);
+    }
+  };
+
+  const handleRemoveContact = (index: number) => {
+    if (formData.contacts.length > 1) {
+      const updatedContacts = formData.contacts.filter((_, i) => i !== index);
+      onChange("contacts", updatedContacts);
+    }
+  };
+
+  const handleRefresh = () => {
+    setRefreshKey((prev) => prev + 1);
   };
 
   return (
@@ -118,34 +136,12 @@ const BusinessForm: React.FC<BusinessFormProps> = ({
       </div>
 
       {/* Contacts */}
-      {formData.contacts.map((contact, index) => (
-        <div key={index} className="mb-4">
-          <label className="block text-[15px] font-medium text-gray-700 mb-3">Contact {index + 1}</label>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            <input
-              type="email"
-              placeholder="Email"
-              value={contact.email}
-              onChange={(e) => handleContactChange(index, "email", e.target.value)}
-              className="block w-full px-3 py-2 border border-gray-300 rounded-md text-sm"
-            />
-            <input
-              type="text"
-              placeholder="Name"
-              value={contact.name}
-              onChange={(e) => handleContactChange(index, "name", e.target.value)}
-              className="block w-full px-3 py-2 border border-gray-300 rounded-md text-sm"
-            />
-            <input
-              type="tel"
-              placeholder="Phone"
-              value={contact.phone}
-              onChange={(e) => handleContactChange(index, "phone", e.target.value)}
-              className="block w-full px-3 py-2 border border-gray-300 rounded-md text-sm"
-            />
-          </div>
-        </div>
-      ))}
+      <ContactFields
+        contacts={formData.contacts}
+        onChange={handleContactChange}
+        onAdd={handleAddContact}
+        onRemove={handleRemoveContact}
+      />
 
       {/* Submit Button */}
       <button
