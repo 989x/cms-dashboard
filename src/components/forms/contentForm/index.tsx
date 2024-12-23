@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import DescriptionField from "./DescriptionField";
+import HTMLEditor from "@/components/forms/HTMLManage/HTMLEditor";
 import ImageUrlField from "./ImageUrlField";
 import ContentCard from "@/components/cards/ContentCard";
 import { FiBook, FiFileText } from "react-icons/fi";
@@ -37,7 +37,7 @@ const ContentForm: React.FC<ContentFormProps> = ({
   };
 
   const handleImageApply = () => {
-    onChange("image_url", pendingImageUrl); // Update the formData image_url
+    onChange("image_url", pendingImageUrl);
     handleRefresh();
   };
 
@@ -130,10 +130,15 @@ const ContentForm: React.FC<ContentFormProps> = ({
       </div>
 
       {/* Description Field */}
-      <DescriptionField
-        value={formData.description}
-        onChange={(value) => handleInputChange("description", value)}
-      />
+      <div className="mb-4">
+        <label htmlFor="description" className="block text-[15px] font-medium text-gray-700 mb-3">
+          Description
+        </label>
+        <HTMLEditor
+          value={formData.description}
+          onChange={(value) => handleInputChange("description", value)}
+        />
+      </div>
 
       {/* Tags Field */}
       <div className="mb-4">
