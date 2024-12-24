@@ -28,7 +28,7 @@ const HTMLEditor: React.FC<HTMLEditorProps> = ({ value, onChange }) => {
           <button
             type="button"
             onClick={handleSwitchToEditMode}
-            className={`px-3 py-2 rounded-md ${
+            className={`px-3 py-2 rounded-lg ${
               !previewMode ? "bg-blue-600 text-white" : "bg-gray-200 text-black"
             }`}
           >
@@ -37,7 +37,7 @@ const HTMLEditor: React.FC<HTMLEditorProps> = ({ value, onChange }) => {
           <button
             type="button"
             onClick={handleSwitchToPreviewMode}
-            className={`px-3 py-2 rounded-md ${
+            className={`px-3 py-2 rounded-lg ${
               previewMode ? "bg-blue-600 text-white" : "bg-gray-200 text-black"
             }`}
           >
@@ -47,7 +47,7 @@ const HTMLEditor: React.FC<HTMLEditorProps> = ({ value, onChange }) => {
         <button
           type="button"
           onClick={handleClearContent}
-          className="px-3 py-2 bg-red-500 text-white rounded-md"
+          className="px-3 py-2 bg-red-500 text-white rounded-lg"
         >
           Clear Content
         </button>

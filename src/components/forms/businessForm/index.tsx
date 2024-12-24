@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import BusinessCard from "@/components/cards/BusinessCard";
+import ImageUrlManager from "./ImageUrlManager";
 import ContactFields from "./ContactFields";
 import { BusinessItem } from "@/types/shared.types";
 import HTMLEditor from "@/components/forms/HTMLManage/HTMLEditor";
@@ -23,39 +24,12 @@ const BusinessForm: React.FC<BusinessFormProps> = ({
     onChange(field, value);
   };
 
-  const handleContactChange = (
-    index: number,
-    field: keyof BusinessItem["contacts"][number],
-    value: string
-  ) => {
-    const updatedContacts = [...formData.contacts];
-    updatedContacts[index] = { ...updatedContacts[index], [field]: value };
-    onChange("contacts", updatedContacts);
-  };
-
-  const handleAddContact = () => {
-    if (formData.contacts.length < 3) {
-      const newContacts = [
-        ...formData.contacts,
-        { email: "", name: "", phone: "" },
-      ];
-      onChange("contacts", newContacts);
-    }
-  };
-
-  const handleRemoveContact = (index: number) => {
-    if (formData.contacts.length > 1) {
-      const updatedContacts = formData.contacts.filter((_, i) => i !== index);
-      onChange("contacts", updatedContacts);
-    }
-  };
-
   const handleRefresh = () => {
     setRefreshKey((prev) => prev + 1);
   };
 
   return (
-    <form onSubmit={onSubmit} className="space-y-6">
+    <form onSubmit={onSubmit} className="space-y-10">
       {/* Business Preview */}
       <div className="mb-6">
         <BusinessCard
@@ -69,7 +43,7 @@ const BusinessForm: React.FC<BusinessFormProps> = ({
       {/* Business Type and Link URL */}
       <div className="mb-4 flex gap-8">
         <div>
-          <label className="block text-[15px] font-medium text-gray-700 mb-3">Business Type</label>
+          <label className="block text-[15px] font-medium text-gray-700 mb-4">Business Type</label>
           <div className="flex gap-3">
             <button
               type="button"
@@ -96,7 +70,7 @@ const BusinessForm: React.FC<BusinessFormProps> = ({
           </div>
         </div>
         <div className="w-full">
-          <label htmlFor="link_url" className="block text-[15px] font-medium text-gray-700 mb-3">
+          <label htmlFor="link_url" className="block text-[15px] font-medium text-gray-700 mb-4">
             Link URL
           </label>
           <input
@@ -109,10 +83,16 @@ const BusinessForm: React.FC<BusinessFormProps> = ({
         </div>
       </div>
 
+      {/* Image Manager */}
+      <ImageUrlManager
+        images={formData.images}
+        onChange={(updatedImages) => handleInputChange("images", updatedImages)}
+      />
+
       {/* Title */}
       <div className="mb-4">
-        <label htmlFor="title" className="block text-[15px] font-medium text-gray-700 mb-3">
-          Title
+        <label htmlFor="title" className="block text-[15px] font-medium text-gray-700 mb-4">
+          Business Title
         </label>
         <input
           id="title"
@@ -126,9 +106,6 @@ const BusinessForm: React.FC<BusinessFormProps> = ({
 
       {/* Description */}
       <div className="mb-4">
-        <label htmlFor="description" className="block text-[15px] font-medium text-gray-700 mb-3">
-          Description
-        </label>
         <HTMLEditor
           value={formData.description}
           onChange={(value) => handleInputChange("description", value)}
@@ -138,9 +115,23 @@ const BusinessForm: React.FC<BusinessFormProps> = ({
       {/* Contacts */}
       <ContactFields
         contacts={formData.contacts}
-        onChange={handleContactChange}
-        onAdd={handleAddContact}
-        onRemove={handleRemoveContact}
+        onChange={(index, field, value) => {
+          const updatedContacts = [...formData.contacts];
+          updatedContacts[index] = { ...updatedContacts[index], [field]: value };
+          handleInputChange("contacts", updatedContacts);
+        }}
+        onAdd={() => {
+          if (formData.contacts.length < 3) {
+            handleInputChange("contacts", [
+              ...formData.contacts,
+              { email: "", name: "", phone: "" },
+            ]);
+          }
+        }}
+        onRemove={(index) => {
+          const updatedContacts = formData.contacts.filter((_, i) => i !== index);
+          handleInputChange("contacts", updatedContacts);
+        }}
       />
 
       {/* Submit Button */}

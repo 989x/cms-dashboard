@@ -11,9 +11,10 @@ interface ContactFieldsProps {
 
 const ContactFields: React.FC<ContactFieldsProps> = ({ contacts, onChange, onRemove, onAdd }) => {
   return (
-    <div>
+    <div className="space-y-4">
+      <h3 className="text-[15px] font-medium text-gray-700">Manage Contacts</h3>
       {contacts.map((contact, index) => (
-        <div key={index} className="mb-4 flex items-center gap-4">
+        <div key={index} className="flex items-center gap-4">
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 flex-1">
             <input
               type="email"
@@ -53,7 +54,7 @@ const ContactFields: React.FC<ContactFieldsProps> = ({ contacts, onChange, onRem
         <button
           type="button"
           onClick={onAdd}
-          className="mt-2 px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-100"
+          className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-100"
         >
           Add Contact
         </button>
