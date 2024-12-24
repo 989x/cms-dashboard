@@ -1,5 +1,6 @@
 import React from "react";
 import { BusinessItem } from "@/types/shared.types";
+import { FiTrash2 } from "react-icons/fi";
 
 interface ContactFieldsProps {
   contacts: BusinessItem["contacts"];
@@ -12,11 +13,8 @@ const ContactFields: React.FC<ContactFieldsProps> = ({ contacts, onChange, onRem
   return (
     <div>
       {contacts.map((contact, index) => (
-        <div key={index} className="mb-4">
-          <label className="block text-[15px] font-medium text-gray-700 mb-3">
-            Contact {index + 1}
-          </label>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div key={index} className="mb-4 flex items-center gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 flex-1">
             <input
               type="email"
               placeholder="Email"
@@ -43,9 +41,10 @@ const ContactFields: React.FC<ContactFieldsProps> = ({ contacts, onChange, onRem
             <button
               type="button"
               onClick={() => onRemove(index)}
-              className="mt-2 text-sm text-red-600 hover:underline"
+              className="text-red-600 hover:text-red-800"
+              title="Remove contact"
             >
-              Remove
+              <FiTrash2 className="h-5 w-5" />
             </button>
           )}
         </div>
@@ -54,7 +53,7 @@ const ContactFields: React.FC<ContactFieldsProps> = ({ contacts, onChange, onRem
         <button
           type="button"
           onClick={onAdd}
-          className="block w-full px-4 py-2 mt-4 text-sm font-medium text-white bg-green-600 border rounded-md"
+          className="mt-2 px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-100"
         >
           Add Contact
         </button>
