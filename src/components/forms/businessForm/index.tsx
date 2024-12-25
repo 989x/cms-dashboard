@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import BusinessCard from "@/components/cards/BusinessCard";
-import ImageUrlManager from "./ImageUrlManager";
+import ImageUrlManager from "../ImageUrlManager";
 import ContactFields from "./ContactFields";
 import { BusinessItem } from "@/types/shared.types";
 import HTMLEditor from "@/components/forms/HTMLManage/HTMLEditor";
 
 interface BusinessFormProps {
   formData: BusinessItem;
-  onChange: (field: string, value: any) => void;
+  onChange: (field: keyof BusinessItem, value: any) => void;
   onSubmit: (e: React.FormEvent) => void;
   previewMode?: boolean;
 }
@@ -20,7 +20,7 @@ const BusinessForm: React.FC<BusinessFormProps> = ({
 }) => {
   const [refreshKey, setRefreshKey] = useState(0);
 
-  const handleInputChange = (field: string, value: any) => {
+  const handleInputChange = (field: keyof BusinessItem, value: any) => {
     onChange(field, value);
   };
 
@@ -85,8 +85,8 @@ const BusinessForm: React.FC<BusinessFormProps> = ({
 
       {/* Image Manager */}
       <ImageUrlManager
-        images={formData.images}
-        onChange={(updatedImages) => handleInputChange("images", updatedImages)}
+        images={formData.cover_images}
+        onChange={(updatedImages) => handleInputChange("cover_images", updatedImages)}
       />
 
       {/* Title */}

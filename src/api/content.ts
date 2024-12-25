@@ -3,7 +3,7 @@ import { ContentItem } from "@/types/shared.types";
 export const generateRandomContents = (count: number): ContentItem[] => {
   const loremWords = [
     "Lorem", "ipsum", "dolor", "sit", "amet", "consectetur", "adipiscing", "elit",
-    "sed", "do", "eiusmod", "tempor", "incididunt", "ut", "labore", "et", "dolore", "magna", "aliqua"
+    "sed", "do", "eiusmod", "tempor", "incididunt", "ut", "labore", "et", "dolore", "magna", "aliqua",
   ];
 
   const getRandomLorem = (wordCount: number) => {
@@ -44,7 +44,14 @@ export const generateRandomContents = (count: number): ContentItem[] => {
       tags: Array.from({ length: Math.floor(Math.random() * 3) + 1 }, () =>
         loremWords[Math.floor(Math.random() * loremWords.length)]
       ), // Always an array of strings
-      image_url: `https://picsum.photos/300/200?random=${Math.floor(Math.random() * 100) + 1}`, // Always non-null
+      cover_images: Array.from({ length: Math.floor(Math.random() * 3) + 1 }, (_, i) =>
+        `https://picsum.photos/300/200?random=${index}-${i}`
+      ), // Array of URLs for cover images
+      embedded_images: Math.random() > 0.5
+        ? Array.from({ length: Math.floor(Math.random() * 3) + 1 }, (_, i) =>
+            `https://picsum.photos/400/300?random=${index}-embed-${i}`
+          )
+        : [], // Array of URLs for embedded images, optional
       link_url: "#", // Always a placeholder link
       views: Math.floor(Math.random() * 1000), // Always a number
       is_active: Math.random() > 0.5, // Boolean value

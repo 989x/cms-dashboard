@@ -17,11 +17,12 @@ export interface ContentItem {
   _id: string; // MongoDB unique identifier
   is_active: boolean;
   link_url: string;
+  cover_images: string[]; // Array of URLs for cover images (primary images)
+  embedded_images?: string[]; // Array of URLs for additional embedded images (from HTML or other sources)
   content_type: "news" | "article";
   title: string;
   description: string;
   tags: string[];
-  image_url: string;
   views: number;
   created_at: string; // ISO timestamp
   updated_at: string; // ISO timestamp
@@ -31,10 +32,11 @@ export interface BusinessItem {
   _id: string; // MongoDB unique identifier
   is_active: boolean;
   link_url: string;
+  cover_images: string[]; // Array of URLs for cover images (primary images)
+  embedded_images?: string[]; // Array of URLs for additional embedded images (from HTML or other sources)
   business_type: "general" | "franchise";
   title: string;
   description: string;
-  images: string[]; // Array of image URLs for multiple images
   contacts: {
     email: string;
     name: string;
@@ -52,9 +54,9 @@ export interface PromotionItem {
   active_from: string; // ISO timestamp
   active_until: string; // ISO timestamp
   link_url: string;
+  image_url: string; // Single image URL (Cover Image)
   title: string;
   description: string;
-  image_url: string;
   views: number;
   created_at: string; // ISO timestamp
   updated_at: string; // ISO timestamp

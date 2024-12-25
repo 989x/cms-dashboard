@@ -10,9 +10,10 @@ const AddBusiness = () => {
     is_active: true,
     link_url: "",
     business_type: "general",
+    cover_images: [], // Updated to align with shared.types.ts
+    embedded_images: [], // Optional field
     title: "",
     description: "",
-    images: [],
     contacts: [{ email: "", name: "", phone: "" }],
     views: 0,
     branches: 0,
@@ -20,7 +21,7 @@ const AddBusiness = () => {
     updated_at: new Date().toISOString(),
   });
 
-  const handleInputChange = (field: string, value: any) => {
+  const handleInputChange = (field: keyof BusinessItem, value: any) => {
     setFormData((prev) => ({
       ...prev,
       [field]: value,

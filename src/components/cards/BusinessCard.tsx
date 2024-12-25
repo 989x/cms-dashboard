@@ -26,8 +26,9 @@ const BusinessCard: React.FC<BusinessCardProps> = ({
   _id,
   is_active,
   business_type,
+  cover_images,
+  embedded_images,
   title,
-  images,
   link_url,
   contacts,
   created_at,
@@ -44,7 +45,8 @@ const BusinessCard: React.FC<BusinessCardProps> = ({
     is_active,
     business_type,
     title,
-    images,
+    cover_images,
+    embedded_images,
     link_url,
     contacts,
     created_at,
@@ -71,7 +73,7 @@ const BusinessCard: React.FC<BusinessCardProps> = ({
       <div className="flex flex-col sm:flex-row sm:items-center gap-4">
         <div className="relative w-full sm:w-[280px] aspect-video flex-shrink-0">
           <Image
-            src={currentData.images?.[0] || "/default-fallback-image.png"}
+            src={currentData.cover_images?.[0] || "/default-fallback-image.png"}
             alt={currentData.title || "No Title"}
             layout="fill"
             objectFit="cover"

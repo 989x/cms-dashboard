@@ -2,23 +2,25 @@
 
 import { useState } from "react";
 import ContentForm from "@/components/forms/contentForm";
+import { ContentItem } from "@/types/shared.types";
 
 const AddContentPage = () => {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<ContentItem>({
     _id: "",
     is_active: true,
     link_url: "",
-    content_type: "news" as "news" | "article",
+    content_type: "news", // Default to "news"
+    cover_images: [], // Array of URLs for cover images
+    embedded_images: [], // Optional field for additional images
     title: "",
     description: "",
-    tags: [] as string[],
-    image_url: "",
+    tags: [],
     views: 0,
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString(),
   });
 
-  const handleChange = (field: string, value: any) => {
+  const handleChange = (field: keyof ContentItem, value: any) => {
     setFormData((prev) => ({
       ...prev,
       [field]: value,

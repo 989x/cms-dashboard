@@ -1,24 +1,13 @@
-import React, { useState } from "react";
-import HTMLEditor from "@/components/forms/HTMLManage/HTMLEditor";
-import ImageUrlField from "./ImageUrlField";
+import { useState } from "react";
+import { ContentItem } from "@/types/shared.types";
 import ContentCard from "@/components/cards/ContentCard";
+import ImageUrlManager from "../ImageUrlManager";
+import HTMLEditor from "@/components/forms/HTMLManage/HTMLEditor";
 import { FiBook, FiFileText } from "react-icons/fi";
 
 interface ContentFormProps {
-  formData: {
-    _id: string;
-    is_active: boolean;
-    link_url: string;
-    content_type: "news" | "article";
-    title: string;
-    description: string;
-    tags: string[];
-    image_url: string;
-    views: number;
-    created_at: string;
-    updated_at: string;
-  };
-  onChange: (field: string, value: any) => void;
+  formData: ContentItem;
+  onChange: (field: keyof ContentItem, value: any) => void; // Use keyof ContentItem for strong typing
   onSubmit: (e: React.FormEvent) => void;
   previewMode?: boolean;
 }
@@ -30,15 +19,9 @@ const ContentForm: React.FC<ContentFormProps> = ({
   previewMode = true,
 }) => {
   const [refreshKey, setRefreshKey] = useState(0);
-  const [pendingImageUrl, setPendingImageUrl] = useState(formData.image_url);
 
-  const handleInputChange = (field: string, value: any) => {
+  const handleInputChange = (field: keyof ContentItem, value: any) => {
     onChange(field, value);
-  };
-
-  const handleImageApply = () => {
-    onChange("image_url", pendingImageUrl);
-    handleRefresh();
   };
 
   const handleRefresh = () => {
@@ -107,12 +90,13 @@ const ContentForm: React.FC<ContentFormProps> = ({
         </div>
       </div>
 
-      {/* Image URL Field */}
-      <ImageUrlField
-        value={pendingImageUrl}
-        onChange={(value) => setPendingImageUrl(value)} // Update pending image URL
-        onApply={handleImageApply} // Apply changes and refresh ContentCard
-      />
+      {/* Cover Images Field */}
+      <div className="mb-4">
+        <ImageUrlManager
+          images={formData.cover_images}
+          onChange={(updatedImages) => handleInputChange("cover_images", updatedImages)}
+        />
+      </div>
 
       {/* Title Field */}
       <div className="mb-4">

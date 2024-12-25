@@ -57,26 +57,25 @@ export const generateRandomBusiness = (count: number): BusinessItem[] => {
 
   const uniqueDates = generateUniqueDates(count);
 
-  return Array.from({ length: count }, (_, index) => {
-    return {
-      _id: generateRandomId(),
-      title: getRandomBusinessName(),
-      description: getRandomDescription(),
-      images: generateRandomImages(),
-      contacts: Array.from({ length: Math.floor(Math.random() * 3) + 1 }, () => ({
-        name: getRandomName(),
-        phone: generateRandomPhoneNumber(),
-        email: getRandomEmail(),
-      })),
-      link_url: getRandomLink(),
-      views: Math.floor(Math.random() * 1000),
-      business_type: Math.random() > 0.5 ? "general" : "franchise",
-      branches: Math.floor(Math.random() * 20) + 1,
-      is_active: Math.random() > 0.5,
-      created_at: uniqueDates[index],
-      updated_at: uniqueDates[index],
-    };
-  });
+  return Array.from({ length: count }, (_, index) => ({
+    _id: generateRandomId(),
+    is_active: Math.random() > 0.5,
+    link_url: getRandomLink(),
+    cover_images: generateRandomImages(),
+    embedded_images: Math.random() > 0.5 ? generateRandomImages() : [],
+    business_type: Math.random() > 0.5 ? "general" : "franchise",
+    title: getRandomBusinessName(),
+    description: getRandomDescription(),
+    contacts: Array.from({ length: Math.floor(Math.random() * 3) + 1 }, () => ({
+      name: getRandomName(),
+      phone: generateRandomPhoneNumber(),
+      email: getRandomEmail(),
+    })),
+    views: Math.floor(Math.random() * 1000),
+    branches: Math.floor(Math.random() * 20) + 1,
+    created_at: uniqueDates[index],
+    updated_at: uniqueDates[index],
+  }));
 };
 
 // Generate mock data

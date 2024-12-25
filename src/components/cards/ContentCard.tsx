@@ -16,8 +16,9 @@ const ContentCard: React.FC<ContentCardProps> = ({
   _id,
   is_active,
   content_type,
+  cover_images,
+  embedded_images,
   title,
-  image_url,
   tags,
   created_at,
   description,
@@ -31,7 +32,9 @@ const ContentCard: React.FC<ContentCardProps> = ({
   const [currentTitle, setCurrentTitle] = useState(title || "");
   const [currentDescription, setCurrentDescription] = useState(description || "");
   const [currentTags, setCurrentTags] = useState(tags || []);
-  const [currentImageUrl, setCurrentImageUrl] = useState(image_url || "/default-fallback-image.png");
+  const [currentCoverImages, setCurrentCoverImages] = useState(
+    cover_images.length > 0 ? cover_images : ["/default-fallback-image.png"]
+  );
   const [hasImageError, setImageError] = useState(false);
 
   const handleSave = (updatedData: ContentItem) => {
@@ -40,12 +43,12 @@ const ContentCard: React.FC<ContentCardProps> = ({
     setCurrentTitle(updatedData.title);
     setCurrentDescription(updatedData.description);
     setCurrentTags(updatedData.tags);
+    setCurrentCoverImages(updatedData.cover_images.length > 0 ? updatedData.cover_images : ["/default-fallback-image.png"]);
     setEditModalOpen(false);
   };
 
   const handleRefresh = () => {
     setImageError(false); // Reset image error state
-    setCurrentImageUrl(image_url || "/default-fallback-image.png");
     if (onRefresh) onRefresh(); // Call parent refresh if provided
   };
 
@@ -56,7 +59,7 @@ const ContentCard: React.FC<ContentCardProps> = ({
       <div className="flex flex-col sm:flex-row sm:items-center gap-4">
         <div className="relative w-full sm:w-[280px] aspect-video flex-shrink-0">
           <Image
-            src={!hasImageError ? currentImageUrl : "/default-fallback-image.png"}
+            src={!hasImageError ? currentCoverImages[0] : "/default-fallback-image.png"}
             alt={currentTitle || "No Title"}
             layout="fill"
             objectFit="cover"
@@ -155,7 +158,8 @@ const ContentCard: React.FC<ContentCardProps> = ({
           title: currentTitle,
           description: currentDescription,
           tags: currentTags,
-          image_url: currentImageUrl,
+          cover_images: currentCoverImages,
+          embedded_images: embedded_images || [],
           created_at,
           views,
           updated_at: new Date().toISOString(),
