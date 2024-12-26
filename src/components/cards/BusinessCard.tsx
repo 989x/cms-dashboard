@@ -103,26 +103,61 @@ const BusinessCard: React.FC<BusinessCardProps> = ({
           <p className="text-sm text-gray-800 line-clamp-2 leading-relaxed">
             {currentData.description || "No description available."}
           </p>
-          <div className="flex items-center text-sm text-gray-600 gap-2">
-            <span className="font-semibold text-gray-800">Branches:</span>
-            <span>{currentData.branches}</span>
-          </div>
-          <div className="flex flex-wrap gap-2 text-sm text-gray-600">
-            {currentData.contacts?.map((contact, index) => (
-              <div
-                key={index}
-                className="flex flex-col sm:flex-row sm:items-center sm:gap-1"
-              >
-                <span className="font-semibold text-gray-800">{contact.name}:</span>
-                <span>{contact.phone}</span>
-                <a
-                  href={`mailto:${contact.email}`}
-                  className="text-blue-500 underline"
-                >
-                  {contact.email}
-                </a>
+          <div className="flex flex-wrap text-sm text-gray-600">
+            {currentData.contacts && (
+              <div className="flex flex-wrap gap-y-2 gap-x-8">
+                <div className="flex flex-col">
+                  <span className="font-semibold text-gray-800">Name</span>
+                  <span>{currentData.contacts.name}</span>
+                </div>
+                <div className="flex flex-col">
+                  <span className="font-semibold text-gray-800">Phone</span>
+                  <span>{currentData.contacts.phone}</span>
+                </div>
+                <div className="flex flex-col">
+                  <span className="font-semibold text-gray-800">Email</span>
+                  <a
+                    href={`mailto:${currentData.contacts.email}`}
+                    className="text-blue-500 underline"
+                  >
+                    {currentData.contacts.email}
+                  </a>
+                </div>
+                {currentData.contacts.facebook && (
+                  <div className="flex flex-col">
+                    <span className="font-semibold text-gray-800">Facebook</span>
+                    <a
+                      href={currentData.contacts.facebook}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-500 underline"
+                    >
+                      {currentData.contacts.facebook}
+                    </a>
+                  </div>
+                )}
+                {currentData.contacts.line && (
+                  <div className="flex flex-col">
+                    <span className="font-semibold text-gray-800">LINE</span>
+                    <span>{currentData.contacts.line}</span>
+                  </div>
+                )}
+                {currentData.contacts.Website && (
+                  <div className="flex flex-col">
+                    <span className="font-semibold text-gray-800">Website</span>
+                    <a
+                      href={currentData.contacts.Website}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-500 underline"
+                    >
+                      {currentData.contacts.Website}
+                    </a>
+                  </div>
+                )}
               </div>
-            ))}
+            )}
+
           </div>
         </div>
       </div>

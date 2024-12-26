@@ -16,7 +16,7 @@ const AddBusiness = () => {
     embedded_images: [], // Optional field
     title: "",
     description: "",
-    contacts: [{ email: "", name: "", phone: "" }],
+    contacts: { email: "", name: "", phone: "" },
     branches: 0,
     view_count: 0,
     created_at: new Date().toISOString(),

@@ -1,9 +1,6 @@
-// cms-dashboard/src/components/forms/businessForm/index.tsx
-
 import { useState } from "react";
 import BusinessCard from "@/components/cards/BusinessCard";
 import ImageUrlManager from "../ImageUrlManager";
-import ContactFields from "./ContactFields";
 import { BusinessItem } from "@/types/shared.types";
 import HTMLEditor from "@/components/forms/HTMLManage/HTMLEditor";
 import { FiGlobe, FiShare2 } from "react-icons/fi";
@@ -166,26 +163,7 @@ const BusinessForm: React.FC<BusinessFormProps> = ({
       </div>
 
       {/* Contacts */}
-      <ContactFields
-        contacts={formData.contacts}
-        onChange={(index, field, value) => {
-          const updatedContacts = [...formData.contacts];
-          updatedContacts[index] = { ...updatedContacts[index], [field]: value };
-          handleInputChange("contacts", updatedContacts);
-        }}
-        onAdd={() => {
-          if (formData.contacts.length < 3) {
-            handleInputChange("contacts", [
-              ...formData.contacts,
-              { email: "", name: "", phone: "" },
-            ]);
-          }
-        }}
-        onRemove={(index) => {
-          const updatedContacts = formData.contacts.filter((_, i) => i !== index);
-          handleInputChange("contacts", updatedContacts);
-        }}
-      />
+      {/* ... */}
 
       {/* Submit Button */}
       <button

@@ -23,6 +23,9 @@ export const generateRandomBusiness = (count: number): BusinessItem[] => {
     "https://example.com/business2",
     "https://example.com/business3",
   ];
+  const facebookLinks = ["https://facebook.com/page1", "https://facebook.com/page2", "https://facebook.com/page3"];
+  const lineIds = ["line123", "line456", "line789"];
+  const websites = ["https://businesswebsite1.com", "https://businesswebsite2.com"];
 
   const getRandomName = () => names[Math.floor(Math.random() * names.length)];
   const getRandomEmail = () => emails[Math.floor(Math.random() * emails.length)];
@@ -66,11 +69,14 @@ export const generateRandomBusiness = (count: number): BusinessItem[] => {
     business_type: Math.random() > 0.5 ? "general" : "franchise",
     title: getRandomBusinessName(),
     description: getRandomDescription(),
-    contacts: Array.from({ length: Math.floor(Math.random() * 3) + 1 }, () => ({
+    contacts: {
       name: getRandomName(),
       phone: generateRandomPhoneNumber(),
       email: getRandomEmail(),
-    })),
+      facebook: Math.random() > 0.5 ? facebookLinks[Math.floor(Math.random() * facebookLinks.length)] : undefined,
+      line: Math.random() > 0.5 ? lineIds[Math.floor(Math.random() * lineIds.length)] : undefined,
+      Website: Math.random() > 0.5 ? websites[Math.floor(Math.random() * websites.length)] : undefined,
+    },
     view_count: Math.floor(Math.random() * 1000),
     branches: Math.floor(Math.random() * 20) + 1,
     created_at: uniqueDates[index],

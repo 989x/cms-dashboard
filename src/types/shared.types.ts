@@ -49,7 +49,7 @@ export interface BusinessItem {
     facebook?: string;
     line?: string;
     Website?: string;
-  }[];
+  };
   investment_start?: number;
   investment_end?: number;
   payback_period?: number;
