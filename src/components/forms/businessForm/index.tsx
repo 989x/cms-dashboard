@@ -122,6 +122,49 @@ const BusinessForm: React.FC<BusinessFormProps> = ({
         />
       </div>
 
+      {/* Branches, Investment Start, Investment End */}
+      <div className="mb-4 flex gap-4">
+        <div className="flex-1 max-w-[25%] md:max-w-[20%]">
+          <label htmlFor="branches" className="block text-[15px] font-medium text-gray-700 mb-2">
+            Branches
+          </label>
+          <input
+            id="branches"
+            type="text"
+            placeholder="e.g., 10"
+            value={formData.branches}
+            onChange={(e) => handleInputChange("branches", e.target.value)}
+            className="block w-full px-3 py-2 border border-gray-300 rounded-md text-sm"
+          />
+        </div>
+        <div className="flex-1">
+          <label htmlFor="investment_start" className="block text-[15px] font-medium text-gray-700 mb-2">
+            Investment Start
+          </label>
+          <input
+            id="investment_start"
+            type="text"
+            placeholder="e.g., 5000"
+            value={formData.investment_start}
+            onChange={(e) => handleInputChange("investment_start", e.target.value)}
+            className="block w-full px-3 py-2 border border-gray-300 rounded-md text-sm"
+          />
+        </div>
+        <div className="flex-1">
+          <label htmlFor="investment_end" className="block text-[15px] font-medium text-gray-700 mb-2">
+            Investment End
+          </label>
+          <input
+            id="investment_end"
+            type="text"
+            placeholder="e.g., 20000"
+            value={formData.investment_end}
+            onChange={(e) => handleInputChange("investment_end", e.target.value)}
+            className="block w-full px-3 py-2 border border-gray-300 rounded-md text-sm"
+          />
+        </div>
+      </div>
+
       {/* Contacts */}
       <ContactFields
         contacts={formData.contacts}

@@ -34,6 +34,7 @@ export interface BusinessItem {
   link_url: string;
   cover_images: string[]; // Array of URLs for cover images (primary images)
   embedded_images?: string[]; // Array of URLs for additional embedded images (from HTML or other sources)
+  business_nationality?: "Thai" | "Chinese" | "Japanese" | "American" | "European" | "Global";
   business_type: "general" | "franchise";
   title: string;
   description: string;
@@ -42,8 +43,11 @@ export interface BusinessItem {
     name: string;
     phone: string;
   }[];
+  branches?: number;
+  investment_start?: number;
+  investment_end?: number;
+  payback_period?: number;
   views: number;
-  branches: number;
   created_at: string; // ISO timestamp
   updated_at: string; // ISO timestamp
 }
