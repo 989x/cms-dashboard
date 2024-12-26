@@ -4,6 +4,7 @@ import ImageUrlManager from "../ImageUrlManager";
 import ContactFields from "./ContactFields";
 import { BusinessItem } from "@/types/shared.types";
 import HTMLEditor from "@/components/forms/HTMLManage/HTMLEditor";
+import { FiGlobe, FiShare2 } from "react-icons/fi";
 
 interface BusinessFormProps {
   formData: BusinessItem;
@@ -42,7 +43,7 @@ const BusinessForm: React.FC<BusinessFormProps> = ({
 
       {/* Business Type and Link URL */}
       <div className="mb-4 flex gap-8">
-        <div>
+       <div>
           <label className="block text-[15px] font-medium text-gray-700 mb-4">Business Type</label>
           <div className="flex gap-3">
             <button
@@ -54,6 +55,7 @@ const BusinessForm: React.FC<BusinessFormProps> = ({
               }`}
               onClick={() => handleInputChange("business_type", "general")}
             >
+              <FiShare2 className="h-[18px] w-[18px]" />
               General
             </button>
             <button
@@ -65,6 +67,7 @@ const BusinessForm: React.FC<BusinessFormProps> = ({
               }`}
               onClick={() => handleInputChange("business_type", "franchise")}
             >
+              <FiGlobe className="h-[18px] w-[18px]" />
               Franchise
             </button>
           </div>

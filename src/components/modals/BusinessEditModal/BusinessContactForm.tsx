@@ -23,7 +23,7 @@ const BusinessContactForm: React.FC<BusinessContactFormProps> = ({
     <div className="mb-5">
       <label className="block font-medium mb-3">Contacts</label>
       {contacts.map((contact, index) => (
-        <div key={index} className="grid grid-cols-[1fr_1fr_1fr_auto] gap-2 mb-3">
+        <div key={index} className="grid grid-cols-[1fr_1fr_1fr_auto] gap-3 mb-3">
           <input
             type="text"
             value={contact.name}
@@ -48,7 +48,7 @@ const BusinessContactForm: React.FC<BusinessContactFormProps> = ({
           <button
             type="button"
             onClick={() => onRemoveContact(index)}
-            className="text-red-500 hover:text-red-700"
+            className="text-red-500 hover:text-red-700 ml-1"
           >
             <FiTrash2 className="h-5 w-5" />
           </button>

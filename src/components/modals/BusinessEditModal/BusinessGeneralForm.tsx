@@ -1,4 +1,4 @@
-import { FiBriefcase, FiMapPin } from "react-icons/fi";
+import { FiGlobe, FiShare2 } from "react-icons/fi";
 
 interface BusinessGeneralFormProps {
   title: string;
@@ -34,22 +34,22 @@ const BusinessGeneralForm: React.FC<BusinessGeneralFormProps> = ({
           <div className="flex gap-3">
             <button
               type="button"
-              className={`flex items-center gap-2 px-3 py-[10px] bg-gray-100 rounded-lg ${
+              className={`flex items-center gap-2.5 px-3 py-[10px] bg-gray-100 rounded-lg ${
                 type === "general" ? "bg-blue-600 text-white" : "border-gray-300 text-gray-700"
               }`}
               onClick={() => onTypeChange("general")}
             >
-              <FiBriefcase className="h-5 w-5" />
+              <FiGlobe className="h-[18px] w-[18px]" />
               General
             </button>
             <button
               type="button"
-              className={`flex items-center gap-2 px-3 py-[10px] bg-gray-100 rounded-lg ${
+              className={`flex items-center gap-2.5 px-3 py-[10px] bg-gray-100 rounded-lg ${
                 type === "franchise" ? "bg-blue-600 text-white" : "border-gray-300 text-gray-700"
               }`}
               onClick={() => onTypeChange("franchise")}
             >
-              <FiMapPin className="h-5 w-5" />
+              <FiShare2 className="h-[18px] w-[18px]" />
               Franchise
             </button>
           </div>
