@@ -24,7 +24,7 @@ export interface ContentItem {
   content_type: "news" | "article";
   title: string;
   description: string;
-  tags: string[];
+  content_tags: string[];
   view_count: number;
   created_at: string; // ISO timestamp
   updated_at: string; // ISO timestamp

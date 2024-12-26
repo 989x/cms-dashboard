@@ -14,7 +14,7 @@ const AddContentPage = () => {
     embedded_images: [], // Optional field for additional images
     title: "",
     description: "",
-    tags: [],
+    content_tags: [],
     view_count: 0,
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString(),

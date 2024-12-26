@@ -135,8 +135,8 @@ const ContentForm: React.FC<ContentFormProps> = ({
               if (e.key === "Enter") {
                 e.preventDefault();
                 const tag = e.currentTarget.value.trim();
-                if (tag && !formData.tags.includes(tag)) {
-                  handleInputChange("tags", [...formData.tags, tag]);
+                if (tag && !formData.content_tags.includes(tag)) {
+                  handleInputChange("content_tags", [...formData.content_tags, tag]);
                   e.currentTarget.value = "";
                 }
               }
@@ -145,18 +145,18 @@ const ContentForm: React.FC<ContentFormProps> = ({
           />
         </div>
         <div className="mt-2 flex gap-2 flex-wrap">
-          {formData.tags.map((tag) => (
+          {formData.content_tags.map((content_tags) => (
             <span
-              key={tag}
+              key={content_tags}
               className="inline-flex items-center px-3 py-1 bg-gray-200 text-gray-700 rounded-lg text-sm"
             >
-              {tag}
+              {content_tags}
               <button
                 type="button"
                 onClick={() =>
                   handleInputChange(
-                    "tags",
-                    formData.tags.filter((t) => t !== tag)
+                    "content_tags",
+                    formData.content_tags.filter((t) => t !== content_tags)
                   )
                 }
                 className="ml-2 text-red-500 hover:text-red-700"

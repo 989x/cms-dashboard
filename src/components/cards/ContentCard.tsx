@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import { ContentItem } from "@/types/shared.types";
 import { formatToThaiDate } from "@/utils/formatDate";
@@ -19,10 +19,10 @@ const ContentCard: React.FC<ContentCardProps> = ({
   cover_images,
   embedded_images,
   title,
-  tags,
-  created_at,
   description,
+  content_tags,
   view_count,
+  created_at,
   previewMode = false,
   onRefresh,
 }) => {
@@ -31,7 +31,7 @@ const ContentCard: React.FC<ContentCardProps> = ({
   const [currentContentType, setCurrentContentType] = useState(content_type);
   const [currentTitle, setCurrentTitle] = useState(title || "");
   const [currentDescription, setCurrentDescription] = useState(description || "");
-  const [currentTags, setCurrentTags] = useState(tags || []);
+  const [currentTags, setCurrentTags] = useState(content_tags || []);
   const [currentCoverImages, setCurrentCoverImages] = useState(
     cover_images.length > 0 ? cover_images : ["/default-fallback-image.png"]
   );
@@ -42,7 +42,7 @@ const ContentCard: React.FC<ContentCardProps> = ({
     setCurrentContentType(updatedData.content_type);
     setCurrentTitle(updatedData.title);
     setCurrentDescription(updatedData.description);
-    setCurrentTags(updatedData.tags);
+    setCurrentTags(updatedData.content_tags);
     setCurrentCoverImages(updatedData.cover_images.length > 0 ? updatedData.cover_images : ["/default-fallback-image.png"]);
     setEditModalOpen(false);
   };
@@ -154,12 +154,12 @@ const ContentCard: React.FC<ContentCardProps> = ({
           _id,
           is_active: currentIsActive,
           link_url: "",
+          cover_images: currentCoverImages,
+          embedded_images: embedded_images || [],
           content_type: currentContentType,
           title: currentTitle,
           description: currentDescription,
-          tags: currentTags,
-          cover_images: currentCoverImages,
-          embedded_images: embedded_images || [],
+          content_tags: currentTags,
           view_count,
           created_at,
           updated_at: new Date().toISOString(),

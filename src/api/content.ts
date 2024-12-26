@@ -41,7 +41,7 @@ export const generateRandomContents = (count: number): ContentItem[] => {
       _id: generateRandomId(), // MongoDB ObjectId style
       title,
       description,
-      tags: Array.from({ length: Math.floor(Math.random() * 3) + 1 }, () =>
+      content_tags: Array.from({ length: Math.floor(Math.random() * 3) + 1 }, () =>
         loremWords[Math.floor(Math.random() * loremWords.length)]
       ), // Always an array of strings
       cover_images: Array.from({ length: Math.floor(Math.random() * 3) + 1 }, (_, i) =>

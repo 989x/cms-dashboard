@@ -17,13 +17,13 @@ const ContentEditModal: React.FC<ContentEditModalProps> = ({
   contentData,
   onSave,
 }) => {
-  const { _id, title, description, tags = [], is_active, content_type } = contentData;
+  const { _id, title, description, content_tags = [], is_active, content_type } = contentData;
 
   const [editIsActive, setEditIsActive] = useState(is_active);
   const [editContentType, setEditContentType] = useState(content_type);
   const [editTitle, setEditTitle] = useState(title);
   const [editDescription, setEditDescription] = useState(description);
-  const [editTags, setEditTags] = useState(tags.join(", "));
+  const [editTags, setEditTags] = useState(content_tags.join(", "));
 
   const handleSave = () => {
     const updatedData: ContentItem = {
@@ -32,7 +32,7 @@ const ContentEditModal: React.FC<ContentEditModalProps> = ({
       content_type: editContentType,
       title: editTitle,
       description: editDescription,
-      tags: editTags.split(",").map((tag) => tag.trim()),
+      content_tags: editTags.split(",").map((tag) => tag.trim()),
     };
 
     console.log("Saving content:", updatedData);
@@ -71,7 +71,7 @@ const ContentEditModal: React.FC<ContentEditModalProps> = ({
               onIsActiveChange={setEditIsActive}
               title={editTitle}
               onTitleChange={setEditTitle}
-              tags={editTags}
+              content_tags={editTags}
               onTagsChange={setEditTags}
             />
             <ContentDescForm 

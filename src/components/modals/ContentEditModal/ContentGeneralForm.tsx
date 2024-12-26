@@ -7,7 +7,7 @@ interface GeneralFormProps {
   onIsActiveChange: (value: boolean) => void;
   title: string;
   onTitleChange: (value: string) => void;
-  tags: string;
+  content_tags: string;
   onTagsChange: (value: string) => void;
 }
 
@@ -18,7 +18,7 @@ const ContentGeneralForm: React.FC<GeneralFormProps> = ({
   onIsActiveChange,
   title,
   onTitleChange,
-  tags,
+  content_tags,
   onTagsChange,
 }) => {
   const handleContentTypeChange = (type: "news" | "article") => {
@@ -101,7 +101,7 @@ const ContentGeneralForm: React.FC<GeneralFormProps> = ({
         <label className="block font-medium mb-3">Tags</label>
         <input
           type="text"
-          value={tags}
+          value={content_tags}
           onChange={(e) => onTagsChange(e.target.value)}
           placeholder="Enter tags separated by commas (e.g., Cloud, Service, Technology)"
           className="w-full p-2.5 border rounded-lg focus:ring focus:ring-blue-300"
