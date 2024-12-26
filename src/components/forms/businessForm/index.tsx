@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+// cms-dashboard/src/components/forms/businessForm/index.tsx
+
+import { useState } from "react";
 import BusinessCard from "@/components/cards/BusinessCard";
 import ImageUrlManager from "../ImageUrlManager";
 import ContactFields from "./ContactFields";
@@ -43,7 +45,7 @@ const BusinessForm: React.FC<BusinessFormProps> = ({
 
       {/* Business Type and Link URL */}
       <div className="mb-4 flex gap-8">
-       <div>
+        <div>
           <label className="block text-[15px] font-medium text-gray-700 mb-4">Business Type</label>
           <div className="flex gap-3">
             <button
@@ -87,10 +89,15 @@ const BusinessForm: React.FC<BusinessFormProps> = ({
       </div>
 
       {/* Image Manager */}
-      <ImageUrlManager
-        images={formData.cover_images}
-        onChange={(updatedImages) => handleInputChange("cover_images", updatedImages)}
-      />
+      <div>
+        <ImageUrlManager
+          coverImages={formData.cover_images}
+          embeddedImages={formData.embedded_images || []}
+          onChange={(type, updatedImages) =>
+            handleInputChange(type === "cover" ? "cover_images" : "embedded_images", updatedImages)
+          }
+        />
+      </div>
 
       {/* Title */}
       <div className="mb-4">

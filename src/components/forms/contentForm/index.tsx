@@ -1,3 +1,5 @@
+// cms-dashboard/src/components/forms/contentForm/index.tsx
+
 import { useState } from "react";
 import { ContentItem } from "@/types/shared.types";
 import ContentCard from "@/components/cards/ContentCard";
@@ -7,7 +9,7 @@ import { FiBook, FiFileText } from "react-icons/fi";
 
 interface ContentFormProps {
   formData: ContentItem;
-  onChange: (field: keyof ContentItem, value: any) => void; // Use keyof ContentItem for strong typing
+  onChange: (field: keyof ContentItem, value: any) => void;
   onSubmit: (e: React.FormEvent) => void;
   previewMode?: boolean;
 }
@@ -42,9 +44,8 @@ const ContentForm: React.FC<ContentFormProps> = ({
         />
       </div>
 
-      {/* Link URL and Content Type in a Single Row */}
+      {/* Link URL and Content Type */}
       <div className="mb-4 flex gap-8">
-        {/* Content Type Field */}
         <div>
           <label className="block text-[15px] font-medium text-gray-700 mb-4">Content Type</label>
           <div className="flex gap-3">
@@ -75,7 +76,6 @@ const ContentForm: React.FC<ContentFormProps> = ({
           </div>
         </div>
 
-        {/* Link URL Field */}
         <div className="w-full">
           <label htmlFor="link_url" className="block text-[15px] font-medium text-gray-700 mb-4">
             Link URL
@@ -90,15 +90,18 @@ const ContentForm: React.FC<ContentFormProps> = ({
         </div>
       </div>
 
-      {/* Cover Images Field */}
+      {/* Cover Images */}
       <div className="mb-4">
         <ImageUrlManager
-          images={formData.cover_images}
-          onChange={(updatedImages) => handleInputChange("cover_images", updatedImages)}
+          coverImages={formData.cover_images}
+          embeddedImages={formData.embedded_images || []}
+          onChange={(type, updatedImages) =>
+            handleInputChange(type === "cover" ? "cover_images" : "embedded_images", updatedImages)
+          }
         />
       </div>
 
-      {/* Title Field */}
+      {/* Title */}
       <div className="mb-4">
         <label htmlFor="title" className="block text-[15px] font-medium text-gray-700 mb-4">
           Content Title
@@ -113,7 +116,7 @@ const ContentForm: React.FC<ContentFormProps> = ({
         />
       </div>
 
-      {/* Description Field */}
+      {/* Description */}
       <div className="mb-4">
         <HTMLEditor
           value={formData.description}
@@ -121,7 +124,7 @@ const ContentForm: React.FC<ContentFormProps> = ({
         />
       </div>
 
-      {/* Tags Field */}
+      {/* Tags */}
       <div className="mb-4">
         <label className="block text-[15px] font-medium text-gray-700 mb-4">Tags</label>
         <div className="flex gap-2 items-center">
