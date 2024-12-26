@@ -34,7 +34,7 @@ const BusinessCard: React.FC<BusinessCardProps> = ({
   created_at,
   updated_at,
   description,
-  views,
+  view_count,
   branches,
   previewMode = false,
   onRefresh,
@@ -52,8 +52,8 @@ const BusinessCard: React.FC<BusinessCardProps> = ({
     created_at,
     updated_at,
     description,
-    views,
     branches,
+    view_count,
   });
 
   const handleSave = (updatedData: BusinessItem) => {
@@ -97,7 +97,7 @@ const BusinessCard: React.FC<BusinessCardProps> = ({
             <span className="h-4 w-[1.5px] bg-gray-300"></span>
             <span className="flex items-center gap-1.5">
               <AiOutlineEye className="h-4 w-4" />
-              {currentData.views ?? "0"}
+              {currentData.view_count ?? "0"}
             </span>
           </div>
           <p className="text-sm text-gray-800 line-clamp-2 leading-relaxed">

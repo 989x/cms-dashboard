@@ -53,7 +53,7 @@ export const generateRandomContents = (count: number): ContentItem[] => {
           )
         : [], // Array of URLs for embedded images, optional
       link_url: "#", // Always a placeholder link
-      views: Math.floor(Math.random() * 1000), // Always a number
+      view_count: Math.floor(Math.random() * 1000), // Always a number
       is_active: Math.random() > 0.5, // Boolean value
       content_type: Math.random() > 0.5 ? "news" : "article",
       created_at: uniqueDates[index],

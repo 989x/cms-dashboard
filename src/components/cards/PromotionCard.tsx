@@ -7,12 +7,12 @@ import { PromotionItem } from "@/types/shared.types";
 
 const PromotionCard: React.FC<PromotionItem> = ({
   _id,
+  is_active,
   title,
   description,
   image_url,
   link_url,
-  views,
-  is_active,
+  view_count,
   active_from,
   active_until,
 }) => {
@@ -50,7 +50,7 @@ const PromotionCard: React.FC<PromotionItem> = ({
               <span className="h-4 w-[1.5px] bg-gray-300"></span>
               <div className="flex items-center gap-x-1.5">
                 <AiOutlineEye className="h-4 w-4" />
-                <span>{views} views</span>
+                <span>{view_count} views</span>
               </div>
             </div>
 

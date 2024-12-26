@@ -71,7 +71,7 @@ export const generateRandomBusiness = (count: number): BusinessItem[] => {
       phone: generateRandomPhoneNumber(),
       email: getRandomEmail(),
     })),
-    views: Math.floor(Math.random() * 1000),
+    view_count: Math.floor(Math.random() * 1000),
     branches: Math.floor(Math.random() * 20) + 1,
     created_at: uniqueDates[index],
     updated_at: uniqueDates[index],

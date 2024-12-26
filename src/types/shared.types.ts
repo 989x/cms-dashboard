@@ -1,3 +1,5 @@
+// shared.types.ts
+
 export interface FranchiseForm {
   _id: string; // MongoDB unique identifier, e.g., "60f7b5a2c2a4d12345abc678"
   is_active: boolean;
@@ -23,7 +25,7 @@ export interface ContentItem {
   title: string;
   description: string;
   tags: string[];
-  views: number;
+  view_count: number;
   created_at: string; // ISO timestamp
   updated_at: string; // ISO timestamp
 }
@@ -47,7 +49,7 @@ export interface BusinessItem {
   investment_start?: number;
   investment_end?: number;
   payback_period?: number;
-  views: number;
+  view_count: number;
   created_at: string; // ISO timestamp
   updated_at: string; // ISO timestamp
 }
@@ -61,7 +63,7 @@ export interface PromotionItem {
   image_url: string; // Single image URL (Cover Image)
   title: string;
   description: string;
-  views: number;
+  view_count: number;
   created_at: string; // ISO timestamp
   updated_at: string; // ISO timestamp
 }

@@ -17,8 +17,8 @@ const AddBusiness = () => {
     title: "",
     description: "",
     contacts: [{ email: "", name: "", phone: "" }],
-    views: 0,
     branches: 0,
+    view_count: 0,
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString(),
   });

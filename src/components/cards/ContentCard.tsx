@@ -22,7 +22,7 @@ const ContentCard: React.FC<ContentCardProps> = ({
   tags,
   created_at,
   description,
-  views,
+  view_count,
   previewMode = false,
   onRefresh,
 }) => {
@@ -84,7 +84,7 @@ const ContentCard: React.FC<ContentCardProps> = ({
             <span className="h-4 w-[1.5px] bg-gray-300"></span>
             <span className="flex items-center gap-1.5">
               <AiOutlineEye className="h-4 w-4" />
-              {views ?? "0"}
+              {view_count ?? "0"}
             </span>
           </div>
           <p className="text-sm text-gray-800 line-clamp-2 leading-relaxed">
@@ -160,8 +160,8 @@ const ContentCard: React.FC<ContentCardProps> = ({
           tags: currentTags,
           cover_images: currentCoverImages,
           embedded_images: embedded_images || [],
+          view_count,
           created_at,
-          views,
           updated_at: new Date().toISOString(),
         }}
         onSave={handleSave}

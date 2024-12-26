@@ -43,7 +43,7 @@ export const generateRandomPromotions = (count: number): PromotionItem[] => {
       description: descriptions[Math.floor(Math.random() * descriptions.length)], // Random description
       image_url: `https://picsum.photos/seed/promo${i}/600/400`, // Generate random image
       link_url: links[Math.floor(Math.random() * links.length)],
-      views: Math.floor(Math.random() * 1000), // Random views (0-999)
+      view_count: Math.floor(Math.random() * 1000), // Random view_count (0-999)
       is_active: Math.random() > 0.5, // Boolean value
       active_from,
       active_until,
