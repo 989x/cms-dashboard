@@ -22,6 +22,7 @@ export interface ContentItem {
   cover_images: string[]; // Array of URLs for cover images (primary images)
   embedded_images?: string[]; // Array of URLs for additional embedded images (from HTML or other sources)
   content_type: "news" | "article";
+  categories?: ("others" | "food" | "medical" | "technology" | "education" | "entertainment")[];
   title: string;
   description: string;
   content_tags: string[];
@@ -36,19 +37,25 @@ export interface BusinessItem {
   link_url: string;
   cover_images: string[]; // Array of URLs for cover images (primary images)
   embedded_images?: string[]; // Array of URLs for additional embedded images (from HTML or other sources)
-  business_nationality?: "Thai" | "Chinese" | "Japanese" | "American" | "European" | "Global";
+  business_nationality?: "thai" | "chinese" | "japanese" | "american" | "european" | "global";
   business_type: "general" | "franchise";
+  categories?: ("others" | "food" | "medical" | "technology" | "education" | "entertainment")[];
   title: string;
   description: string;
   contacts: {
     email: string;
     name: string;
     phone: string;
+    facebook?: string;
+    line?: string;
+    Website?: string;
   }[];
-  branches?: number;
   investment_start?: number;
   investment_end?: number;
   payback_period?: number;
+  branches?: number;
+  service_area?: string;
+  map_url?: string;
   view_count: number;
   created_at: string; // ISO timestamp
   updated_at: string; // ISO timestamp

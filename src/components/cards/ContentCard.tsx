@@ -1,8 +1,10 @@
+// cms-dashboard/src/components/cards/ContentCard.tsx
+
 import { useState } from "react";
+import { useRouter } from "next/router";
 import Image from "next/image";
 import { ContentItem } from "@/types/shared.types";
 import { formatToThaiDate } from "@/utils/formatDate";
-import ContentEditModal from "../modals/ContentEditModal";
 import { AiOutlineCalendar, AiOutlineEye } from "react-icons/ai";
 import { FiEdit, FiEye, FiEyeOff, FiTrash2, FiBook, FiFileText } from "react-icons/fi";
 import { MdRefresh } from "react-icons/md";
@@ -26,7 +28,7 @@ const ContentCard: React.FC<ContentCardProps> = ({
   previewMode = false,
   onRefresh,
 }) => {
-  const [isEditModalOpen, setEditModalOpen] = useState(false);
+  const router = useRouter();
   const [currentIsActive, setCurrentIsActive] = useState(is_active);
   const [currentContentType, setCurrentContentType] = useState(content_type);
   const [currentTitle, setCurrentTitle] = useState(title || "");
@@ -37,14 +39,11 @@ const ContentCard: React.FC<ContentCardProps> = ({
   );
   const [hasImageError, setImageError] = useState(false);
 
-  const handleSave = (updatedData: ContentItem) => {
-    setCurrentIsActive(updatedData.is_active);
-    setCurrentContentType(updatedData.content_type);
-    setCurrentTitle(updatedData.title);
-    setCurrentDescription(updatedData.description);
-    setCurrentTags(updatedData.content_tags);
-    setCurrentCoverImages(updatedData.cover_images.length > 0 ? updatedData.cover_images : ["/default-fallback-image.png"]);
-    setEditModalOpen(false);
+  const handleEdit = () => {
+    router.push({
+      pathname: "/content/add",
+      query: { _id, edit: true },
+    });
   };
 
   const handleRefresh = () => {
@@ -130,7 +129,7 @@ const ContentCard: React.FC<ContentCardProps> = ({
             <>
               <button
                 className="flex items-center gap-2 px-3 py-2 border text-blue-600 font-semibold rounded-md transition-colors duration-200 hover:bg-blue-600 hover:text-white"
-                onClick={() => setEditModalOpen(true)}
+                onClick={handleEdit}
               >
                 <FiEdit className="h-4 w-4" />
                 Edit
@@ -145,27 +144,6 @@ const ContentCard: React.FC<ContentCardProps> = ({
           )}
         </div>
       </div>
-
-      {/* Modal */}
-      <ContentEditModal
-        isOpen={isEditModalOpen}
-        onClose={() => setEditModalOpen(false)}
-        contentData={{
-          _id,
-          is_active: currentIsActive,
-          link_url: "",
-          cover_images: currentCoverImages,
-          embedded_images: embedded_images || [],
-          content_type: currentContentType,
-          title: currentTitle,
-          description: currentDescription,
-          content_tags: currentTags,
-          view_count,
-          created_at,
-          updated_at: new Date().toISOString(),
-        }}
-        onSave={handleSave}
-      />
     </div>
   );
 };

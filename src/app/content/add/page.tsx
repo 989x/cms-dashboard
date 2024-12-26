@@ -1,3 +1,5 @@
+// cms-dashboard/src/app/content/add/page.tsx
+
 "use client";
 
 import { useState } from "react";
