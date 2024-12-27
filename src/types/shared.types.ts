@@ -56,7 +56,7 @@ export interface BusinessItem {
   branches?: number;
   service_area?: string;
   map_url?: string;
-  promotion?: {
+  special_deal?: {
     is_active: boolean;
     details: string;
     start_date?: string; // ISO timestamp
