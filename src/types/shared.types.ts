@@ -56,6 +56,12 @@ export interface BusinessItem {
   branches?: number;
   service_area?: string;
   map_url?: string;
+  promotion?: {
+    is_active: boolean;
+    details: string;
+    start_date?: string; // ISO timestamp
+    end_date?: string; // ISO timestamp
+  };
   view_count: number;
   created_at: string; // ISO timestamp
   updated_at: string; // ISO timestamp
