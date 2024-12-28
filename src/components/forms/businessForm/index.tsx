@@ -1,5 +1,3 @@
-import { useState } from "react";
-import BusinessCard from "@/components/cards/BusinessCard";
 import ImageUrlManager from "../ImageUrlManager";
 import { BusinessItem } from "@/types/shared.types";
 import HTMLEditor from "@/components/forms/HTMLManage/HTMLEditor";
@@ -16,30 +14,13 @@ const BusinessForm: React.FC<BusinessFormProps> = ({
   formData,
   onChange,
   onSubmit,
-  previewMode = true,
 }) => {
-  const [refreshKey, setRefreshKey] = useState(0);
-
   const handleInputChange = (field: keyof BusinessItem, value: any) => {
     onChange(field, value);
   };
 
-  const handleRefresh = () => {
-    setRefreshKey((prev) => prev + 1);
-  };
-
   return (
     <form onSubmit={onSubmit} className="space-y-10">
-      {/* Business Preview */}
-      <div className="mb-6">
-        <BusinessCard
-          key={refreshKey}
-          {...formData}
-          previewMode={previewMode}
-          onRefresh={handleRefresh}
-        />
-      </div>
-
       {/* Business Type and Link URL */}
       <div className="mb-4 flex gap-8">
         <div>
