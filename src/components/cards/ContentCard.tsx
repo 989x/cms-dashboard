@@ -7,14 +7,8 @@ import { formatToThaiDate } from "@/utils/formatDate";
 import ContentEditModal from "../modals/ContentEditModal";
 import { AiOutlineCalendar, AiOutlineEye } from "react-icons/ai";
 import { FiEdit, FiEye, FiEyeOff, FiTrash2, FiBook, FiFileText } from "react-icons/fi";
-import { MdRefresh } from "react-icons/md";
 
-interface ContentCardProps extends ContentItem {
-  previewMode?: boolean;
-  onRefresh?: () => void;
-}
-
-const ContentCard: React.FC<ContentCardProps> = ({
+const ContentCard: React.FC<any> = ({
   _id,
   is_active,
   content_type,
@@ -24,8 +18,6 @@ const ContentCard: React.FC<ContentCardProps> = ({
   created_at,
   description,
   view_count,
-  previewMode = false,
-  onRefresh,
 }) => {
   const [isEditModalOpen, setEditModalOpen] = useState(false);
   const [currentIsActive, setCurrentIsActive] = useState(is_active);
@@ -45,11 +37,6 @@ const ContentCard: React.FC<ContentCardProps> = ({
     setCurrentDescription(updatedData.description);
     setCurrentTags(updatedData.content_tags);
     setEditModalOpen(false);
-  };
-
-  const handleRefresh = () => {
-    setImageError(false); // Reset image error state
-    if (onRefresh) onRefresh(); // Call parent refresh if provided
   };
 
   const TypeIcon = currentContentType === "article" ? FiBook : FiFileText;
@@ -91,7 +78,7 @@ const ContentCard: React.FC<ContentCardProps> = ({
             {currentDescription || "No description available."}
           </p>
           <div className="flex gap-2.5">
-            {currentTags?.map((tag, index) => (
+            {currentTags?.map((tag: any, index: any) => (
               <span key={index} className="font-semibold text-sm text-blue-500">
                 {tag}
               </span>
@@ -118,31 +105,19 @@ const ContentCard: React.FC<ContentCardProps> = ({
           </button>
         </div>
         <div className="flex gap-3 text-xs">
-          {previewMode ? (
-            <button
-              className="flex items-center gap-2 px-3 py-2 border text-gray-600 font-semibold rounded-md transition-colors duration-200 hover:bg-gray-300 hover:text-gray-900"
-              onClick={handleRefresh}
-            >
-              <MdRefresh className="h-5 w-5" />
-              Refresh
-            </button>
-          ) : (
-            <>
-              <button
-                className="flex items-center gap-2 px-3 py-2 border text-blue-600 font-semibold rounded-md transition-colors duration-200 hover:bg-blue-600 hover:text-white"
-                onClick={() => setEditModalOpen(true)}
-              >
-                <FiEdit className="h-4 w-4" />
-                Edit
-              </button>
-              <button
-                className="flex items-center gap-2 px-3 py-2 border text-red-600 font-semibold rounded-md transition-colors duration-200 hover:bg-red-600 hover:text-white"
-              >
-                <FiTrash2 className="h-4 w-4" />
-                Delete
-              </button>
-            </>
-          )}
+          <button
+            className="flex items-center gap-2 px-3 py-2 border text-blue-600 font-semibold rounded-md transition-colors duration-200 hover:bg-blue-600 hover:text-white"
+            onClick={() => setEditModalOpen(true)}
+          >
+            <FiEdit className="h-4 w-4" />
+            Edit
+          </button>
+          <button
+            className="flex items-center gap-2 px-3 py-2 border text-red-600 font-semibold rounded-md transition-colors duration-200 hover:bg-red-600 hover:text-white"
+          >
+            <FiTrash2 className="h-4 w-4" />
+            Delete
+          </button>
         </div>
       </div>
 

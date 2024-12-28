@@ -1,3 +1,5 @@
+// cms-dashboard/next.config.ts
+
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
@@ -8,8 +10,12 @@ const nextConfig: NextConfig = {
     // Method 2: Allow all domains using remotePatterns
     remotePatterns: [
       {
-        protocol: "https",
-        hostname: "**", // Allows all domains
+        protocol: "http", // Allow HTTP protocol
+        hostname: "**", // Allows all hostnames
+      },
+      {
+        protocol: "https", // Allow HTTPS protocol
+        hostname: "**", // Allows all hostnames
       },
     ],
   },

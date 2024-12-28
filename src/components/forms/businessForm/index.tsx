@@ -7,7 +7,6 @@ interface BusinessFormProps {
   formData: BusinessItem;
   onChange: (field: keyof BusinessItem, value: any) => void;
   onSubmit: (e: React.FormEvent) => void;
-  previewMode?: boolean;
 }
 
 const BusinessForm: React.FC<BusinessFormProps> = ({

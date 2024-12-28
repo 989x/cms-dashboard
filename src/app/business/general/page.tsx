@@ -1,12 +1,14 @@
+// cms-dashboard/src/app/business/general/page.tsx
+
 "use client";
 
 import { withListPage } from "@/hoc/withListPage";
-import { mockGeneralBusiness } from "@/api/business";
+import { fetchGeneralBusinesses } from "@/api/business";
 import BusinessCard from "@/components/cards/BusinessCard";
 
 const GeneralBusinessPage = withListPage({
   title: "Manage General Businesses",
-  fetchData: () => mockGeneralBusiness,
+  fetchData: fetchGeneralBusinesses,
   renderCard: (business) => <BusinessCard key={business._id} {...business} />,
 });
 

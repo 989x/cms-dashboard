@@ -15,7 +15,7 @@ interface SortableItem {
 
 interface ListPageProps<T extends SortableItem> {
   title: string;
-  fetchData: () => T[];
+  fetchData: () => Promise<T[]>; // Changed to async function returning a promise
   renderCard: (item: T) => JSX.Element;
   defaultSortKey?: keyof T;
 }
@@ -29,15 +29,24 @@ export function withListPage<T extends SortableItem>({
   return function ListPage() {
     const router = useRouter();
 
-    const [content] = useState<T[]>(fetchData());
-    const [filteredContent, setFilteredContent] = useState<T[]>(fetchData());
+    const [content, setContent] = useState<T[]>([]);
+    const [filteredContent, setFilteredContent] = useState<T[]>([]);
     const [sortBy, setSortBy] = useState<string>("Related");
 
     useEffect(() => {
       if (!hasAuthToken()) {
         router.replace("/login");
+      } else {
+        fetchData()
+          .then((data) => {
+            setContent(data);
+            setFilteredContent(data);
+          })
+          .catch((error) => {
+            console.error("Error fetching data:", error);
+          });
       }
-    }, [router]);
+    }, [router, fetchData]);
 
     const handleSearch = (query: string) => {
       const filtered = content.filter((item) =>
@@ -66,11 +75,11 @@ export function withListPage<T extends SortableItem>({
         case "Status: Active":
           sortedItems.sort((a, b) => Number(b.is_active) - Number(a.is_active));
           break;
-          case "Views: Ascending":
-            sortedItems.sort((a, b) => (a.view_count || 0) - (b.view_count || 0));
-            break;
-          case "Views: Descending":
-            sortedItems.sort((a, b) => (b.view_count || 0) - (a.view_count || 0));
+        case "Views: Ascending":
+          sortedItems.sort((a, b) => (a.view_count || 0) - (b.view_count || 0));
+          break;
+        case "Views: Descending":
+          sortedItems.sort((a, b) => (b.view_count || 0) - (a.view_count || 0));
           break;
         case "Date: Newest First":
           sortedItems.sort(

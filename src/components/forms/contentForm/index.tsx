@@ -1,8 +1,6 @@
 // cms-dashboard/src/components/forms/contentForm/index.tsx
 
-import { useState } from "react";
 import { ContentItem } from "@/types/shared.types";
-import ContentCard from "@/components/cards/ContentCard";
 import ImageUrlManager from "../ImageUrlManager";
 import HTMLEditor from "@/components/forms/HTMLManage/HTMLEditor";
 import { FiBook, FiFileText } from "react-icons/fi";
@@ -11,39 +9,19 @@ interface ContentFormProps {
   formData: ContentItem;
   onChange: (field: keyof ContentItem, value: any) => void;
   onSubmit: (e: React.FormEvent) => void;
-  previewMode?: boolean;
 }
 
 const ContentForm: React.FC<ContentFormProps> = ({
   formData,
   onChange,
   onSubmit,
-  previewMode = true,
 }) => {
-  const [refreshKey, setRefreshKey] = useState(0);
-
   const handleInputChange = (field: keyof ContentItem, value: any) => {
     onChange(field, value);
   };
 
-  const handleRefresh = () => {
-    // ใช้วิธี "Key-based Component Re-rendering" หรือ "Triggering Re-render with Key Prop"
-    // บังคับให้ React รู้จักการเปลี่ยนแปลงด้วยการเปลี่ยน key
-    setRefreshKey((prev) => prev + 1);
-  };
-
   return (
     <form onSubmit={onSubmit} className="space-y-10">
-      {/* Post Preview */}
-      <div className="mb-6">
-        <ContentCard
-          key={refreshKey} // ใช้ key เพื่อ trigger การ re-render
-          {...formData}
-          previewMode={previewMode}
-          onRefresh={handleRefresh}
-        />
-      </div>
-
       {/* Link URL and Content Type */}
       <div className="mb-4 flex gap-8">
         <div>
