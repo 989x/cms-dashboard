@@ -1,14 +1,14 @@
 // cms-dashboard/src/components/cards/ContentCard.tsx
 
-import { useState } from "react";
 import Image from "next/image";
+import { useState } from "react";
 import { ContentItem } from "@/types/shared.types";
 import { formatToThaiDate } from "@/utils/formatDate";
 import ContentEditModal from "../modals/ContentEditModal";
 import { AiOutlineCalendar, AiOutlineEye } from "react-icons/ai";
 import { FiEdit, FiEye, FiEyeOff, FiTrash2, FiBook, FiFileText } from "react-icons/fi";
 
-const ContentCard: React.FC<any> = ({
+const ContentCard: React.FC<ContentItem> = ({
   _id,
   is_active,
   content_type,

@@ -1,4 +1,5 @@
-import React from "react";
+// cms-dashboard/src/app/promotion/page.tsx
+
 import Image from "next/image";
 import { AiOutlineCalendar, AiOutlineEye, AiOutlineClockCircle } from "react-icons/ai";
 import { FiEdit, FiEye, FiEyeOff, FiTrash2 } from "react-icons/fi";

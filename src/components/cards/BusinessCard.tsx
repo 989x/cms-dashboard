@@ -1,12 +1,12 @@
-import { useState } from "react";
 import Image from "next/image";
+import { useState } from "react";
 import { BusinessItem } from "@/types/shared.types";
 import { formatToThaiDate } from "@/utils/formatDate";
 import BusinessEditModal from "../modals/BusinessEditModal";
 import { AiOutlineCalendar, AiOutlineEye } from "react-icons/ai";
 import { FiEdit, FiEye, FiEyeOff, FiTrash2, FiShare2, FiGlobe } from "react-icons/fi";
 
-const BusinessCard: React.FC<any> = ({
+const BusinessCard: React.FC<BusinessItem> = ({
   _id,
   is_active,
   business_type,
