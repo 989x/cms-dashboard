@@ -1,3 +1,5 @@
+// cms-dashboard/src/hoc/withListPage.tsx
+
 "use client";
 
 import { useEffect, useState } from "react";
@@ -35,15 +37,20 @@ export function withListPage<T extends SortableItem>({
 
     useEffect(() => {
       if (!hasAuthToken()) {
+        console.log("No auth token found, redirecting to login...");
         router.replace("/login");
       } else {
+        console.log("Fetching data...");
         fetchData()
           .then((data) => {
-            setContent(data);
-            setFilteredContent(data);
+            console.log("Data fetched successfully:", data);
+            setContent(data || []); // Ensure `data` is always an array
+            setFilteredContent(data || []); // Ensure `filteredContent` is always an array
           })
           .catch((error) => {
             console.error("Error fetching data:", error);
+            setContent([]); // Set empty array on error
+            setFilteredContent([]); // Set empty array on error
           });
       }
     }, [router, fetchData]);
@@ -112,7 +119,7 @@ export function withListPage<T extends SortableItem>({
         {/* Search and Sort */}
         <SearchSection
           onSearch={handleSearch}
-          resultCount={filteredContent.length}
+          resultCount={filteredContent?.length || 0} // Ensure no error if `filteredContent` is null
           onSortChange={handleSortChange}
         />
 
