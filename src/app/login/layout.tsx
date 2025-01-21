@@ -1,4 +1,4 @@
-import { SERVER_IP } from "@/api/config";
+import { SERVER_IP } from '@/api/config';
 
 export const metadata = {
   title: `CMS ${SERVER_IP}`,

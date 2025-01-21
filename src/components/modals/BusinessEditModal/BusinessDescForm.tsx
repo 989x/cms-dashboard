@@ -1,4 +1,4 @@
-import HTMLEditor from "../../forms/HTMLManage/HTMLEditor";
+import HTMLEditor from '../../forms/HTMLManage/HTMLEditor';
 
 interface BusinessDescFormProps {
   description: string;
@@ -9,9 +9,7 @@ const BusinessDescForm: React.FC<BusinessDescFormProps> = ({
   description,
   onDescriptionChange,
 }) => {
-  return (
-    <HTMLEditor value={description} onChange={onDescriptionChange} />
-  );
+  return <HTMLEditor value={description} onChange={onDescriptionChange} />;
 };
 
 export default BusinessDescForm;

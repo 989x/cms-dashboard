@@ -6,8 +6,15 @@ export interface ContentItem {
   link_url: string;
   cover_images: string[]; // Array of URLs for cover images (primary images)
   embedded_images?: string[]; // Array of URLs for additional embedded images (from HTML or other sources)
-  content_type: "news" | "article";
-  categories?: ("others" | "food" | "medical" | "technology" | "education" | "entertainment")[];
+  content_type: 'news' | 'article';
+  categories?: (
+    | 'others'
+    | 'food'
+    | 'medical'
+    | 'technology'
+    | 'education'
+    | 'entertainment'
+  )[];
   title: string;
   description: string;
   content_tags: string[];
@@ -22,9 +29,22 @@ export interface BusinessItem {
   link_url: string;
   cover_images: string[]; // Array of URLs for cover images (primary images)
   embedded_images?: string[]; // Array of URLs for additional embedded images (from HTML or other sources)
-  business_nationality?: "thai" | "chinese" | "japanese" | "american" | "european" | "global";
-  business_type: "general" | "franchise";
-  categories?: ("others" | "food" | "medical" | "technology" | "education" | "entertainment")[];
+  business_nationality?:
+    | 'thai'
+    | 'chinese'
+    | 'japanese'
+    | 'american'
+    | 'european'
+    | 'global';
+  business_type: 'general' | 'franchise';
+  categories?: (
+    | 'others'
+    | 'food'
+    | 'medical'
+    | 'technology'
+    | 'education'
+    | 'entertainment'
+  )[];
   title: string;
   description: string;
   contacts: {

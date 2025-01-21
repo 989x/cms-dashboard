@@ -1,11 +1,11 @@
 // cms-dashboard/src/hoc/withListPage.tsx
 
-"use client";
+'use client';
 
-import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
-import { hasAuthToken } from "@/utils/authStorage";
-import SearchSection from "@/components/search/SearchSection";
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { hasAuthToken } from '@/utils/authStorage';
+import SearchSection from '@/components/search/SearchSection';
 
 interface SortableItem {
   [key: string]: any; // Generic object to support multiple keys
@@ -26,29 +26,29 @@ export function withListPage<T extends SortableItem>({
   title,
   fetchData,
   renderCard,
-  defaultSortKey = "title",
+  defaultSortKey = 'title',
 }: ListPageProps<T>) {
   return function ListPage() {
     const router = useRouter();
 
     const [content, setContent] = useState<T[]>([]);
     const [filteredContent, setFilteredContent] = useState<T[]>([]);
-    const [sortBy, setSortBy] = useState<string>("Related");
+    const [sortBy, setSortBy] = useState<string>('Related');
 
     useEffect(() => {
       if (!hasAuthToken()) {
-        console.log("No auth token found, redirecting to login...");
-        router.replace("/login");
+        console.log('No auth token found, redirecting to login...');
+        router.replace('/login');
       } else {
-        console.log("Fetching data...");
+        console.log('Fetching data...');
         fetchData()
           .then((data) => {
-            console.log("Data fetched successfully:", data);
+            console.log('Data fetched successfully:', data);
             setContent(data || []); // Ensure `data` is always an array
             setFilteredContent(data || []); // Ensure `filteredContent` is always an array
           })
           .catch((error) => {
-            console.error("Error fetching data:", error);
+            console.error('Error fetching data:', error);
             setContent([]); // Set empty array on error
             setFilteredContent([]); // Set empty array on error
           });
@@ -64,7 +64,9 @@ export function withListPage<T extends SortableItem>({
 
     const handleSortChange = (sortBy: string) => {
       setSortBy(sortBy);
-      const sorted = sortContent(filteredContent, sortBy, { default: defaultSortKey });
+      const sorted = sortContent(filteredContent, sortBy, {
+        default: defaultSortKey,
+      });
       setFilteredContent(sorted);
     };
 
@@ -76,36 +78,36 @@ export function withListPage<T extends SortableItem>({
       const sortedItems = [...items];
 
       switch (sortBy) {
-        case "Status: Inactive":
+        case 'Status: Inactive':
           sortedItems.sort((a, b) => Number(a.is_active) - Number(b.is_active));
           break;
-        case "Status: Active":
+        case 'Status: Active':
           sortedItems.sort((a, b) => Number(b.is_active) - Number(a.is_active));
           break;
-        case "Views: Ascending":
+        case 'Views: Ascending':
           sortedItems.sort((a, b) => (a.view_count || 0) - (b.view_count || 0));
           break;
-        case "Views: Descending":
+        case 'Views: Descending':
           sortedItems.sort((a, b) => (b.view_count || 0) - (a.view_count || 0));
           break;
-        case "Date: Newest First":
+        case 'Date: Newest First':
           sortedItems.sort(
             (a, b) =>
-              new Date(b.created_at || "").getTime() -
-              new Date(a.created_at || "").getTime()
+              new Date(b.created_at || '').getTime() -
+              new Date(a.created_at || '').getTime()
           );
           break;
-        case "Date: Oldest First":
+        case 'Date: Oldest First':
           sortedItems.sort(
             (a, b) =>
-              new Date(a.created_at || "").getTime() -
-              new Date(b.created_at || "").getTime()
+              new Date(a.created_at || '').getTime() -
+              new Date(b.created_at || '').getTime()
           );
           break;
         default:
-          const key = keyMap.default || "title";
+          const key = keyMap.default || 'title';
           sortedItems.sort((a, b) =>
-            (a[key]?.toString() || "").localeCompare(b[key]?.toString() || "")
+            (a[key]?.toString() || '').localeCompare(b[key]?.toString() || '')
           );
       }
 
@@ -113,8 +115,8 @@ export function withListPage<T extends SortableItem>({
     };
 
     return (
-      <div className="max-w-5xl mx-auto px-4 sm:px-6">
-        <h1 className="text-lg sm:text-xl font-bold mb-6 sm:mb-8">{title}</h1>
+      <div className='max-w-5xl mx-auto px-4 sm:px-6'>
+        <h1 className='text-lg sm:text-xl font-bold mb-6 sm:mb-8'>{title}</h1>
 
         {/* Search and Sort */}
         <SearchSection
@@ -124,11 +126,13 @@ export function withListPage<T extends SortableItem>({
         />
 
         {/* Render List */}
-        <div className="grid gap-4">
+        <div className='grid gap-4'>
           {filteredContent.length > 0 ? (
             filteredContent.map((item) => renderCard(item))
           ) : (
-            <p className="text-gray-500 text-center">No {title.toLowerCase()} available.</p>
+            <p className='text-gray-500 text-center'>
+              No {title.toLowerCase()} available.
+            </p>
           )}
         </div>
       </div>

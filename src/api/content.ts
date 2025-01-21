@@ -1,14 +1,14 @@
 // cms-dashboard/src/api/content.ts
 
-import { ContentItem } from "@/types/shared.types";
+import { ContentItem } from '@/types/shared.types';
 
-const BASE_URL = "http://128.199.202.159:8080";
+const BASE_URL = 'http://128.199.202.159:8080';
 
 const fetchData = async <T>(endpoint: string): Promise<T> => {
   const response = await fetch(`${BASE_URL}${endpoint}`, {
-    method: "GET",
+    method: 'GET',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
   });
 
@@ -21,10 +21,10 @@ const fetchData = async <T>(endpoint: string): Promise<T> => {
 };
 
 export const fetchAllContents = (): Promise<ContentItem[]> =>
-  fetchData<ContentItem[]>("/api/v1/contents");
+  fetchData<ContentItem[]>('/api/v1/contents');
 
 export const fetchContentArticles = (): Promise<ContentItem[]> =>
-  fetchData<ContentItem[]>("/api/v1/contents/search/article");
+  fetchData<ContentItem[]>('/api/v1/contents/search/article');
 
 export const fetchContentNews = (): Promise<ContentItem[]> =>
-  fetchData<ContentItem[]>("/api/v1/contents/search/news");
+  fetchData<ContentItem[]>('/api/v1/contents/search/news');

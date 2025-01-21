@@ -1,14 +1,14 @@
 // cms-dashboard/src/api/business.ts
 
-import { BusinessItem } from "@/types/shared.types";
+import { BusinessItem } from '@/types/shared.types';
 
-const BASE_URL = "http://128.199.202.159:8080";
+const BASE_URL = 'http://128.199.202.159:8080';
 
 const fetchData = async <T>(endpoint: string): Promise<T> => {
   const response = await fetch(`${BASE_URL}${endpoint}`, {
-    method: "GET",
+    method: 'GET',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
   });
 
@@ -21,10 +21,10 @@ const fetchData = async <T>(endpoint: string): Promise<T> => {
 };
 
 export const fetchAllBusinesses = (): Promise<BusinessItem[]> =>
-  fetchData<BusinessItem[]>("/api/v1/businesses");
+  fetchData<BusinessItem[]>('/api/v1/businesses');
 
 export const fetchGeneralBusinesses = (): Promise<BusinessItem[]> =>
-  fetchData<BusinessItem[]>("/api/v1/businesses/search/general");
+  fetchData<BusinessItem[]>('/api/v1/businesses/search/general');
 
 export const fetchFranchiseBusinesses = (): Promise<BusinessItem[]> =>
-  fetchData<BusinessItem[]>("/api/v1/businesses/search/franchise");
+  fetchData<BusinessItem[]>('/api/v1/businesses/search/franchise');

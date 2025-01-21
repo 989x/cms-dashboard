@@ -1,13 +1,13 @@
 // cms-dashboard/src/app/content/article/page.tsx
 
-"use client";
+'use client';
 
-import { withListPage } from "@/hoc/withListPage";
-import { fetchContentArticles } from "@/api/content";
-import ContentCard from "@/components/cards/ContentCard";
+import { withListPage } from '@/hoc/withListPage';
+import { fetchContentArticles } from '@/api/content';
+import ContentCard from '@/components/cards/ContentCard';
 
 const ArticlePage = withListPage({
-  title: "Manage Article Content",
+  title: 'Manage Article Content',
   fetchData: fetchContentArticles,
   renderCard: (article) => <ContentCard key={article._id} {...article} />,
 });

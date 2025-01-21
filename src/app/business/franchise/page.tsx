@@ -1,13 +1,13 @@
 // cms-dashboard/src/app/business/franchise/page.tsx
 
-"use client";
+'use client';
 
-import { withListPage } from "@/hoc/withListPage";
-import { fetchFranchiseBusinesses } from "@/api/business";
-import BusinessCard from "@/components/cards/BusinessCard";
+import { withListPage } from '@/hoc/withListPage';
+import { fetchFranchiseBusinesses } from '@/api/business';
+import BusinessCard from '@/components/cards/BusinessCard';
 
 const FranchiseBusinessPage = withListPage({
-  title: "Manage Franchise Businesses",
+  title: 'Manage Franchise Businesses',
   fetchData: fetchFranchiseBusinesses,
   renderCard: (business) => <BusinessCard key={business._id} {...business} />,
 });

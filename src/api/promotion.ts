@@ -1,14 +1,14 @@
 // cms-dashboard/src/api/promotion.ts
 
-import { PromotionItem } from "@/types/shared.types";
+import { PromotionItem } from '@/types/shared.types';
 
-const BASE_URL = "http://128.199.202.159:8080";
+const BASE_URL = 'http://128.199.202.159:8080';
 
 const fetchData = async <T>(endpoint: string): Promise<T> => {
   const response = await fetch(`${BASE_URL}${endpoint}`, {
-    method: "GET",
+    method: 'GET',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
   });
 
@@ -21,4 +21,4 @@ const fetchData = async <T>(endpoint: string): Promise<T> => {
 };
 
 export const fetchPromotions = (): Promise<PromotionItem[]> =>
-  fetchData<PromotionItem[]>("/api/v1/promotions");
+  fetchData<PromotionItem[]>('/api/v1/promotions');
