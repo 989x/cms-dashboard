@@ -20,11 +20,31 @@ const fetchData = async <T>(endpoint: string): Promise<T> => {
   return result.data;
 };
 
+const sendPostRequest = async <T>(endpoint: string, data: any): Promise<T> => {
+  const response = await fetch(`${BASE_URL}${endpoint}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  });
+
+  if (!response.ok) {
+    throw new Error(`Failed to post data to ${endpoint}`);
+  }
+
+  const result = await response.json();
+  return result.data;
+};
+
 export const fetchAllContents = (): Promise<ContentItem[]> =>
-  fetchData<ContentItem[]>('/api/v1/contents');
+  fetchData<ContentItem[]>('/api/v1/contents/search');
 
-export const fetchContentArticles = (): Promise<ContentItem[]> =>
-  fetchData<ContentItem[]>('/api/v1/contents/search/article');
+export const fetchContentByType = (type: string): Promise<ContentItem[]> =>
+  fetchData<ContentItem[]>(`/api/v1/contents/search?type=${type}`);
 
-export const fetchContentNews = (): Promise<ContentItem[]> =>
-  fetchData<ContentItem[]>('/api/v1/contents/search/news');
+export const fetchContentById = (id: string): Promise<ContentItem> =>
+  fetchData<ContentItem>(`/api/v1/contents/_id/${id}`);
+
+export const createContent = (content: Partial<ContentItem>): Promise<ContentItem> =>
+  sendPostRequest<ContentItem>('/api/v1/contents', content);

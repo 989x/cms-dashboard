@@ -1,10 +1,8 @@
 // cms-dashboard/src/components/cards/ContentCard.tsx
 
 import Image from 'next/image';
-import { useState } from 'react';
 import { ContentItem } from '@/types/shared.types';
 import { formatToThaiDate } from '@/utils/formatDate';
-import ContentEditModal from '../modals/ContentEditModal';
 import { AiOutlineCalendar, AiOutlineEye } from 'react-icons/ai';
 import { FiEdit, FiEye, FiEyeOff, FiTrash2, FiBook, FiFileText, } from 'react-icons/fi';
 
@@ -19,27 +17,12 @@ const ContentCard: React.FC<ContentItem> = ({
   description,
   view_count,
 }) => {
-  const [isEditModalOpen, setEditModalOpen] = useState(false);
-  const [currentIsActive, setCurrentIsActive] = useState(is_active);
-  const [currentContentType, setCurrentContentType] = useState(content_type);
-  const [currentTitle, setCurrentTitle] = useState(title || '');
-  const [currentDescription, setCurrentDescription] = useState(
-    description || ''
-  );
-  const [currentTags, setCurrentTags] = useState(content_tags || []);
-  const [currentCoverImages, setCurrentCoverImages] = useState(
-    cover_images.length > 0 ? cover_images : ['/default-fallback-image.png']
-  );
-  const [hasImageError, setImageError] = useState(false);
-
-  const handleSave = (updatedData: ContentItem) => {
-    setCurrentIsActive(updatedData.is_active);
-    setCurrentContentType(updatedData.content_type);
-    setCurrentTitle(updatedData.title);
-    setCurrentDescription(updatedData.description);
-    setCurrentTags(updatedData.content_tags);
-    setEditModalOpen(false);
-  };
+  const currentIsActive = is_active;
+  const currentContentType = content_type;
+  const currentTitle = title || '';
+  const currentDescription = description || '';
+  const currentTags = content_tags || [];
+  const currentCoverImages = (cover_images ?? []).length > 0 ? cover_images : ['/default-fallback-image.png'];
 
   const TypeIcon = currentContentType === 'article' ? FiBook : FiFileText;
 
@@ -48,16 +31,11 @@ const ContentCard: React.FC<ContentItem> = ({
       <div className='flex flex-col sm:flex-row sm:items-center gap-4'>
         <div className='relative w-full sm:w-[280px] aspect-video flex-shrink-0'>
           <Image
-            src={
-              !hasImageError
-                ? currentCoverImages[0]
-                : '/default-fallback-image.png'
-            }
+            src={currentCoverImages[0]}
             alt={currentTitle || 'No Title'}
             layout='fill'
             objectFit='cover'
             className='rounded-md'
-            onError={() => setImageError(true)} // Handle image error
           />
         </div>
         <div className='flex-1 flex flex-col gap-2 justify-center'>
@@ -113,39 +91,12 @@ const ContentCard: React.FC<ContentItem> = ({
           </button>
         </div>
         <div className='flex gap-3 text-xs'>
-          <button
-            className='flex items-center gap-2 px-3 py-2 border text-blue-600 font-semibold rounded-md transition-colors duration-200 hover:bg-blue-600 hover:text-white'
-            onClick={() => setEditModalOpen(true)}
-          >
-            <FiEdit className='h-4 w-4' />
-            Edit
-          </button>
           <button className='flex items-center gap-2 px-3 py-2 border text-red-600 font-semibold rounded-md transition-colors duration-200 hover:bg-red-600 hover:text-white'>
             <FiTrash2 className='h-4 w-4' />
             Delete
           </button>
         </div>
       </div>
-
-      {/* Modal */}
-      {/* <ContentEditModal
-        isOpen={isEditModalOpen}
-        onClose={() => setEditModalOpen(false)}
-        contentData={{
-          _id,
-          is_active: currentIsActive,
-          link_url: "",
-          content_type: currentContentType,
-          title: currentTitle,
-          description: currentDescription,
-          tags: currentTags,
-          image_url: currentImageUrl,
-          created_at,
-          views,
-          updated_at: new Date().toISOString(),
-        }}
-        onSave={handleSave}
-      /> */}
     </div>
   );
 };

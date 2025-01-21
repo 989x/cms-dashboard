@@ -51,16 +51,10 @@ export const navItems = [
         description: 'Add new content such as articles or news posts',
       },
       {
-        href: '/content/news',
-        label: 'Manage News',
+        href: '/content',
+        label: 'Manage Contents',
         icon: FiFileText,
         description: 'Oversee and edit news content posted on the platform',
-      },
-      {
-        href: '/content/article',
-        label: 'Manage Article',
-        icon: FiBook,
-        description: 'Handle and update articles published on the site',
       },
     ],
   },
@@ -75,7 +69,7 @@ export const navItems = [
       },
       {
         href: '/',
-        label: 'Setting',
+        label: 'Redis Cache',
         icon: FiSettings,
         description: 'Access and modify system-wide settings',
       },

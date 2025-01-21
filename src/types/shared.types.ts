@@ -1,85 +1,17 @@
-// shared.types.ts
+// cms-dashboard/src/types/shared.types.ts
 
 export interface ContentItem {
   _id: string; // MongoDB unique identifier
-  is_active: boolean;
-  link_url: string;
-  cover_images: string[]; // Array of URLs for cover images (primary images)
-  content_type: 'news' | 'article';
-  categories?: (
-    | 'others'
-    | 'food'
-    | 'medical'
-    | 'technology'
-    | 'education'
-    | 'entertainment'
-  )[];
-  title: string;
-  description: string;
-  content_tags: string[];
-  view_count: number;
-  created_at: string; // ISO timestamp
-  updated_at: string; // ISO timestamp
-}
-
-export interface BusinessItem {
-  _id: string; // MongoDB unique identifier
-  is_active: boolean;
-  link_url: string;
-  cover_images: string[]; // Array of URLs for cover images (primary images)
-  business_nationality?:
-    | 'thai'
-    | 'chinese'
-    | 'japanese'
-    | 'american'
-    | 'european'
-    | 'global';
-  business_type: 'general' | 'franchise';
-  categories?: (
-    | 'others'
-    | 'food'
-    | 'medical'
-    | 'technology'
-    | 'education'
-    | 'entertainment'
-  )[];
-  title: string;
-  description: string;
-  contacts: {
-    email: string;
-    name: string;
-    phone: string;
-    facebook?: string;
-    line?: string;
-    Website?: string;
-  };
-  investment_start?: number;
-  investment_end?: number;
-  payback_period?: number;
-  branches?: number;
-  service_area?: string;
-  map_url?: string;
-  special_deal?: {
-    is_active: boolean;
-    details: string;
-    start_date?: string; // ISO timestamp
-    end_date?: string; // ISO timestamp
-  };
-  view_count: number;
-  created_at: string; // ISO timestamp
-  updated_at: string; // ISO timestamp
-}
-
-export interface PromotionItem {
-  _id: string; // MongoDB unique identifier
-  is_active: boolean;
-  active_from: string; // ISO timestamp
-  active_until: string; // ISO timestamp
-  link_url: string;
-  image_url: string; // Single image URL (Cover Image)
-  title: string;
-  description: string;
-  view_count: number;
-  created_at: string; // ISO timestamp
-  updated_at: string; // ISO timestamp
+  public_id: string; // Unique public identifier
+  is_active: boolean; // Status of the content item
+  slug_url: string; // SEO-friendly URL
+  redirect_url: string; // URL for redirection
+  cover_images: string[]; // Array of URLs for cover images
+  content_type: 'news' | 'article'; // Allowed values: "news" | "article"
+  content_tags: string[]; // Tags related to the content item
+  title: string; // Title of the content item
+  description: string; // Description of the content item
+  view_count: number; // View count of the content item
+  created_at: string; // ISO timestamp for content creation
+  updated_at: string; // ISO timestamp for content update
 }
