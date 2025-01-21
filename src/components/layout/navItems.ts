@@ -1,5 +1,4 @@
 import {
-  FiInbox,
   FiPlusCircle,
   FiGlobe,
   FiShare2,
@@ -11,23 +10,6 @@ import {
 } from "react-icons/fi";
 
 export const navItems = [
-  {
-    category: "Message",
-    items: [
-      {
-        href: "/forms/franchise",
-        label: "Franchise Forms",
-        icon: FiInbox,
-        description: "Manage and access all franchise-related forms efficiently",
-      },
-      {
-        href: "/forms/business",
-        label: "Business Forms",
-        icon: FiInbox,
-        description: "Handle business-related forms and documents seamlessly",
-      },
-    ],
-  },
   {
     category: "Promotion",
     items: [
