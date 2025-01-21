@@ -5,7 +5,6 @@ export interface ContentItem {
   is_active: boolean;
   link_url: string;
   cover_images: string[]; // Array of URLs for cover images (primary images)
-  embedded_images?: string[]; // Array of URLs for additional embedded images (from HTML or other sources)
   content_type: 'news' | 'article';
   categories?: (
     | 'others'
@@ -28,7 +27,6 @@ export interface BusinessItem {
   is_active: boolean;
   link_url: string;
   cover_images: string[]; // Array of URLs for cover images (primary images)
-  embedded_images?: string[]; // Array of URLs for additional embedded images (from HTML or other sources)
   business_nationality?:
     | 'thai'
     | 'chinese'

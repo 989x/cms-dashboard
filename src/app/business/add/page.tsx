@@ -13,7 +13,6 @@ const AddBusiness = () => {
     link_url: '',
     business_type: 'general',
     cover_images: [], // Updated to align with shared.types.ts
-    embedded_images: [], // Optional field
     title: '',
     description: '',
     contacts: { email: '', name: '', phone: '' },

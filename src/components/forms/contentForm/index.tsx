@@ -77,12 +77,8 @@ const ContentForm: React.FC<ContentFormProps> = ({
       <div className='mb-4'>
         <ImageUrlManager
           coverImages={formData.cover_images}
-          embeddedImages={formData.embedded_images || []}
-          onChange={(type, updatedImages) =>
-            handleInputChange(
-              type === 'cover' ? 'cover_images' : 'embedded_images',
-              updatedImages
-            )
+          onChange={(updatedImages) =>
+            handleInputChange('cover_images', updatedImages)
           }
         />
       </div>

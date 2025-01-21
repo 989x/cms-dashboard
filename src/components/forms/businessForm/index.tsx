@@ -74,12 +74,8 @@ const BusinessForm: React.FC<BusinessFormProps> = ({
       <div>
         <ImageUrlManager
           coverImages={formData.cover_images}
-          embeddedImages={formData.embedded_images || []}
-          onChange={(type, updatedImages) =>
-            handleInputChange(
-              type === 'cover' ? 'cover_images' : 'embedded_images',
-              updatedImages
-            )
+          onChange={(updatedImages) =>
+            handleInputChange('cover_images', updatedImages)
           }
         />
       </div>

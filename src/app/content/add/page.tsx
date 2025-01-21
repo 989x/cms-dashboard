@@ -13,7 +13,6 @@ const AddContentPage = () => {
     link_url: '',
     content_type: 'news', // Default to "news"
     cover_images: [], // Array of URLs for cover images
-    embedded_images: [], // Optional field for additional images
     title: '',
     description: '',
     content_tags: [],
