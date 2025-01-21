@@ -76,7 +76,7 @@ export default function Sidebar() {
           <nav className='flex-1 overflow-y-auto px-4 no-scrollbar'>
             {navItems.map(({ category, items }) => (
               <div key={category}>
-                <h2 className='text-xs my-2 font-semibold text-gray-400 uppercase tracking-wide'>
+                <h2 className='text-xs my-3 font-semibold text-gray-400 uppercase tracking-wide'>
                   {category}
                 </h2>
                 <ul className='space-y-[2px] -mr-4'>

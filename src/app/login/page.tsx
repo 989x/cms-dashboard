@@ -12,13 +12,12 @@ export default function LoginPage() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-  const [isHuman, setIsHuman] = useState(false);
   const [error, setError] = useState('');
   const router = useRouter();
 
   const handleLogin = async () => {
-    if (!username || !password || !isHuman) {
-      setError('Please fill out all fields and confirm you are not a bot.');
+    if (!username || !password) {
+      setError('Please fill out all fields.');
       return;
     }
     try {
@@ -62,9 +61,9 @@ export default function LoginPage() {
             {error}
           </p>
         )}
-        <div className='space-y-5'>
+        <div className='space-y-5 text-sm'>
           <div>
-            <label className='block text-gray-600 font-medium mb-2'>
+            <label className='block text-gray-600 font-medium mb-2.5'>
               Username
             </label>
             <input
@@ -76,7 +75,7 @@ export default function LoginPage() {
             />
           </div>
           <div>
-            <label className='block text-gray-600 font-medium mb-2'>
+            <label className='block text-gray-600 font-medium mb-2.5'>
               Password
             </label>
             <div className='relative'>
@@ -100,24 +99,12 @@ export default function LoginPage() {
               </button>
             </div>
           </div>
-          <div className='flex items-center'>
-            <input
-              type='checkbox'
-              id='notABot'
-              checked={isHuman}
-              onChange={(e) => setIsHuman(e.target.checked)}
-              className='h-4 w-4 text-blue-600 border-gray-300 rounded'
-            />
-            <label htmlFor='notABot' className='ml-2 text-gray-600 text-sm'>
-              I am not a bot
-            </label>
-          </div>
         </div>
         <button
           onClick={handleLogin}
-          disabled={!username || !password || !isHuman}
+          disabled={!username || !password}
           className={`mt-8 w-full py-2 rounded-md font-medium ${
-            !username || !password || !isHuman
+            !username || !password
               ? 'bg-gray-400 text-gray-200 cursor-not-allowed'
               : 'bg-blue-600 text-white'
           }`}
