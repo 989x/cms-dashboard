@@ -1,3 +1,5 @@
+// cms-dashboard/src/utils/authStorage.ts
+
 export const hasAuthToken = (): boolean => {
   const authToken = localStorage.getItem('authToken');
   return !!authToken; // Returns true if the token exists

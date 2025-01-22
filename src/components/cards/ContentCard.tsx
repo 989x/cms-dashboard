@@ -4,7 +4,8 @@ import Image from 'next/image';
 import { ContentItem } from '@/types/shared.types';
 import { formatToThaiDate } from '@/utils/formatDate';
 import { AiOutlineCalendar, AiOutlineEye } from 'react-icons/ai';
-import { FiEdit, FiEye, FiEyeOff, FiTrash2, FiBook, FiFileText, } from 'react-icons/fi';
+import { FiEdit, FiEye, FiEyeOff, FiTrash2, FiBook, FiFileText } from 'react-icons/fi';
+import { MdOutlineLocalOffer } from 'react-icons/md'; // Added icon for promotion
 
 const ContentCard: React.FC<ContentItem> = ({
   _id,
@@ -24,7 +25,12 @@ const ContentCard: React.FC<ContentItem> = ({
   const currentTags = content_tags || [];
   const currentCoverImages = (cover_images ?? []).length > 0 ? cover_images : ['/default-fallback-image.png'];
 
-  const TypeIcon = currentContentType === 'article' ? FiBook : FiFileText;
+  const TypeIcon =
+    currentContentType === 'article'
+      ? FiBook
+      : currentContentType === 'promotion'
+      ? MdOutlineLocalOffer
+      : FiFileText;
 
   return (
     <div className='block'>
@@ -46,7 +52,11 @@ const ContentCard: React.FC<ContentItem> = ({
             <span className='flex items-center gap-1.5'>
               <TypeIcon className='h-4 w-4 text-blue-500' />
               <span className='font-medium'>
-                {currentContentType === 'article' ? 'Article' : 'News'}
+                {currentContentType === 'article'
+                  ? 'Article'
+                  : currentContentType === 'promotion'
+                  ? 'Promotion'
+                  : 'News'}
               </span>
             </span>
             <span className='h-4 w-[1.5px] bg-gray-300'></span>

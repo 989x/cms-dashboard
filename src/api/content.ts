@@ -4,6 +4,10 @@ import { ContentItem } from '@/types/shared.types';
 
 const BASE_URL = 'http://128.199.202.159:8080';
 
+const getAuthToken = (): string | null => {
+  return localStorage.getItem('authToken');
+};
+
 const fetchData = async <T>(endpoint: string): Promise<T> => {
   const response = await fetch(`${BASE_URL}${endpoint}`, {
     method: 'GET',
@@ -20,17 +24,42 @@ const fetchData = async <T>(endpoint: string): Promise<T> => {
   return result.data;
 };
 
-const sendPostRequest = async <T>(endpoint: string, data: any): Promise<T> => {
+const sendData = async <T>(endpoint: string, data: any): Promise<T> => {
+  const token = getAuthToken();
+
+  if (!token) {
+    throw new Error('Unauthorized: No token found');
+  }
+
+  const formData = new FormData();
+  for (const key in data) {
+    if (Array.isArray(data[key])) {
+      // กรณีที่เป็น array เช่น content_tags
+      data[key].forEach((item: string) => formData.append(`${key}[]`, item));
+    } else {
+      formData.append(key, data[key]);
+    }
+  }
+
   const response = await fetch(`${BASE_URL}${endpoint}`, {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`, // Bearer Token ไม่ต้องใช้ Content-Type ในกรณีนี้
     },
-    body: JSON.stringify(data),
+    body: formData,
   });
 
   if (!response.ok) {
-    throw new Error(`Failed to post data to ${endpoint}`);
+    let errorMessage = `Failed to post data to ${endpoint}`;
+    try {
+      const errorResponse = await response.json();
+      if (errorResponse && errorResponse.message) {
+        errorMessage = errorResponse.message;
+      }
+    } catch {
+      errorMessage = `${response.status} ${response.statusText}`;
+    }
+    throw new Error(errorMessage);
   }
 
   const result = await response.json();
@@ -47,4 +76,4 @@ export const fetchContentById = (id: string): Promise<ContentItem> =>
   fetchData<ContentItem>(`/api/v1/contents/_id/${id}`);
 
 export const createContent = (content: Partial<ContentItem>): Promise<ContentItem> =>
-  sendPostRequest<ContentItem>('/api/v1/contents', content);
+  sendData<ContentItem>('/api/v1/contents', content);

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import styles from './HTMLPreview.module.css';
+import styles from './Preview.module.css';
 
 interface HTMLEditorProps {
   value: string;

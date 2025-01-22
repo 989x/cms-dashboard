@@ -8,7 +8,7 @@ import { hasAuthToken } from '@/utils/authStorage';
 import { fetchAllContents } from '@/api/content';
 import ContentCard from '@/components/cards/ContentCard';
 import SearchSection from '@/components/forms/SearchSection';
-import { ContentItem } from '@/types/shared.types'; // Import the ContentItem type
+import { ContentItem } from '@/types/shared.types';
 
 const ContentPage = () => {
   const router = useRouter();
