@@ -1,4 +1,4 @@
-import { FiPlusCircle, FiGlobe, FiShare2, FiFileText, FiBook, FiImage, FiSettings, FiTag, } from 'react-icons/fi';
+import { FiPlusCircle, FiGlobe, FiShare2, FiFileText, FiImage, FiDatabase, FiTag, } from 'react-icons/fi';
 
 export const navItems = [
   {
@@ -70,7 +70,7 @@ export const navItems = [
       {
         href: '/',
         label: 'Redis Cache',
-        icon: FiSettings,
+        icon: FiDatabase,
         description: 'Access and modify system-wide settings',
       },
     ],

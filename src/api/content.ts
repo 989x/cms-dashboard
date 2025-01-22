@@ -31,22 +31,13 @@ const sendData = async <T>(endpoint: string, data: any): Promise<T> => {
     throw new Error('Unauthorized: No token found');
   }
 
-  const formData = new FormData();
-  for (const key in data) {
-    if (Array.isArray(data[key])) {
-      // กรณีที่เป็น array เช่น content_tags
-      data[key].forEach((item: string) => formData.append(`${key}[]`, item));
-    } else {
-      formData.append(key, data[key]);
-    }
-  }
-
   const response = await fetch(`${BASE_URL}${endpoint}`, {
     method: 'POST',
     headers: {
-      Authorization: `Bearer ${token}`, // Bearer Token ไม่ต้องใช้ Content-Type ในกรณีนี้
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
     },
-    body: formData,
+    body: JSON.stringify(data),
   });
 
   if (!response.ok) {

@@ -12,16 +12,16 @@ const AddContentPage = () => {
   const router = useRouter();
 
   const [formData, setFormData] = useState({
+    admin_notice: '',
     slug_url: '',
     redirect_url: '',
+    content_type: undefined as 'news' | 'article' | 'promotion' | undefined,
+    content_tags: [] as string[],
     title: '',
     description: '',
-    admin_notice: '', // Field for admin notice
-    content_tags: [] as string[], // Field for tags
-    content_type: undefined as 'news' | 'article' | 'promotion' | undefined, // Added "promotion" option
   });
 
-  const [tagInput, setTagInput] = useState(''); // For handling tag input
+  const [tagInput, setTagInput] = useState('');
 
   useEffect(() => {
     if (!hasAuthToken()) {
@@ -52,9 +52,14 @@ const AddContentPage = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!formData.content_type) {
+      alert('Please select a content type.');
+      return;
+    }
     try {
       await createContent(formData);
       alert('Content created successfully!');
+      router.push('/content');
     } catch (error) {
       if (error instanceof Error) {
         alert('Failed to create content: ' + error.message);
@@ -127,11 +132,11 @@ const AddContentPage = () => {
           <label htmlFor='tags' className='mb-3 text-sm font-medium'>
             Tags
           </label>
-          <div className='flex gap-2 items-center'>
+          <div className='flex gap-4 items-center'>
             <input
               id='tags'
               type='text'
-              placeholder='Add a tag'
+              placeholder='technology'
               value={tagInput}
               onChange={(e) => setTagInput(e.target.value)}
               className='border border-gray-300 rounded-md px-3 py-2 flex-1'
