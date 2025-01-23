@@ -1,43 +1,28 @@
-import { FiPlusCircle, FiGlobe, FiShare2, FiFileText, FiImage, FiDatabase, FiTag, } from 'react-icons/fi';
+// cms-dashboard/src/components/layout/navItems.ts
+
+import { FiPlusCircle, FiGlobe, FiFileText, FiImage, FiDatabase, FiEdit } from 'react-icons/fi';
 
 export const navItems = [
   {
-    category: 'Promotion',
-    items: [
-      {
-        href: '/promotions/add',
-        label: 'Add Promotion',
-        icon: FiPlusCircle,
-        description: 'Create new promotions for the landing page',
-      },
-      {
-        href: '/promotion',
-        label: 'Manage Promotion',
-        icon: FiTag,
-        description: 'View and update existing promotions on the landing page',
-      },
-    ],
-  },
-  {
-    category: 'Listing',
+    category: 'Business',
     items: [
       {
         href: '/business/add',
-        label: 'Create Listing',
+        label: 'Create Business',
         icon: FiPlusCircle,
-        description: 'Add a new business listing to the platform',
+        description: 'Easily add a new business listing to expand your platform.',
       },
       {
         href: '/business/general',
-        label: 'Manage Business',
+        label: 'Business Listings',
         icon: FiGlobe,
-        description: 'View and manage general business listings',
+        description: 'View, manage, and organize all business listings in one place.',
       },
       {
-        href: '/business/franchise',
-        label: 'Manage Franchise',
-        icon: FiShare2,
-        description: 'Manage and update franchise-related listings',
+        href: '/business/edit',
+        label: 'Edit Business',
+        icon: FiEdit,
+        description: 'Update and refine existing business listings effortlessly.',
       },
     ],
   },
@@ -48,13 +33,19 @@ export const navItems = [
         href: '/content/add',
         label: 'Add Content',
         icon: FiPlusCircle,
-        description: 'Add new content such as articles or news posts',
+        description: 'Create and publish new content such as articles or news posts.',
       },
       {
         href: '/content',
-        label: 'Manage Contents',
+        label: 'Content Listings',
         icon: FiFileText,
-        description: 'Oversee and edit news content posted on the platform',
+        description: 'Browse and manage all posted content efficiently.',
+      },
+      {
+        href: '/content/edit',
+        label: 'Edit Content',
+        icon: FiEdit,
+        description: 'Revise and update existing content with ease.',
       },
     ],
   },
@@ -63,15 +54,15 @@ export const navItems = [
     items: [
       {
         href: '/content/images',
-        label: 'Manage Image',
+        label: 'Manage Images',
         icon: FiImage,
-        description: 'Organize and manage image resources for the platform',
+        description: 'Organize and handle image resources across the platform.',
       },
       {
         href: '/',
         label: 'Redis Cache',
         icon: FiDatabase,
-        description: 'Access and modify system-wide settings',
+        description: 'Monitor and configure system-wide Redis cache settings.',
       },
     ],
   },
