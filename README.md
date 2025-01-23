@@ -27,24 +27,18 @@ docker run -d -p 4000:4000 cms-dashboard
 ```
 src/
 - api/
-  - config.ts: Configuration file for API (reads from `.env`)
-  - login.ts: Handles login API requests
-  - business.ts: Mock or API
-  - news.ts: Mock or API
-  - promotion.ts: Mock or API
+  - config.ts
+  - content.ts
+  - login.ts
 
 - app/
-  - business/
-    - page.tsx
   - content/
-    - page.tsx
-  - message/
+    - add/
+      page.tsx
     - page.tsx
   - login/
     - layout.tsx: Layout for the login page (handles metadata)
     - page.tsx: Login page with UI and authentication logic
-  - promotion/
-    - page.tsx
   - client-layout.tsx: Client-side layout logic (handles conditional rendering of Sidebar)
   - layout.tsx: Root layout for the app
   - not-found.tsx
@@ -55,25 +49,14 @@ src/
     - navItems.ts: Defines navigation structure with categories, links, icons, and descriptions for Sidebar.
     - Sidebar.tsx
   - cards/
-    - BusinessCard.tsx
     - ContentCard.tsx
-    - PromotionCard.tsx
   - forms/
-    - contentForm/
-      - ...forms and index.tsx
-    - HTMLManage/
-      - HTMLEditor.tsx
-      - HTMLPreview.module.css
-  - modals/
-    - BusinessEditModal/
-      - ...forms and index.tsx
-    - ContentEditModal/
-      - ...forms and index.tsx
-  - search/
+    - html/
+      - Editor.tsx
+      - Preview.module.css
+    - ContentForm.tsx
     - SearchSection.tsx
-
-- hoc/
-  - withListPage.tsx: A reusable Higher-Order Component (HOC) for list-based pages, managing filtering, sorting, and rendering logic.
+    - TagsInput.tsx
 
 - utils/
   - authStorage.ts: Utility for handling authentication tokens
