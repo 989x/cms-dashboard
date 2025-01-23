@@ -1,3 +1,5 @@
+// cms-dashboard/src/app/layout.tsx
+
 import './globals.css';
 import { SERVER_IP } from '@/api/config';
 import ClientLayout from './client-layout';

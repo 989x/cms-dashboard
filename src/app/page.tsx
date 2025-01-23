@@ -1,21 +1,9 @@
-'use client';
+// cms-dashboard/src/app/page.tsx'use client';
 
 import Link from 'next/link';
-import { useEffect } from 'react';
-import { useRouter } from 'next/navigation';
-import { hasAuthToken } from '@/utils/authStorage';
 import { navItems } from '@/components/layout/navItems';
 
 export default function Home() {
-  const router = useRouter();
-
-  useEffect(() => {
-    // Redirect to login if not authenticated
-    if (!hasAuthToken()) {
-      router.push('/login');
-    }
-  }, [router]); // Add 'router' as a dependency
-
   return (
     <div className='w-full max-w-5xl mx-auto px-4 sm:px-6'>
       <h1 className='text-lg sm:text-xl font-bold mb-6 sm:mb-8'>Dashboard</h1>
