@@ -18,7 +18,6 @@ export default function ClientLayout({
   const isFullScreenPage = pathname === '/login';
 
   useEffect(() => {
-    // Check if user is authenticated
     if (!hasAuthToken() && pathname !== '/login') {
       router.replace('/login');
     }
@@ -26,7 +25,7 @@ export default function ClientLayout({
 
   // Optionally prevent rendering until authentication is verified
   if (!hasAuthToken() && pathname !== '/login') {
-    return null; // Prevent rendering if redirecting
+    return null; // Prevent rendering if not authenticated
   }
 
   return (
@@ -37,7 +36,7 @@ export default function ClientLayout({
           isFullScreenPage ? 'w-full' : ''
         }`}
       >
-        <div className="flex-1 flex flex-col overflow-y-auto">
+        <div className='flex-1 flex flex-col overflow-y-auto'>
           <main
             className={`${
               isFullScreenPage ? 'h-full' : 'flex-1 pt-8 sm:pt-10 pb-10'
