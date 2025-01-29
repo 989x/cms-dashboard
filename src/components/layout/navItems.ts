@@ -18,12 +18,6 @@ export const navItems = [
         icon: FiGlobe,
         description: 'View, manage, and organize all business listings in one place.',
       },
-      {
-        href: '/business/edit',
-        label: 'Edit Business',
-        icon: FiEdit,
-        description: 'Update and refine existing business listings effortlessly.',
-      },
     ],
   },
   {
@@ -40,12 +34,6 @@ export const navItems = [
         label: 'Content Listings',
         icon: FiFileText,
         description: 'Browse and manage all posted content efficiently.',
-      },
-      {
-        href: '/content/edit',
-        label: 'Edit Content',
-        icon: FiEdit,
-        description: 'Revise and update existing content with ease.',
       },
     ],
   },

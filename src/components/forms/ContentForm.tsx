@@ -2,15 +2,16 @@
 
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import HTMLEditor from '@/components/forms/html/Editor';
 import TagsInput from './TagsInput';
 
 interface ContentFormProps {
   onSubmit: (data: any) => Promise<void>;
+  initialData?: any;
 }
 
-const ContentForm: React.FC<ContentFormProps> = ({ onSubmit }) => {
+const ContentForm: React.FC<ContentFormProps> = ({ onSubmit, initialData }) => {
   const [formData, setFormData] = useState({
     admin_notice: '',
     slug_url: '',
@@ -22,6 +23,21 @@ const ContentForm: React.FC<ContentFormProps> = ({ onSubmit }) => {
     description: '',
   });
 
+  useEffect(() => {
+    if (initialData) {
+      setFormData({
+        admin_notice: initialData.admin_notice || '',
+        slug_url: initialData.slug_url || '',
+        redirect_url: initialData.redirect_url || '',
+        cover_images: initialData.cover_images || [],
+        content_type: initialData.content_type || undefined,
+        content_tags: initialData.content_tags || [],
+        title: initialData.title || '',
+        description: initialData.description || '',
+      });
+    }
+  }, [initialData]);
+
   const handleChange = (key: string, value: string | string[]) => {
     setFormData((prev) => ({ ...prev, [key]: value }));
   };
@@ -32,16 +48,16 @@ const ContentForm: React.FC<ContentFormProps> = ({ onSubmit }) => {
   };
 
   const fields = [
-    { name: 'admin_notice', label: 'Admin Notice', type: 'text', placeholder: 'Notice for admins' },
-    { name: 'content_type', label: 'Content Type', type: 'button' },
-    { name: 'slug_url', label: 'Slug URL', type: 'text', placeholder: 'my-awesome-content' },
-    { name: 'redirect_url', label: 'Redirect URL', type: 'text', placeholder: 'https://example.com' },
-    { name: 'title', label: 'Title', type: 'text', placeholder: 'My Awesome Content' },
+    { name: 'admin_notice', label: 'Admin Notice', type: 'text', placeholder: 'Notice for admins', required: false },
+    { name: 'content_type', label: 'Content Type', type: 'button', required: true },
+    { name: 'slug_url', label: 'Slug URL', type: 'text', placeholder: 'my-awesome-content', required: false },
+    { name: 'redirect_url', label: 'Redirect URL', type: 'text', placeholder: 'https://example.com', required: false },
+    { name: 'title', label: 'Title', type: 'text', placeholder: 'My Awesome Content', required: true },
   ];
 
   return (
     <form onSubmit={handleSubmit} className='space-y-6'>
-      {fields.map(({ name, label, type, placeholder }) => (
+      {fields.map(({ name, label, type, placeholder, required }) => (
         <div key={name} className='flex flex-col text-sm'>
           <label htmlFor={name} className='mb-3 font-medium'>
             {label}
@@ -55,7 +71,7 @@ const ContentForm: React.FC<ContentFormProps> = ({ onSubmit }) => {
               value={formData[name as keyof typeof formData] as string}
               onChange={(e) => handleChange(name, e.target.value)}
               className='border border-gray-300 rounded-md px-3 py-2'
-              required
+              {...(required ? { required: true } : {})}
             />
           ) : (
             <div className='flex gap-3'>
@@ -99,7 +115,6 @@ const ContentForm: React.FC<ContentFormProps> = ({ onSubmit }) => {
             const files = e.target.files;
             if (files) {
               setFormData((prev) => {
-                // Append the new file to the original file. and limited to no more than 8 photos
                 const updatedFiles = [
                   ...prev.cover_images,
                   ...Array.from(files),
@@ -115,7 +130,7 @@ const ContentForm: React.FC<ContentFormProps> = ({ onSubmit }) => {
           <ul className='mt-3 space-y-2'>
             {formData.cover_images.map((file, index) => (
               <li key={index} className='flex items-center justify-between bg-gray-100 p-2 rounded-md shadow-sm'>
-                <span className='text-sm text-gray-700'>{file.name}</span>
+                <span className='text-sm text-gray-700'>{typeof file === 'string' ? file : file.name}</span>
                 <button
                   type='button'
                   onClick={() => {
@@ -148,7 +163,7 @@ const ContentForm: React.FC<ContentFormProps> = ({ onSubmit }) => {
           type='submit'
           className='bg-blue-600 text-white font-medium px-4 py-2 rounded-lg'
         >
-          Create Content
+          {initialData ? 'Update Content' : 'Create Content'}
         </button>
       </div>
     </form>

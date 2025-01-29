@@ -1,11 +1,14 @@
 // cms-dashboard/src/components/cards/ContentCard.tsx
 
+'use client';
+
+import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { ContentItem } from '@/types/shared.types';
 import { formatToThaiDate } from '@/utils/formatDate';
 import { AiOutlineCalendar, AiOutlineEye } from 'react-icons/ai';
 import { FiEdit, FiEye, FiEyeOff, FiTrash2, FiBook, FiFileText } from 'react-icons/fi';
-import { MdOutlineLocalOffer } from 'react-icons/md'; // Added icon for promotion
+import { MdOutlineLocalOffer } from 'react-icons/md';
 
 const ContentCard: React.FC<ContentItem> = ({
   _id,
@@ -18,6 +21,7 @@ const ContentCard: React.FC<ContentItem> = ({
   description,
   view_count,
 }) => {
+  const router = useRouter();
   const currentIsActive = is_active;
   const currentContentType = content_type;
   const currentTitle = title || '';
@@ -31,6 +35,10 @@ const ContentCard: React.FC<ContentItem> = ({
       : currentContentType === 'promotion'
       ? MdOutlineLocalOffer
       : FiFileText;
+
+  const handleEdit = () => {
+    router.push(`/content/edit/${_id}`);
+  };
 
   return (
     <div className='block'>
@@ -101,6 +109,13 @@ const ContentCard: React.FC<ContentItem> = ({
           </button>
         </div>
         <div className='flex gap-3 text-xs'>
+          <button 
+            className='flex items-center gap-2 px-3 py-2 border text-blue-600 font-semibold rounded-md transition-colors duration-200 hover:bg-blue-600 hover:text-white'
+            onClick={handleEdit}
+          >
+            <FiEdit className='h-4 w-4' />
+            Edit
+          </button>
           <button className='flex items-center gap-2 px-3 py-2 border text-red-600 font-semibold rounded-md transition-colors duration-200 hover:bg-red-600 hover:text-white'>
             <FiTrash2 className='h-4 w-4' />
             Delete
