@@ -4,7 +4,6 @@
 
 import { useState, useEffect } from 'react';
 import HTMLEditor from '@/components/forms/html/Editor';
-import TagsInput from './TagsInput';
 
 interface ContentFormProps {
   onSubmit: (data: any) => Promise<void>;
@@ -17,8 +16,8 @@ const ContentForm: React.FC<ContentFormProps> = ({ onSubmit, initialData }) => {
     slug_url: '',
     redirect_url: '',
     cover_images: [] as File[],
-    content_type: undefined as 'news' | 'article' | 'promotion' | undefined,
-    content_tags: [] as string[],
+    content_type: '' as 'news' | 'article' | 'promotion',
+    content_tags: '',
     title: '',
     description: '',
   });
@@ -30,8 +29,8 @@ const ContentForm: React.FC<ContentFormProps> = ({ onSubmit, initialData }) => {
         slug_url: initialData.slug_url || '',
         redirect_url: initialData.redirect_url || '',
         cover_images: initialData.cover_images || [],
-        content_type: initialData.content_type || undefined,
-        content_tags: initialData.content_tags || [],
+        content_type: initialData.content_type || '',
+        content_tags: initialData.content_tags || '',
         title: initialData.title || '',
         description: initialData.description || '',
       });
@@ -44,20 +43,27 @@ const ContentForm: React.FC<ContentFormProps> = ({ onSubmit, initialData }) => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+  
+    if (!['news', 'article', 'promotion'].includes(formData.content_type)) {
+      alert('Invalid content type selected.');
+      return;
+    }
+  
+    console.log('DEBUG_MODE: Submitting form data:', formData);
     await onSubmit(formData);
   };
 
   const fields = [
-    { name: 'admin_notice', label: 'Admin Notice', type: 'text', placeholder: 'Notice for admins', required: false },
-    { name: 'content_type', label: 'Content Type', type: 'button', required: true },
-    { name: 'slug_url', label: 'Slug URL', type: 'text', placeholder: 'my-awesome-content', required: false },
-    { name: 'redirect_url', label: 'Redirect URL', type: 'text', placeholder: 'https://example.com', required: false },
-    { name: 'title', label: 'Title', type: 'text', placeholder: 'My Awesome Content', required: true },
+    { name: 'admin_notice', label: 'Admin Notice', type: 'text', placeholder: 'Notice for admins' },
+    { name: 'content_type', label: 'Content Type', type: 'button' },
+    { name: 'slug_url', label: 'Slug URL', type: 'text', placeholder: 'my-awesome-content' },
+    { name: 'redirect_url', label: 'Redirect URL', type: 'text', placeholder: 'https://example.com' },
+    { name: 'title', label: 'Title', type: 'text', placeholder: 'My Awesome Content' },
   ];
 
   return (
     <form onSubmit={handleSubmit} className='space-y-6'>
-      {fields.map(({ name, label, type, placeholder, required }) => (
+      {fields.map(({ name, label, type, placeholder }) => (
         <div key={name} className='flex flex-col text-sm'>
           <label htmlFor={name} className='mb-3 font-medium'>
             {label}
@@ -71,7 +77,6 @@ const ContentForm: React.FC<ContentFormProps> = ({ onSubmit, initialData }) => {
               value={formData[name as keyof typeof formData] as string}
               onChange={(e) => handleChange(name, e.target.value)}
               className='border border-gray-300 rounded-md px-3 py-2'
-              {...(required ? { required: true } : {})}
             />
           ) : (
             <div className='flex gap-3'>
@@ -148,16 +153,18 @@ const ContentForm: React.FC<ContentFormProps> = ({ onSubmit, initialData }) => {
           </ul>
         )}
       </div>
-      <TagsInput
-        tags={formData.content_tags}
-        onAddTag={(tag) => handleChange('content_tags', [...formData.content_tags, tag])}
-        onRemoveTag={(tag) =>
-          handleChange(
-            'content_tags',
-            formData.content_tags.filter((t) => t !== tag)
-          )
-        }
-      />
+      <div className='flex flex-col text-sm'>
+        <label htmlFor='content_tags' className='mb-3 font-medium'>Content Tags</label>
+        <input
+          id='content_tags'
+          type='text'
+          placeholder='tag1, tag2, tag3'
+          value={formData.content_tags}
+          onChange={(e) => handleChange('content_tags', e.target.value)}
+          className='border border-gray-300 rounded-md px-3 py-2'
+        />
+      </div>
+
       <div className='pt-4'>
         <button
           type='submit'

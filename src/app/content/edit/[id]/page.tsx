@@ -41,7 +41,7 @@ const EditContentPage = () => {
           content_type: data.content_type,
           title: data.title,
           description: data.description,
-          content_tags: data.content_tags || [],
+          content_tags: Array.isArray(data.content_tags) ? data.content_tags.join(',') : '',
           view_count: data.view_count,
           created_at: data.created_at,
           updated_at: data.updated_at,
@@ -74,6 +74,7 @@ const EditContentPage = () => {
       formData.append('redirect_url', updatedContent.redirect_url);
       formData.append('admin_notice', updatedContent.admin_notice);
       formData.append('public_id', updatedContent.public_id);
+      formData.append('content_tags', updatedContent.content_tags); // Send as comma-separated string
 
       updatedContent.cover_images.forEach((file: File | string) => {
         if (typeof file !== 'string') {
