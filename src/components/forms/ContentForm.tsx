@@ -13,6 +13,7 @@ interface ContentFormProps {
 const ContentForm: React.FC<ContentFormProps> = ({ onSubmit, initialData }) => {
   const [formData, setFormData] = useState({
     admin_notice: '',
+    is_active: '',
     slug_url: '',
     redirect_url: '',
     cover_images: [] as File[],
@@ -21,11 +22,12 @@ const ContentForm: React.FC<ContentFormProps> = ({ onSubmit, initialData }) => {
     title: '',
     description: '',
   });
-
+  
   useEffect(() => {
     if (initialData) {
       setFormData({
         admin_notice: initialData.admin_notice || '',
+        is_active: initialData.is_active || '',
         slug_url: initialData.slug_url || '',
         redirect_url: initialData.redirect_url || '',
         cover_images: initialData.cover_images || [],

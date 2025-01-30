@@ -26,15 +26,16 @@ const EditContentPage = () => {
         setContentData({
           _id: data._id,
           public_id: data.public_id,
-          slug_url: data.slug_url,
+          admin_notice: data.admin_notice || '',
           is_active: data.is_active,
+          slug_url: data.slug_url,
           redirect_url: data.redirect_url,
           cover_images: data.cover_images || [],
           content_type: data.content_type,
+          content_tags: Array.isArray(data.content_tags) ? data.content_tags.join(',') : '',
           title: data.title,
           description: data.description,
-          content_tags: Array.isArray(data.content_tags) ? data.content_tags.join(',') : '',
-          view_count: data.view_count,
+          view_count: data.view_count || 0,
           created_at: data.created_at,
           updated_at: data.updated_at,
         });
@@ -53,14 +54,14 @@ const EditContentPage = () => {
       if (!token) throw new Error('Unauthorized: No token found');
 
       const formData = new FormData();
-      formData.append('title', updatedContent.title);
-      formData.append('description', updatedContent.description);
-      formData.append('content_type', updatedContent.content_type);
-      formData.append('content_tags', updatedContent.content_tags);
+      formData.append('public_id', updatedContent.public_id);
+      formData.append('admin_notice', updatedContent.admin_notice);
       formData.append('slug_url', updatedContent.slug_url);
       formData.append('redirect_url', updatedContent.redirect_url);
-      formData.append('admin_notice', updatedContent.admin_notice);
-      formData.append('public_id', updatedContent.public_id);
+      formData.append('content_type', updatedContent.content_type);
+      formData.append('content_tags', updatedContent.content_tags);
+      formData.append('title', updatedContent.title);
+      formData.append('description', updatedContent.description);
 
       updatedContent.cover_images.forEach((file: File | string) => {
         if (typeof file !== 'string') {

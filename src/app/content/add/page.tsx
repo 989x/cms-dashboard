@@ -12,23 +12,23 @@ const AddContentPage = () => {
     try {
       const token = localStorage.getItem('authToken');
       if (!token) throw new Error('Unauthorized: No token found');
-  
-      if (content.cover_images.length > 8) {
-        throw new Error('You can upload a maximum of 8 images.');
-      }
-  
+
       const formData = new FormData();
-  
+
       // Append text fields
+      formData.append('admin_notice', content.admin_notice);
+      formData.append('slug_url', content.slug_url);
+      formData.append('redirect_url', content.redirect_url);
+      formData.append('content_type', content.content_type);
+      formData.append('content_tags', content.content_tags);
       formData.append('title', content.title);
       formData.append('description', content.description);
-      formData.append('ContentType', content.content_type);
-  
+
       // Append each image file
       content.cover_images.forEach((file: File) => {
         formData.append('cover_images', file);
       });
-  
+
       const response = await fetch('http://128.199.202.159:8080/api/v1/contents', {
         method: 'POST',
         headers: {
@@ -36,12 +36,12 @@ const AddContentPage = () => {
         },
         body: formData,
       });
-  
+
       if (!response.ok) {
         const errorResponse = await response.json();
         throw new Error(errorResponse?.message || 'Failed to create content');
       }
-  
+
       alert('Content created successfully!');
       router.push('/content');
     } catch (error) {
