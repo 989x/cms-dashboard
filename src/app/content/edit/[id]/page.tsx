@@ -10,19 +10,11 @@ const EditContentPage = () => {
   const router = useRouter();
   const { id } = useParams();
   const [contentData, setContentData] = useState<any | null>(null);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchContent = async () => {
       try {
-        const token = localStorage.getItem('authToken');
-        if (!token) throw new Error('Unauthorized: No token found');
-
-        const response = await fetch(`http://128.199.202.159:8080/api/v1/contents/_id/${id}`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const response = await fetch(`http://128.199.202.159:8080/api/v1/contents/_id/${id}`);
 
         if (!response.ok) {
           throw new Error('Failed to fetch content data');
@@ -49,8 +41,6 @@ const EditContentPage = () => {
       } catch (error) {
         alert(error instanceof Error ? error.message : 'An unknown error occurred.');
         router.push('/content');
-      } finally {
-        setLoading(false);
       }
     };
 
@@ -62,19 +52,15 @@ const EditContentPage = () => {
       const token = localStorage.getItem('authToken');
       if (!token) throw new Error('Unauthorized: No token found');
 
-      if (updatedContent.cover_images.length > 8) {
-        throw new Error('You can upload a maximum of 8 images.');
-      }
-
       const formData = new FormData();
       formData.append('title', updatedContent.title);
       formData.append('description', updatedContent.description);
       formData.append('content_type', updatedContent.content_type);
+      formData.append('content_tags', updatedContent.content_tags);
       formData.append('slug_url', updatedContent.slug_url);
       formData.append('redirect_url', updatedContent.redirect_url);
       formData.append('admin_notice', updatedContent.admin_notice);
       formData.append('public_id', updatedContent.public_id);
-      formData.append('content_tags', updatedContent.content_tags); // Send as comma-separated string
 
       updatedContent.cover_images.forEach((file: File | string) => {
         if (typeof file !== 'string') {
@@ -101,10 +87,6 @@ const EditContentPage = () => {
       alert(error instanceof Error ? error.message : 'An unknown error occurred.');
     }
   };
-
-  if (loading) {
-    return <p className="text-center text-gray-500">Loading...</p>;
-  }
 
   if (!contentData) {
     return <p className="text-center text-red-500">Failed to load content.</p>;

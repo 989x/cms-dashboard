@@ -44,12 +44,7 @@ const ContentForm: React.FC<ContentFormProps> = ({ onSubmit, initialData }) => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
   
-    if (!['news', 'article', 'promotion'].includes(formData.content_type)) {
-      alert('Invalid content type selected.');
-      return;
-    }
-  
-    console.log('DEBUG_MODE: Submitting form data:', formData);
+    // console.log('DEBUG_MODE: Submitting form data:', formData);
     await onSubmit(formData);
   };
 
